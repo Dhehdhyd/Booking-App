@@ -18,7 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 
 # The main objective of the application is to display the trips available at travel offices and facilitate the process of ground reservatins for travelers
 
- - importance
+ - importance Application
  
  1 - It is easy for the traveler to book the trips that suits him.
 
