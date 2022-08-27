@@ -20,20 +20,26 @@ samples, guidance on mobile development, and a full API reference.
 
  - importance
  
-1 - It is easy for the traveler to book the trips that suits him.
-2 - View all available trips for the current date.
+ 1 - It is easy for the traveler to book the trips that suits him.
+
+ 2 - View all available trips for the current date.
 
 
 
  - Application main pages
  
-1 - Homepage contains( available trips at the current date , Fields to enter the trip data you are looking for).
-2 - Create an account page cotains(Fields to enter the data needed to complete the account creation process).
-3 - Another traveler’s account page cotains(Fields to enter the data needed to complete the account creation process).
-4 - Trip booking page , booking confirmation and payment type.
-5 - Edit account information if desired.
+ 1 - Homepage contains( available trips at the current date , Fields to enter the trip data you are looking for).
+
+ 2 - Create an account page contains(Fields to enter the data needed to complete the account creation process).
+
+ 3 - Another traveler’s account page cotains(Fields to enter the data needed to complete the account creation process).
+
+ 4 - Trip booking page , booking confirmation and payment type.
+
+ 5 - Edit account information if desired.
 
 _ How to use the app
+
 link video
 
 
