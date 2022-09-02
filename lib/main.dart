@@ -68,7 +68,7 @@ Container(child: TextField(),),
 Container(child: TextField(),),
 Container(child: RaisedButton(
 onPressed: null,
-child: Text('بحث',style: TextStyle(fontSize: 15),
+child: Text('بحث ',style: TextStyle(fontSize: 15),
 ),
 ),
 
@@ -140,7 +140,7 @@ label: "الصفحة الرئسية",
 
     drawer: Drawer(
 child: ListView(children: [
-  ListTile(title: Text('شرح استخدام التطبيق'),
+  ListTile(title: Text('شرح كيفيةاستخدام التطبيق'),
   trailing: Icon(Icons.add_call),
   onTap: ()=>{},),
     ListTile(title: Text('تعديل بيانات حسابي'),
