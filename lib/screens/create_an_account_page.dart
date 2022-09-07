@@ -1,0 +1,395 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
+import 'package:intl/intl.dart';//تنسيق التاريخ
+import '../main.dart';
+/*import 'dart:io';
+//import 'package:image_picker/image_picker.dart';//حق الصور 
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Allow this app to access your photos</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Allow access to microphone</string>
+        android:requestLegacyExternalStorage="true"*/
+class create_account extends StatefulWidget {
+  @override
+  _create_accountState createState() => _create_accountState();
+}
+
+class _create_accountState extends State<create_account> {
+  @override
+  Widget build(BuildContext context) {
+    bool passwordicon=true;
+     bool passwordicon1=true;
+    var name=TextEditingController();
+    var city=TextEditingController();
+    var password=TextEditingController();
+    var passwoord1=TextEditingController();
+    var phone_no=TextEditingController();
+    var ID_number=TextEditingController();
+    List<String>list_gender=[
+  'أنثى', 'ذكر',
+  ];
+  String? selectedItem='ذكر';
+    List<String>list_Date=[
+  '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
+   '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
+   '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
+  ];
+  String? selectedItem1='2000';
+  //String _selectedDate="null";
+  //DateTime _selectedDate1=DateTime.now();
+  /*عرض التاريخ
+  void date_picker()
+  {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1965),
+      lastDate: DateTime(2008),
+      currentDate:DateTime.now(),
+    ).then((date){
+      if(date==null){return;}
+      setState(() {
+_selectedDate1=date;
+              _selectedDate=date.toString();
+            });});}*/
+    return 
+    Scaffold(
+       appBar: AppBar(
+         actions: 
+          [ Padding(
+             padding: const EdgeInsets.only(left: 250),
+
+             child: Text("انشاء حساب ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
+           ),], 
+          flexibleSpace: Container(
+          decoration: BoxDecoration(
+gradient: LinearGradient(colors: [
+  Color.fromRGBO(0, 0, 77,1),
+  Color.fromRGBO(77, 0, 77,1),
+  Color.fromRGBO(0, 0, 77,1),
+  
+
+
+],),
+          ),
+          ),
+
+        ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          
+          color: Color.fromRGBO(255, 255, 255, 0.5),
+shadowColor: Color.fromRGBO(77, 0, 77, 0.5),
+elevation: 20,
+          child: SingleChildScrollView(
+                    child: Column(
+              children: [
+                
+                //العنوان
+               Center(
+                 child: Text(" حسابي",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 25,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+        ),
+        ),
+               ),
+               SizedBox(height: 25,),
+                // حقل الاسم
+               Container(
+                 child: TextField(
+   
+     decoration: InputDecoration(
+    
+         labelText:"الاسم بالكامل",
+    
+         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+    
+         prefixIcon: Icon(Icons.person,color: Color.fromRGBO(77, 0, 77,1),),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.text,
+//استلم القيمة من المستخدم
+//controller:name ,
+     ),
+               ),
+              SizedBox(height: 25,),
+ // الجنس والتاريخ قائمة خيارات             
+Container(
+  
+ 
+  child: Row(
+    children: [
+      SizedBox(width: 2,),
+      Text(' نوع الجنس',style:TextStyle(color: Color.fromRGBO(77,0 , 77,1),fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+      SizedBox(width: 2,),
+      Container( 
+          height: 70,
+  width: 80,
+ // margin: EdgeInsets.only(left:200.0),
+          child: DropdownButtonFormField<String>(
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            )
+          ),
+                  isExpanded: true,
+                  value:selectedItem,
+                  onChanged: (newValue){
+                    setState(() {
+                              selectedItem = newValue;
+                            });
+                  },
+                  items: list_gender.map((item)=> DropdownMenuItem(
+          value:item,
+          child: Text(item),
+) 
+                  ).toList(),
+                ),
+      ),
+       
+     SizedBox(width: 8,),
+      Text('تاريخ الميلاد',style:TextStyle(color: Color.fromRGBO(77,0 , 77,1),fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+
+  SizedBox(width: 2,),
+ Container( 
+          height: 70,
+    width: 100,
+    //margin: EdgeInsets.only(left:20.0),
+          child: DropdownButtonFormField<String>(
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            )
+          ),
+                  isExpanded: true,
+                  value:selectedItem1,
+                  onChanged: (newValue){
+                    setState(() {
+                              selectedItem1 = newValue;
+                            });
+                  },
+                  items: list_Date.map((item)=> DropdownMenuItem(
+          value:item,
+          child: Text(item),
+) 
+                  ).toList(),
+                ),
+        ),
+
+    ],
+  ),
+    ),
+               SizedBox(height: 25,),
+            
+               //حقل المدينة
+               Container(
+                 child: TextField(
+    
+     decoration: InputDecoration(
+    
+         labelText:"المدينة التي تسكن فيها",
+    
+         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+    
+         prefixIcon: Icon(Icons.location_city_rounded,color: Color.fromRGBO(77, 0, 77,1),),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.text,
+
+//controller:city ,
+     ),
+               ),
+     SizedBox(height: 25,),
+     //رقم الهاتف
+               Container(
+                 child: TextField(
+    
+     decoration: InputDecoration(
+    
+         labelText:"رقم الهاتف",
+    
+         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+    
+         prefixIcon: Icon(Icons.phone_android,color: Color.fromRGBO(77, 0, 77,1),),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.number,
+
+//controller:phone_no,
+     ),
+               ),
+     SizedBox(height: 25,),
+     //رقم الهوية
+               Container(
+                 child: TextField(
+  
+     decoration: InputDecoration(
+    
+         labelText:"رقم الهوية",
+    
+         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+    
+         prefixIcon: Icon(Icons.card_membership,color: Color.fromRGBO(77, 0, 77,1),),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.number,
+
+//controller:ID_number,
+     ),
+               ),
+              
+               SizedBox(height: 25,),
+                //حقل كلمة المرور
+               Container(
+                 child: TextField(
+    
+     decoration: InputDecoration(
+    
+         labelText:"كلمة المرور",
+    
+         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+    /*هل تريد رؤية الكلمة او لا
+        suffixIcon: IconButton(icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+         onPressed:(){setState(() {
+                      passwordicon=!passwordicon;
+                      
+                    });
+                    },
+                    ),*/
+                      suffixIcon: Icon(Icons.visibility,color: Color.fromRGBO(77, 0, 77,1),),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.visiblePassword,
+/*النص محمي
+obscureText: passwordicon,*/
+obscureText: false,
+//controller:password,
+     ),
+               ),
+      SizedBox(height: 25,),
+      //حقل تأكيد كلمة المرور
+              Container(
+                 child: TextField(
+    
+     decoration: InputDecoration(
+    
+         labelText:"تأكيد كلمة المرور ",
+    
+        labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+    /*هل تريد رؤية الكلمة او لا
+        suffixIcon: IconButton(icon:Icon(passwordicon1?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+         onPressed:(){setState(() {
+                      passwordicon1=!passwordicon1;
+                      
+                    });
+                    },
+                    ),*/
+                      suffixIcon: Icon(Icons.visibility,color: Color.fromRGBO(77, 0, 77,1),),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.visiblePassword,
+/*النص محمي
+obscureText: passwordicon1,*/
+obscureText: false,
+//controller:passwoord1,
+     ),
+               ),
+                SizedBox(height: 25,),
+               //زر عرض صورة
+             Container(child: Row(
+  children: [
+    SizedBox(width: 6,),
+
+          Container(
+            width: 80,
+            height: 80,
+            child: RaisedButton(
+    disabledColor: Color.fromRGBO(77, 0, 77,1),
+    disabledTextColor:Colors.white, 
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    
+    onPressed: null,
+    child: Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 13)),
+    
+    
+    ),
+          ),
+          SizedBox(width: 6,),
+          
+     Container(
+        color: Colors.blue,
+
+      ),
+    
+  ],
+       
+    ),
+),   
+                SizedBox(height: 25,),
+               //زر انشاء حساب
+             Container(child: Column(
+  children: [
+          RaisedButton(
+    disabledColor: Color.fromRGBO(77, 0, 77,1),
+    disabledTextColor:Colors.white, 
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    
+    onPressed: null,
+    child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15)),
+    
+    
+    ),
+    
+  ],
+       crossAxisAlignment: CrossAxisAlignment.stretch, 
+    ),
+), 
+SizedBox(height: 25,), ],
+                    ),
+          ),
+        ),
+      ),
+    );
+  }
+}
