@@ -4,6 +4,17 @@ import 'package:intl/intl.dart';//تنسيق التاريخ
 import 'package:splashscreen/splashscreen.dart';//صفحة التحميل
 import '../screens/start_page.dart';
 import '../screens/create_an_account_page.dart';
+import '../screens/about_the_application.dart';
+import '../screens/explain_the_use_of_application.dart';
+import '../screens/help_and_support.dart';
+import '../screens/modifly_my_account_data.dart';
+import '../screens/create_an_account_traveler.dart';
+import '../screens/trip_details_page.dart';
+import '../screens/settings.dart';
+import '../class_tools/app_drawer.dart';
+import '../class_tools/app_card.dart';
+import '../class_tools/app_BottomNavigationBar.dart';
+
 
 void main() {
  return runApp(mystartpage());
@@ -34,7 +45,22 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner:false,
 
-      home: MyHomePage(),
+     // home: MyHomePage(),
+       initialRoute: '/',
+      routes: {
+        '/': (context) =>MyHomePage() ,
+         '/help_and_support': (context) =>Help_and_support() ,
+               '/mycreate_account': (context) =>Mycreate_account() ,
+                     '/explain_the_use_of_applicationt': (context) =>Explain_the_use_of_application() ,
+                           '/create_account': (context) =>Create_account() ,
+                                 '/modifly_my_account_data ': (context) =>Modifly_my_account_data () ,
+                                       '/settingpage': (context) =>Settingpage() ,
+                                       '/about_the_application': (context) =>About_the_application() ,
+                                       '/trip_details_page': (context) =>Trip_details_page() ,
+                                      
+
+                                       
+          }
     );
   }
 }
@@ -47,32 +73,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String? selectedItem='صنعاء';
   String? selectedItem1='اب';
-  int select_index_page=0;
-  //الانتقال في ايقونة الشريط السفلي
-void _createaccount(int index){
-  setState(() {
-      select_index_page=index;
-    });
-select_page(context,select_index_page);
 
-}
 
   List<String>list_city=[
   'عدن', 'صنعاء', 'اب', 'جدة', 'رياض',
   ];
-  //دالة التنقل في الصفحات
- void select_page(BuildContext ctx,int index_page)
-  {
-    Navigator.of(ctx).push(MaterialPageRoute(
-      builder: (_){
-        if(index_page==0)
-        return MyHomePage();
-        else
-        return create_account();
-
-      }
-    ));
-  }
+ 
   String _selectedDate="null";
   DateTime _selectedDate1=DateTime.now();
   //عرض التاريخ
@@ -208,11 +214,11 @@ Container(
           ).toList(),
         ),
     ),
-
 SizedBox(height: 30),
 //التاريخ
 Container(child:Row(
   children: [
+    SizedBox(width: 6,),
    Icon(Icons.date_range,color: Color.fromRGBO(0, 0, 77,1),), 
 SizedBox(width: 10),
 
@@ -252,7 +258,17 @@ Container(child: Column(
        crossAxisAlignment: CrossAxisAlignment.stretch, 
     ),
 ),
-  
+Text("increase and decrease"),
+SizedBox(height: 30,),
+AppCard(),
+SizedBox(height: 10,),
+AppCard(),
+SizedBox(height: 10,),
+AppCard(),
+SizedBox(height: 10,),
+AppCard(),
+SizedBox(height: 10,),
+AppCard(),
 ],
 ),
 
@@ -263,71 +279,11 @@ Container(child: Column(
 
 ),
 //الشريط السفلي
- bottomNavigationBar:BottomNavigationBar(
-//backgroundColor:  Colors.white,
-//selectedItemColor: Color.fromRGBO(0, 0, 77,1),
-//unselectedItemColor: Color.fromRGBO(77, 0, 77,1),
-currentIndex: select_index_page,
-//selectedFontSize: 12,
-//unselectedFontSize: 12,
-type: BottomNavigationBarType.shifting,
-  onTap:_createaccount,
-  
-items: [BottomNavigationBarItem(
-  
- backgroundColor:Color.fromRGBO(77, 0, 77,1),
+ bottomNavigationBar:AppBottomNavigationBar(),
  
-icon:Icon(Icons.home),
-label: "الصفحة الرئسية",
-
-),
-BottomNavigationBarItem(
-  backgroundColor:Color.fromRGBO(77, 0, 77,1),
-  icon:Icon(Icons.create),
-
-label: "انشاء حساب",
-
-),
-],
-),
 
 // القائمة المنسدلة
-    drawer: Container(
-        alignment: Alignment.topLeft,
-        child: Drawer(
-child: ListView(children: [
-  Container( height: 40,      
-   decoration: BoxDecoration(
-gradient: LinearGradient(colors: [
-  Color.fromRGBO(0, 0, 77,1),
-  Color.fromRGBO(77, 0, 77,1),
-  Color.fromRGBO(0, 0, 77,1),
- ] ),
- ),
- ),
-SizedBox(height: 20),
-  ListTile(title: Text('شرح كيفيةاستخدام التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.video_call),
-  onTap: ()=>{},),
-        ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.manage_accounts),
-  onTap: ()=>{},),
-         ListTile(title: Text('الإعدادات',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster',)),
-  trailing: Icon(Icons.settings),
-  onTap: ()=>{},),
-         ListTile(title: Text('مشاركة التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
- trailing: Icon(Icons.share),
-  onTap: ()=>{},),
-         ListTile(title: Text('حول التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.question_answer),
-  onTap: ()=>{},),
-         ListTile(title: Text('المساعدة والدعم',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.help_sharp),
-  onTap: ()=>{},)
-],
-        ),
-        ),
-    ),
+    drawer:AppDrawer(), 
 
     ),
      );

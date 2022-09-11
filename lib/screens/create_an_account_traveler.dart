@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة �
 import 'package:intl/intl.dart';//تنسيق التاريخ
 import '../main.dart';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';//حق الصور 
+//import 'package:image_picker/image_picker.dart';//حق الصور 
 /*
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Allow this app to access your photos</string>
@@ -11,23 +11,17 @@ import 'package:image_picker/image_picker.dart';//حق الصور
 <string>Allow access to microphone</string>
         android:requestLegacyExternalStorage="true"
         image_picker: ^0.8.5+3 */
-class Mycreate_account extends StatefulWidget {
+class Create_account extends StatefulWidget {
   @override
-  _Mycreate_accountState createState() => _Mycreate_accountState();
+  _Create_accountState createState() => _Create_accountState();
 }
 
-class _Mycreate_accountState extends State<Mycreate_account> {
+class _Create_accountState extends State<Create_account> {
   @override
   Widget build(BuildContext context) {
-    File _image= File('file.txt');
-    final picker=ImagePicker();
-    bool passwordicon=true;
-     bool passwordicon1=true;
+    File _image;
+    //final picker=ImagePicker();
     var name=TextEditingController();
-    var city=TextEditingController();
-    var password=TextEditingController();
-    var passwoord1=TextEditingController();
-    var phone_no=TextEditingController();
     var ID_number=TextEditingController();
     List<String>list_gender=[
   'أنثى', 'ذكر',
@@ -55,8 +49,8 @@ class _Mycreate_accountState extends State<Mycreate_account> {
       setState(() {
 _selectedDate1=date;
               _selectedDate=date.toString();
-            });});}*/
- Future getImage(ImageSource scr)async{
+            });});}
+            Future getImage(ImageSource scr)async{
 final PickedFile=await picker.getImage(source: scr);
 setState(() {
   if(PickedFile!=null)
@@ -67,7 +61,7 @@ setState(() {
     print('لم تختر صورة');
   }
 });
-            }        
+            }*/
 
     return 
     Scaffold(
@@ -76,7 +70,7 @@ setState(() {
           [ Padding(
              padding: const EdgeInsets.only(left: 250),
 
-             child: Text("انشاء حساب ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
+             child: Text(" بيانات مسافر",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -105,7 +99,7 @@ elevation: 20,
                 
                 //العنوان
                Center(
-                 child: Text(" حسابي",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 25,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                 child: Text("بيانات مسافر",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 25,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
         ),
         ),
                ),
@@ -205,56 +199,7 @@ Container(
     ),
                SizedBox(height: 25,),
             
-               //حقل المدينة
-               Container(
-                 child: TextField(
-    
-     decoration: InputDecoration(
-    
-         labelText:"المدينة التي تسكن فيها",
-    
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    
-         prefixIcon: Icon(Icons.location_city_rounded,color: Color.fromRGBO(77, 0, 77,1),),
-    
-    enabledBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
-    ),
-    
-              ), 
-    
-keyboardType: TextInputType.text,
-
-//controller:city ,
-     ),
-               ),
-     SizedBox(height: 25,),
-     //رقم الهاتف
-               Container(
-                 child: TextField(
-    
-     decoration: InputDecoration(
-    
-         labelText:"رقم الهاتف",
-    
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    
-         prefixIcon: Icon(Icons.phone_android,color: Color.fromRGBO(77, 0, 77,1),),
-    
-    enabledBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
-    ),
-    
-              ), 
-    
-keyboardType: TextInputType.number,
-
-//controller:phone_no,
-     ),
-               ),
-     SizedBox(height: 25,),
+              
      //رقم الهوية
                Container(
                  child: TextField(
@@ -281,74 +226,8 @@ keyboardType: TextInputType.number,
                ),
               
                SizedBox(height: 25,),
-                //حقل كلمة المرور
-               Container(
-                 child: TextField(
-    
-     decoration: InputDecoration(
-    
-         labelText:"كلمة المرور",
-    
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    /*هل تريد رؤية الكلمة او لا
-        suffixIcon: IconButton(icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
-         onPressed:(){setState(() {
-                      passwordicon=!passwordicon;
-                      
-                    });
-                    },
-                    ),*/
-                      suffixIcon: Icon(Icons.visibility,color: Color.fromRGBO(77, 0, 77,1),),
-    
-    enabledBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
-    ),
-    
-              ), 
-    
-keyboardType: TextInputType.visiblePassword,
-/*النص محمي
-obscureText: passwordicon,*/
-obscureText: false,
-//controller:password,
-     ),
-               ),
-      SizedBox(height: 25,),
-      //حقل تأكيد كلمة المرور
-              Container(
-                 child: TextField(
-    
-     decoration: InputDecoration(
-    
-         labelText:"تأكيد كلمة المرور ",
-    
-        labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    /*هل تريد رؤية الكلمة او لا
-        suffixIcon: IconButton(icon:Icon(passwordicon1?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
-         onPressed:(){setState(() {
-                      passwordicon1=!passwordicon1;
-                      
-                    });
-                    },
-                    ),*/
-                      suffixIcon: Icon(Icons.visibility,color: Color.fromRGBO(77, 0, 77,1),),
-    
-    enabledBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
-    ),
-    
-              ), 
-    
-keyboardType: TextInputType.visiblePassword,
-/*النص محمي
-obscureText: passwordicon1,*/
-obscureText: false,
-//controller:passwoord1,
-     ),
-               ),
-                SizedBox(height: 25,),
+              
+     
                //زر عرض صورة
              Container(child: Row(
   children: [
@@ -368,8 +247,8 @@ obscureText: false,
        final AlertDialog adimage=AlertDialog(
 content: Container(
 height: 150,
-child: _image==null?Text("لم تختر صورة"):Image.file(_image),
-//child: Text("اختر "),
+//child: _image==null?Text("لم تختر صورة"):Image.file(_image),
+child: Text("اختر "),
  ),
        );
       final AlertDialog ad=AlertDialog(
@@ -386,9 +265,10 @@ child: Column(
       leading: Icon(Icons.image),
       title: Text("المعرض"),
       onTap: (){
- showDialog(builder: (context) => adimage, context:context);
+  Navigator.of(context).pop();
+ showAboutDialog(context:context ,children: [adimage]);
 
-getImage(ImageSource.gallery);
+//getImage(ImageSource.gallery);
         
 
       },
@@ -402,8 +282,9 @@ getImage(ImageSource.gallery);
       leading: Icon(Icons.add_a_photo),
       title: Text("الكاميرا"),
       onTap: (){
-         showDialog(builder: (context) => adimage, context:context);
-getImage(ImageSource.camera);
+//getImage(ImageSource.camera);
+        Navigator.of(context).pop();
+ showAboutDialog(context:context ,children: [adimage]);
 
       },
     ),
@@ -414,8 +295,7 @@ getImage(ImageSource.camera);
       );
                
 
-         showDialog(builder: (context) => ad, context:context);
-      
+      showAboutDialog(context:context ,children: [ad]);
 // showDialog(context: context, builder: (BuildContext context) {_},child:ad);
     } ,
     child: Row(
@@ -448,7 +328,7 @@ getImage(ImageSource.camera);
     ),
     
     onPressed: null,
-    child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15)),
+    child: Text(' إرسال ',style: TextStyle(fontSize: 15)),
     
     
     ),
