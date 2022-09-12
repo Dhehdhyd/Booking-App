@@ -39,23 +39,7 @@ class _Mycreate_accountState extends State<Mycreate_account> {
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
   String? selectedItem1='2000';
-  //String _selectedDate="null";
-  //DateTime _selectedDate1=DateTime.now();
-  /*عرض التاريخ
-  void date_picker()
-  {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1965),
-      lastDate: DateTime(2008),
-      currentDate:DateTime.now(),
-    ).then((date){
-      if(date==null){return;}
-      setState(() {
-_selectedDate1=date;
-              _selectedDate=date.toString();
-            });});}*/
+//دالة اختيار صوره
  Future getImage(ImageSource scr)async{
 final PickedFile=await picker.getImage(source: scr);
 setState(() {
