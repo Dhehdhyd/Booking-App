@@ -3,24 +3,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة �
 import 'package:intl/intl.dart';//تنسيق التاريخ
 import '../main.dart';
 import 'dart:io';
-//import 'package:image_picker/image_picker.dart';//حق الصور 
-/*
-<key>NSPhotoLibraryUsageDescription</key>
-<string>Allow this app to access your photos</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>Allow access to microphone</string>
-        android:requestLegacyExternalStorage="true"
-        image_picker: ^0.8.5+3 */
+import 'package:image_picker/image_picker.dart';//حق الصور 
 class Create_account extends StatefulWidget {
   @override
   _Create_accountState createState() => _Create_accountState();
 }
 
 class _Create_accountState extends State<Create_account> {
-  @override
-  Widget build(BuildContext context) {
-    File _image;
-    //final picker=ImagePicker();
+  File _image=File('');
+    final picker=ImagePicker();
+    bool showimagebool=false;
     var name=TextEditingController();
     var ID_number=TextEditingController();
     List<String>list_gender=[
@@ -33,37 +25,119 @@ class _Create_accountState extends State<Create_account> {
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
   String? selectedItem1='2000';
-  //String _selectedDate="null";
-  //DateTime _selectedDate1=DateTime.now();
-  /*عرض التاريخ
-  void date_picker()
+  //عرض الصوره في الصفحة بعد تأكيد الاختيار
+  Widget showimage()
   {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1965),
-      lastDate: DateTime(2008),
-      currentDate:DateTime.now(),
-    ).then((date){
-      if(date==null){return;}
-      setState(() {
-_selectedDate1=date;
-              _selectedDate=date.toString();
-            });});}
-            Future getImage(ImageSource scr)async{
+if(showimagebool==true)
+   {return Column(
+     children: [
+       SizedBox(height: 25,),
+       Container(
+          height: 150,
+width: 250,
+child:
+ Image.file(_image,fit: BoxFit.fill,),
+        ),
+       SizedBox(height: 25,),
+     ],
+   );
+  }
+  else
+  {
+ return SizedBox(height: 25,);
+  }
+  }
+
+  //دالة اختيار صوره
+ Future getImage(ImageSource scr)async{
 final PickedFile=await picker.getImage(source: scr);
 setState(() {
   if(PickedFile!=null)
   {
     _image=File(PickedFile.path);
+     final AlertDialog adimage=AlertDialog(
+content: Container(
+height: 250,
+width: 300,
+
+child:
+ Column(
+  children: [
+    Container(
+      height: 150,
+width: 250,
+child:
+ _image==File('')?Text("لم تختر صورة"):Image.file(_image,fit: BoxFit.fill,),
+    ),
+    SizedBox(height: 20,),
+
+    Row(
+      children: [
+        Container(
+          width: 100,
+        
+        child: RaisedButton(
+          color: Color.fromRGBO(77, 0, 77,1),
+         shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+          child: Center(child: Text("موافق",style: TextStyle(color: Colors.white),)),
+          onPressed: (){
+   
+setState(() {
+  showimagebool=true;
+  
+});
+ 
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
+
+          },
+        ),
+        ),
+     
+    SizedBox(width: 70,),
+       Container(
+         
+      width: 100,
+   
+    child: RaisedButton(
+       color: Color.fromRGBO(77, 0, 77,1),
+       shape:  RoundedRectangleBorder(
+       borderRadius: BorderRadius.circular(40.0)
+    ),
+      child: Center(child: Text("الغاء",style: TextStyle(color: Colors.white),)),
+      onPressed: (){
+        setState(() {
+  showimagebool=false;
+  
+});
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
+           
+
+      },
+    ),
+    ), 
+     ],
+    ),
+     ],
+)
+),
+
+
+ 
+       );
+       showDialog(builder: (context) => adimage, context:context,barrierDismissible: false);
+
   }else
   {
     print('لم تختر صورة');
   }
 });
-            }*/
-
-    return 
+            } 
+  @override
+  Widget build(BuildContext context) {
+   
+  return 
     Scaffold(
        appBar: AppBar(
          actions: 
@@ -229,7 +303,7 @@ keyboardType: TextInputType.number,
               
      
                //زر عرض صورة
-             Container(child: Row(
+            Container(child: Row(
   children: [
   
 
@@ -244,13 +318,7 @@ keyboardType: TextInputType.number,
     ),
     
     onPressed:(){
-       final AlertDialog adimage=AlertDialog(
-content: Container(
-height: 150,
-//child: _image==null?Text("لم تختر صورة"):Image.file(_image),
-child: Text("اختر "),
- ),
-       );
+    
       final AlertDialog ad=AlertDialog(
 title:Text("اختر الصور من ") ,
 content: Container(
@@ -260,15 +328,24 @@ child: Column(
     Divider(color: Colors.black,),
     Container(
       width: 300,
+    
+    child: RaisedButton(
     color: Color.fromRGBO(77, 0, 77,1),
-    child: ListTile(
-      leading: Icon(Icons.image),
-      title: Text("المعرض"),
-      onTap: (){
-  Navigator.of(context).pop();
- showAboutDialog(context:context ,children: [adimage]);
-
-//getImage(ImageSource.gallery);
+      child: Row(
+        children: [
+          Icon(Icons.image,color: Color.fromRGBO(0, 0, 77,1),),
+SizedBox(width: 10,),
+          Text("المعرض",style: TextStyle(color: Colors.white),),
+        ],
+      ),
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+      onPressed: (){
+   
+getImage(ImageSource.gallery);
+ 
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
         
 
       },
@@ -277,14 +354,23 @@ child: Column(
     SizedBox(height: 10,),
        Container(
       width: 300,
+    
+    child: RaisedButton(
     color: Color.fromRGBO(77, 0, 77,1),
-    child: ListTile(
-      leading: Icon(Icons.add_a_photo),
-      title: Text("الكاميرا"),
-      onTap: (){
-//getImage(ImageSource.camera);
-        Navigator.of(context).pop();
- showAboutDialog(context:context ,children: [adimage]);
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+      child: Row(
+        children: [
+          Icon(Icons.add_a_photo,color: Color.fromRGBO(0, 0, 77,1),),
+          SizedBox(width: 10,),
+          Text("الكاميرا",style: TextStyle(color: Colors.white),),
+        ],
+      ),
+      onPressed: (){
+      
+getImage(ImageSource.camera);
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
 
       },
     ),
@@ -295,8 +381,9 @@ child: Column(
       );
                
 
-      showAboutDialog(context:context ,children: [ad]);
-// showDialog(context: context, builder: (BuildContext context) {_},child:ad);
+         showDialog(builder: (context) => ad, context:context);
+     
+
     } ,
     child: Row(
       children: [
@@ -316,19 +403,34 @@ child: Column(
        
     ),
 ),   
-                SizedBox(height: 25,),
+               
+                showimage(),
                //زر انشاء حساب
              Container(child: Column(
   children: [
           RaisedButton(
-    disabledColor: Color.fromRGBO(77, 0, 77,1),
-    disabledTextColor:Colors.white, 
+    color: Color.fromRGBO(77, 0, 77,1),
+    textColor:Colors.white, 
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
     
-    onPressed: null,
-    child: Text(' إرسال ',style: TextStyle(fontSize: 15)),
+    onPressed: (){
+        final AlertDialog ok=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 20,fontWeight: FontWeight.bold),)) ,
+content: Container(
+height: 50,
+child:Icon(Icons.add_task,color: Colors.green,size: 50,)
+
+),
+      );
+               
+
+         showDialog(builder: (context) => ok, context:context);
+    },
+    child: Text('إنشاء حساب مسافر ',style: TextStyle(fontSize: 15)),
     
     
     ),

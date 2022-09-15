@@ -5,14 +5,13 @@ import 'package:splashscreen/splashscreen.dart';//صفحة التحميل
 import '../screens/start_page.dart';
 import '../screens/create_an_account_page.dart';
 import '../screens/about_the_application.dart';
-import '../screens/explain_the_use_of_application.dart';
 import '../screens/help_and_support.dart';
 import '../screens/modifly_my_account_data.dart';
 import '../screens/create_an_account_traveler.dart';
 import '../screens/trip_details_page.dart';
 import '../screens/settings.dart';
 import '../class_tools/app_drawer.dart';
-import '../class_tools/app_card.dart';
+import '../class_tools/app_card_trip.dart';
 import '../class_tools/app_BottomNavigationBar.dart';
 
 
@@ -51,7 +50,6 @@ class MyApp extends StatelessWidget {
         '/': (context) =>MyHomePage() ,
          '/help_and_support': (context) =>Help_and_support() ,
                '/mycreate_account': (context) =>Mycreate_account() ,
-                     '/explain_the_use_of_applicationt': (context) =>Explain_the_use_of_application() ,
                            '/create_account': (context) =>Create_account() ,
                                  '/modifly_my_account_data ': (context) =>Modifly_my_account_data () ,
                                        '/settingpage': (context) =>Settingpage() ,

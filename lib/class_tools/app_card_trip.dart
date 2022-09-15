@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../screens/create_an_account_traveler.dart';
+import '../screens/trip_details_page.dart';
 import '../screens/create_an_account_page.dart';
-
-//import '../main.dart';بطاقة الرحلة
+import '../main.dart';
+//بطاقة الرحلة
 class AppCard extends StatefulWidget {
   @override
   _AppCardState createState() => _AppCardState();
@@ -11,18 +13,19 @@ class _AppCardState extends State<AppCard> {
   @override
   void select_page(BuildContext ctx,int index_page)
   {
-    Navigator.of(ctx).pushNamed(
+    Navigator.of(ctx).push(MaterialPageRoute(
+      builder: (_){
       
         
-    index_page==1?'trip_details_page':index_page==2?'mycreate_account':'create_account',
-arguments: {
+ return   index_page==1?Trip_details_page():index_page==2?Mycreate_account():Create_account();
+//arguments: {
 //مفتاح وقيمة'id':indexpage==1?10:20وهكذا كل القيم التي تحتاج لتمريرها
 
-}  
+}  ),
     );
-  }
-  myDialog(){
-      final AlertDialog ad=AlertDialog(
+     }
+myDialog(){
+     final AlertDialog ad=AlertDialog(
 title:Text("حجز الرحلة  ") ,
 content: Container(
 height: 150,
@@ -31,15 +34,27 @@ child: Column(
     Divider(color: Colors.black,),
     Container(
       width: 300,
+    child: RaisedButton(
     color: Color.fromRGBO(77, 0, 77,0.7),
-    child: ListTile(
-      leading: Icon(Icons.person),
-      title: Text("حجز لي"),
-      onTap: (){
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+      child: Row(
+        children: [
+          Icon(Icons.person),
+           SizedBox(width: 10,),
+          Text("حجز لي",style: TextStyle(color: Colors.white),),
+         
+           
+        ],
+      ),
+      onPressed: (){
 // هل قد انشاء حساب من قبل ام لاأذا انشاء ينتقل الى اتمام الحجز او الى صفحة الانشاء
    //احدد رقم الصفحة
    setState(() {
-      select_page(context, 2);
+      select_page(context, 1);
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
+
       }); 
         
     },
@@ -48,13 +63,24 @@ child: Column(
     SizedBox(height: 10,),
        Container(
       width: 300,
+    child: RaisedButton(
     color: Color.fromRGBO(77, 0, 77,0.7),
-    child: ListTile(
-      leading: Icon(Icons.man),
-      title: Text("حجز لمسافر"),
-      onTap: (){
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+      child: Row(
+        children: [
+           Icon(Icons.man),
+           SizedBox(width: 10,),
+          Text("حجز لمسافر",style: TextStyle(color: Colors.white)),
+          
+         
+        ],
+      ),
+      onPressed: (){
  setState(() {
 select_page(context, 3);
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
     
   });
       },
@@ -274,13 +300,13 @@ elevation: 400,
               Container(child: Column(
   children: [
           RaisedButton(
-    disabledColor: Color.fromRGBO(77, 0, 77,1),
-    disabledTextColor:Colors.white, 
+    color: Color.fromRGBO(77, 0, 77,1),
+    textColor:Colors.white, 
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0)
     ),
     
-    onPressed:null,// myDialog(),
+    onPressed:(){myDialog();},
     child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 10)),
     
     

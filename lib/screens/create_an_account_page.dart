@@ -17,9 +17,7 @@ class Mycreate_account extends StatefulWidget {
 }
 
 class _Mycreate_accountState extends State<Mycreate_account> {
-  @override
-  Widget build(BuildContext context) {
-    File _image= File('file.txt');
+   File _image=File('');
     final picker=ImagePicker();
     bool passwordicon=true;
      bool passwordicon1=true;
@@ -29,6 +27,7 @@ class _Mycreate_accountState extends State<Mycreate_account> {
     var passwoord1=TextEditingController();
     var phone_no=TextEditingController();
     var ID_number=TextEditingController();
+    bool showimagebool=false;
     List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
@@ -39,19 +38,119 @@ class _Mycreate_accountState extends State<Mycreate_account> {
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
   String? selectedItem1='2000';
-//دالة اختيار صوره
+  //عرض الصوره في الصفحة بعد تأكيد الاختيار
+  Widget showimage()
+  {
+if(showimagebool==true)
+   {return Column(
+     children: [
+       SizedBox(height: 25,),
+       Container(
+          height: 150,
+width: 250,
+child:
+ Image.file(_image,fit: BoxFit.fill,),
+        ),
+       SizedBox(height: 25,),
+     ],
+   );
+  }
+  else
+  {
+ return SizedBox(height: 25,);
+  }
+  }
+
+  //دالة اختيار صوره
  Future getImage(ImageSource scr)async{
 final PickedFile=await picker.getImage(source: scr);
 setState(() {
   if(PickedFile!=null)
   {
     _image=File(PickedFile.path);
+     final AlertDialog adimage=AlertDialog(
+content: Container(
+height: 250,
+width: 300,
+
+child:
+ Column(
+  children: [
+    Container(
+      height: 150,
+width: 250,
+child:
+ _image==File('')?Text("لم تختر صورة"):Image.file(_image,fit: BoxFit.fill,),
+    ),
+    SizedBox(height: 20,),
+
+    Row(
+      children: [
+        Container(
+          width: 100,
+        
+        child: RaisedButton(
+          color: Color.fromRGBO(77, 0, 77,1),
+         shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+          child: Center(child: Text("موافق",style: TextStyle(color: Colors.white),)),
+          onPressed: (){
+   
+setState(() {
+  showimagebool=true;
+  
+});
+ 
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
+
+          },
+        ),
+        ),
+     
+    SizedBox(width: 70,),
+       Container(
+         
+      width: 100,
+   
+    child: RaisedButton(
+       color: Color.fromRGBO(77, 0, 77,1),
+       shape:  RoundedRectangleBorder(
+       borderRadius: BorderRadius.circular(40.0)
+    ),
+      child: Center(child: Text("الغاء",style: TextStyle(color: Colors.white),)),
+      onPressed: (){
+        setState(() {
+  showimagebool=false;
+  
+});
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
+           
+
+      },
+    ),
+    ), 
+     ],
+    ),
+     ],
+)
+),
+
+
+ 
+       );
+       showDialog(builder: (context) => adimage, context:context,barrierDismissible: false);
+
   }else
   {
     print('لم تختر صورة');
   }
 });
-            }        
+            } 
+  @override
+  Widget build(BuildContext context) {
+   
+       
 
     return 
     Scaffold(
@@ -96,7 +195,7 @@ elevation: 20,
                SizedBox(height: 25,),
                 // حقل الاسم
                Container(
-                 child: TextField(
+                 child: TextFormField(
    
      decoration: InputDecoration(
     
@@ -112,7 +211,7 @@ elevation: 20,
     ),
     
               ), 
-    
+    textCapitalization: TextCapitalization.characters,
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
 //controller:name ,
@@ -191,7 +290,7 @@ Container(
             
                //حقل المدينة
                Container(
-                 child: TextField(
+                 child: TextFormField(
     
      decoration: InputDecoration(
     
@@ -268,21 +367,24 @@ keyboardType: TextInputType.number,
                 //حقل كلمة المرور
                Container(
                  child: TextField(
-    
+obscureText: passwordicon,
+   obscuringCharacter: "*", 
      decoration: InputDecoration(
     
          labelText:"كلمة المرور",
     
          labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    /*هل تريد رؤية الكلمة او لا
-        suffixIcon: IconButton(icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+    //هل تريد رؤية الكلمة او لا
+        suffixIcon: IconButton(
          onPressed:(){setState(() {
-                      passwordicon=!passwordicon;
+                     if( passwordicon)
+                 { passwordicon=false;}
+                     else{passwordicon=true;}
                       
                     });
-                    },
-                    ),*/
-                      suffixIcon: Icon(Icons.visibility,color: Color.fromRGBO(77, 0, 77,1),),
+                    },icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+                    ),
+                  
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
@@ -292,9 +394,7 @@ keyboardType: TextInputType.number,
               ), 
     
 keyboardType: TextInputType.visiblePassword,
-/*النص محمي
-obscureText: passwordicon,*/
-obscureText: false,
+
 //controller:password,
      ),
                ),
@@ -302,21 +402,25 @@ obscureText: false,
       //حقل تأكيد كلمة المرور
               Container(
                  child: TextField(
+obscureText: passwordicon1,
+   obscuringCharacter: "*", 
     
      decoration: InputDecoration(
     
          labelText:"تأكيد كلمة المرور ",
     
         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    /*هل تريد رؤية الكلمة او لا
-        suffixIcon: IconButton(icon:Icon(passwordicon1?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+    //هل تريد رؤية الكلمة او لا
+         suffixIcon: IconButton(
          onPressed:(){setState(() {
-                      passwordicon1=!passwordicon1;
+                     if( passwordicon1)
+                 { passwordicon1=false;}
+                     else{passwordicon1=true;}
                       
                     });
-                    },
-                    ),*/
-                      suffixIcon: Icon(Icons.visibility,color: Color.fromRGBO(77, 0, 77,1),),
+                    },icon:Icon(passwordicon1?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+                    ),
+                     
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
@@ -328,7 +432,6 @@ obscureText: false,
 keyboardType: TextInputType.visiblePassword,
 /*النص محمي
 obscureText: passwordicon1,*/
-obscureText: false,
 //controller:passwoord1,
      ),
                ),
@@ -349,13 +452,7 @@ obscureText: false,
     ),
     
     onPressed:(){
-       final AlertDialog adimage=AlertDialog(
-content: Container(
-height: 150,
-child: _image==null?Text("لم تختر صورة"):Image.file(_image),
-//child: Text("اختر "),
- ),
-       );
+    
       final AlertDialog ad=AlertDialog(
 title:Text("اختر الصور من ") ,
 content: Container(
@@ -365,14 +462,24 @@ child: Column(
     Divider(color: Colors.black,),
     Container(
       width: 300,
+    
+    child: RaisedButton(
     color: Color.fromRGBO(77, 0, 77,1),
-    child: ListTile(
-      leading: Icon(Icons.image),
-      title: Text("المعرض"),
-      onTap: (){
- showDialog(builder: (context) => adimage, context:context);
-
+      child: Row(
+        children: [
+          Icon(Icons.image,color: Color.fromRGBO(0, 0, 77,1),),
+SizedBox(width: 10,),
+          Text("المعرض",style: TextStyle(color: Colors.white),),
+        ],
+      ),
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+      onPressed: (){
+   
 getImage(ImageSource.gallery);
+ 
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
         
 
       },
@@ -381,13 +488,23 @@ getImage(ImageSource.gallery);
     SizedBox(height: 10,),
        Container(
       width: 300,
+    
+    child: RaisedButton(
     color: Color.fromRGBO(77, 0, 77,1),
-    child: ListTile(
-      leading: Icon(Icons.add_a_photo),
-      title: Text("الكاميرا"),
-      onTap: (){
-         showDialog(builder: (context) => adimage, context:context);
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+      child: Row(
+        children: [
+          Icon(Icons.add_a_photo,color: Color.fromRGBO(0, 0, 77,1),),
+          SizedBox(width: 10,),
+          Text("الكاميرا",style: TextStyle(color: Colors.white),),
+        ],
+      ),
+      onPressed: (){
+      
 getImage(ImageSource.camera);
+   Navigator.of(context,rootNavigator: true).pop('dialog');         
 
       },
     ),
@@ -399,8 +516,8 @@ getImage(ImageSource.camera);
                
 
          showDialog(builder: (context) => ad, context:context);
-      
-// showDialog(context: context, builder: (BuildContext context) {_},child:ad);
+     
+
     } ,
     child: Row(
       children: [
@@ -420,18 +537,34 @@ getImage(ImageSource.camera);
        
     ),
 ),   
-                SizedBox(height: 25,),
+               
+                showimage(),
                //زر انشاء حساب
              Container(child: Column(
   children: [
           RaisedButton(
-    disabledColor: Color.fromRGBO(77, 0, 77,1),
-    disabledTextColor:Colors.white, 
+    color: Color.fromRGBO(77, 0, 77,1),
+    textColor:Colors.white, 
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
     
-    onPressed: null,
+    onPressed: (){
+      
+        final AlertDialog ok=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 20,fontWeight: FontWeight.bold),)) ,
+content: Container(
+height: 50,
+child:Icon(Icons.add_task,color: Colors.green,size: 50,)
+
+),
+      );
+               
+
+         showDialog(builder: (context) => ok, context:context);
+    },
     child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15)),
     
     
