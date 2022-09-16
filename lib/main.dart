@@ -12,6 +12,7 @@ import '../screens/trip_details_page.dart';
 import '../screens/settings.dart';
 import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
+import '../class_tools/counter_date_main.dart';
 import '../class_tools/app_BottomNavigationBar.dart';
 
 
@@ -256,8 +257,10 @@ Container(child: Column(
        crossAxisAlignment: CrossAxisAlignment.stretch, 
     ),
 ),
-Text("increase and decrease"),
+// الزيادة والنقصان في التاريخ
+  Counter_date(),
 SizedBox(height: 30,),
+// الرحلات
 AppCard(),
 SizedBox(height: 10,),
 AppCard(),
