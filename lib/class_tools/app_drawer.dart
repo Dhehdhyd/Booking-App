@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../screens/about_the_application.dart';
 import '../screens/help_and_support.dart';
@@ -80,6 +81,7 @@ setState(() {
          ListTile(title: Text('مشاركة التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
  trailing: Icon(Icons.share),
   onTap: ()=>{
+    Share.share('رابط التطبيق في جوجل play com.example.tickets_booking_app'),
 
   },),
          ListTile(title: Text('حول التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),

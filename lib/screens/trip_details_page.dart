@@ -1,10 +1,82 @@
 import 'package:flutter/material.dart';
+
 class Trip_details_page extends StatefulWidget {
   @override
   _Trip_details_pageState createState() => _Trip_details_pageState();
 }
 
 class _Trip_details_pageState extends State<Trip_details_page> {
+ int _radiovalue=0;
+  String result="";
+  int numberselect=0;
+
+   myDialog(){
+    if(numberselect==0)
+     { final AlertDialog ok1=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Row(
+    children: [
+        Icon(Icons.warning_sharp,color: Color.fromRGBO(77, 0, 77, 0.7),size: 40,),
+      SizedBox(width: 8,),
+      Text("الرجاء تحديد طريقة الدفع",style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 15,fontWeight: FontWeight.bold),),
+    ],
+  )) ,
+
+      );
+               
+
+         showDialog(builder: (context) => ok1, context:context);
+  }
+  else if(numberselect==1)
+     {
+  final AlertDialog ok2=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Text('''الرجاء المسارعة في الدفع الى اقرب فرع للمكتب خلال 24 ساعة
+ ورقم الحجز الخاص بك هو 24446 ''',style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 15,fontWeight: FontWeight.bold),)) ,
+content: Container(
+height: 50,
+child:Row(
+  children: [
+        SizedBox(width: 20,),
+        Icon(Icons.alarm,color: Color.fromRGBO(77, 0, 77, 1),size: 40,),
+        SizedBox(width: 30,),
+        Icon(Icons.airport_shuttle,color: Color.fromRGBO(77, 0, 77, 1),size: 40,),
+
+
+  ],
+)
+
+),
+      );
+               
+
+         showDialog(builder: (context) => ok2, context:context);
+  }
+  else if(numberselect==2)
+     {
+  final AlertDialog ok3=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Row(
+    children: [
+      Icon(Icons.beenhere,color: Colors.green,size: 30),
+        SizedBox(width: 20,),
+      Text( "تم الحجز بنجاح",style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 15,fontWeight: FontWeight.bold),),
+    ],
+  )) ,
+content: Container(
+height: 50,
+width: 50,
+child: Text("صورة التذكره"),
+),
+      );
+               
+
+         showDialog(builder: (context) => ok3, context:context);
+  }
+  }
   @override
   Widget build(BuildContext context) {
     return
@@ -419,8 +491,39 @@ child: Column(
            child: Text(' طريقة الدفع ',style: TextStyle(fontSize: 15,color: Color.fromRGBO(77, 0, 77, 1),fontWeight: FontWeight.bold)
            )
            ),
-     
-       
+     SizedBox(height: 20,),
+     Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Radio(
+            value: 1,
+            groupValue: _radiovalue,
+            onChanged: <int>(value){
+              setState(() {
+                              _radiovalue=value;
+                              numberselect=1;
+
+                            });
+            },
+          ),
+          Text('الدفع نقدا',style: TextStyle(fontSize: 15,color: Color.fromRGBO(0, 0, 77, 1)),),
+                Radio(
+            value: 2,
+            groupValue: _radiovalue,
+            onChanged: <int>(value){
+              setState(() {
+                              _radiovalue=value;
+                              numberselect=2;
+                            });
+            },
+          ),
+          Text('التحويل البنكي',style: TextStyle(fontSize: 15,color: Color.fromRGBO(0, 0, 77, 1)),),
+        ],
+      ),
+      
+    ),
+      // AppRadio(),
        
      
       
@@ -442,20 +545,10 @@ child: Column(
     ),
     
     onPressed: (){
-   
-        final AlertDialog ok=AlertDialog(
-title:Container(
-alignment: Alignment.center,
-  child: Text("تم الحجز بنجاح",style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 20,fontWeight: FontWeight.bold),)) ,
-content: Container(
-height: 50,
-child:Icon(Icons.add_task,color: Colors.green,size: 50,)
-
-),
-      );
-               
-
-         showDialog(builder: (context) => ok, context:context);
+   setState(() {
+       myDialog(); 
+      });
+     
     },
     child: Text('تأكيد الحجز',style: TextStyle(fontSize: 15)),
     
