@@ -14,20 +14,26 @@ import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
 import '../class_tools/counter_date_main.dart';
 import '../class_tools/app_BottomNavigationBar.dart';
-
-
+ThemeMode tm=ThemeMode.light;
+bool _swval=false;
+bool darkMode=false;
 void main() {
+/*
+  SharedPreferences.getInstance().then((instance){
+  instance.getBool('darkMode');
  return runApp(mystartpage());
-}
+ });*/
+ return runApp(mystartpage());
 
+}
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ticket_Booking_App',
+    return 
+    MaterialApp(
+      title: 'BusTrav',
       //اتجاة الكتابة واللغة العربية
        localizationsDelegates: [
     GlobalMaterialLocalizations.delegate,
@@ -37,12 +43,26 @@ class MyApp extends StatelessWidget {
    supportedLocales: [
     Locale('ar', 'AE'), // English, no country code
   ],
+  themeMode:tm,
       theme: ThemeData(
        //اللوان التطبيق الرئيسية 
-        primarySwatch:Colors.purple,
-        accentColor: Colors.purpleAccent,
-        
+        primarySwatch:Colors.lightBlue,
+
+        accentColor: secondappcolor,
+        canvasColor: lightcolor,
+        scaffoldBackgroundColor: lightcolor,
+      brightness: Brightness.light,
       ),
+      //لون في الوضع اليلي
+      darkTheme: ThemeData( 
+         primarySwatch:Colors.lightBlue,
+        accentColor: secondappcolor,
+        canvasColor: darkcolor,
+        scaffoldBackgroundColor: darkcolor,
+      brightness: Brightness.dark,
+
+
+        ),
       debugShowCheckedModeBanner:false,
 
      // home: MyHomePage(),
@@ -65,11 +85,15 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+
+  
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
+  
   String? selectedItem='صنعاء';
   String? selectedItem1='اب';
 
@@ -103,25 +127,27 @@ _selectedDate1=date;
        length: 2,
             child: Scaffold(
         appBar: AppBar(
+          
          actions: 
           [ Padding(
              padding: const EdgeInsets.only(left: 210.0),
 
-             child: Text('الصفحة الرئيسية',style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
-           ),], 
-          flexibleSpace: Container(
+             child: Text('الصفحة الرئيسية',style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
+           ),
+
+          ],backgroundColor: fristappcolor,
+           /*
+         flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-  Color.fromRGBO(0, 0, 77,1),
-  Color.fromRGBO(77, 0, 77,1),
-  Color.fromRGBO(0, 0, 77,1),
+fristappcolor,
   
 
 
 ],),
           ),
           ),
-
+*/
         ),
         
         body://الحقول  
@@ -136,9 +162,9 @@ Container(
   child: Row(
     children: [
         SizedBox(width: 10),
-   Icon(Icons.location_city,color: Color.fromRGBO(0, 0, 77,1),),
+   Icon(Icons.location_city,color: secondappcolor),
    SizedBox(width: 10), 
-        Text('من مدينة',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster',
+        Text('من مدينة',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
         ),),
    
     ],
@@ -151,7 +177,7 @@ Container(
   decoration: InputDecoration(
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+        borderSide: BorderSide(width: 2,color:fristappcolor )
     )
   ),
           icon: Icon(Icons.arrow_drop_down),
@@ -176,9 +202,9 @@ Container(
   child: Row(
     children: [
         SizedBox(width: 10),
-   Icon(Icons.location_city,color: Color.fromRGBO(0, 0, 77,1),),
+   Icon(Icons.location_on,color: secondappcolor,),
    SizedBox(width: 10), 
-        Text('الى مدينة',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster',
+        Text('الى مدينة',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
         ),
         ),
    
@@ -194,7 +220,7 @@ Container(
   decoration: InputDecoration(
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+        borderSide: BorderSide(width: 2,color:fristappcolor )
     )
   ),
           icon: Icon(Icons.arrow_drop_down),
@@ -218,7 +244,7 @@ SizedBox(height: 30),
 Container(child:Row(
   children: [
     SizedBox(width: 6,),
-   Icon(Icons.date_range,color: Color.fromRGBO(0, 0, 77,1),), 
+   Icon(Icons.date_range,color: secondappcolor,), 
 SizedBox(width: 10),
 
     InkWell(
@@ -240,15 +266,18 @@ SizedBox(height: 20),
 //الزر بحث
 Container(child: Column(
   children: [
-          RaisedButton(
-    disabledColor: Color.fromRGBO(77, 0, 77,1),
-    disabledTextColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+            ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      disabledBackgroundColor: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
     
     onPressed: null,
-    child: Text('بحث ',style: TextStyle(fontSize: 15)),
+    child: Text('بحث ',style: TextStyle(fontSize: 15,color:Colors.white)),
     
     
     ),

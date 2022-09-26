@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة �
 import 'package:intl/intl.dart';//تنسيق التاريخ
 import '../main.dart';
 import 'dart:io';
+import '../screens/settings.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
 /*
 <key>NSPhotoLibraryUsageDescription</key>
@@ -89,10 +90,14 @@ child:
         Container(
           width: 100,
         
-        child: RaisedButton(
-          color: Color.fromRGBO(77, 0, 77,1),
-         shape:  RoundedRectangleBorder(
+        child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
           child: Center(child: Text("موافق",style: TextStyle(color: Colors.white),)),
           onPressed: (){
@@ -113,10 +118,13 @@ setState(() {
          
       width: 100,
    
-    child: RaisedButton(
-       color: Color.fromRGBO(77, 0, 77,1),
+    child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
        shape:  RoundedRectangleBorder(
-       borderRadius: BorderRadius.circular(40.0)
+        borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
       child: Center(child: Text("الغاء",style: TextStyle(color: Colors.white),)),
       onPressed: (){
@@ -150,8 +158,6 @@ setState(() {
   @override
   Widget build(BuildContext context) {
    
-       
-
     return 
     Scaffold(
        appBar: AppBar(
@@ -159,14 +165,13 @@ setState(() {
           [ Padding(
              padding: const EdgeInsets.only(left: 250),
 
-             child: Text("انشاء حساب ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
+             child: Text("انشاء حساب ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-  Color.fromRGBO(0, 0, 77,1),
-  Color.fromRGBO(77, 0, 77,1),
-  Color.fromRGBO(0, 0, 77,1),
+fristappcolor,
+fristappcolor,
   
 
 
@@ -180,7 +185,7 @@ gradient: LinearGradient(colors: [
         child: Card(
           
           color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor: Color.fromRGBO(77, 0, 77, 0.5),
+shadowColor: Color.fromRGBO(60, 90, 195, 0.1),
 elevation: 20,
           child: SingleChildScrollView(
                     child: Column(
@@ -188,7 +193,7 @@ elevation: 20,
                 
                 //العنوان
                Center(
-                 child: Text(" حسابي",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 25,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                 child: Text(" حسابي",style:TextStyle(color:secondtextcolor,fontSize: 25,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
         ),
         ),
                ),
@@ -201,13 +206,13 @@ elevation: 20,
     
          labelText:"الاسم بالكامل",
     
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     
-         prefixIcon: Icon(Icons.person,color: Color.fromRGBO(77, 0, 77,1),),
+         prefixIcon: Icon(Icons.person,color: secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
               ), 
@@ -225,7 +230,7 @@ Container(
   child: Row(
     children: [
       SizedBox(width: 2,),
-      Text(' نوع الجنس',style:TextStyle(color: Color.fromRGBO(77,0 , 77,1),fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+      Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
       SizedBox(width: 2,),
       Container( 
           height: 70,
@@ -235,7 +240,7 @@ Container(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+                borderSide: BorderSide(width: 2,color:fristappcolor )
             )
           ),
                   isExpanded: true,
@@ -254,7 +259,7 @@ Container(
       ),
        
      SizedBox(width: 8,),
-      Text('تاريخ الميلاد',style:TextStyle(color: Color.fromRGBO(77,0 , 77,1),fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+      Text('تاريخ الميلاد',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
   SizedBox(width: 2,),
  Container( 
@@ -265,7 +270,7 @@ Container(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+                borderSide: BorderSide(width: 2,color:fristappcolor )
             )
           ),
                   isExpanded: true,
@@ -298,11 +303,11 @@ Container(
     
          labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
     
-         prefixIcon: Icon(Icons.location_city_rounded,color: Color.fromRGBO(77, 0, 77,1),),
+         prefixIcon: Icon(Icons.location_city_rounded,color: secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
               ), 
@@ -323,11 +328,11 @@ keyboardType: TextInputType.text,
     
          labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
     
-         prefixIcon: Icon(Icons.phone_android,color: Color.fromRGBO(77, 0, 77,1),),
+         prefixIcon: Icon(Icons.phone_android,color: secondappcolor),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
               ), 
@@ -348,11 +353,11 @@ keyboardType: TextInputType.number,
     
          labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
     
-         prefixIcon: Icon(Icons.card_membership,color: Color.fromRGBO(77, 0, 77,1),),
+         prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
               ), 
@@ -382,13 +387,13 @@ obscureText: passwordicon,
                      else{passwordicon=true;}
                       
                     });
-                    },icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+                    },icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color:secondappcolor,),
                     ),
                   
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            borderSide: BorderSide(width: 2,color:fristappcolor)
     ),
     
               ), 
@@ -418,13 +423,13 @@ obscureText: passwordicon1,
                      else{passwordicon1=true;}
                       
                     });
-                    },icon:Icon(passwordicon1?Icons.visibility:Icons.visibility_off,color: Color.fromRGBO(77, 0, 77,1),),
+                    },icon:Icon(passwordicon1?Icons.visibility:Icons.visibility_off,color: secondappcolor,),
                     ),
                      
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:Color.fromRGBO(77, 0, 77,1) )
+            borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
               ), 
@@ -444,11 +449,14 @@ obscureText: passwordicon1,*/
           Expanded(
                       child: Container(
               
-              child: RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+              child:ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
     
     onPressed:(){
@@ -462,19 +470,25 @@ child: Column(
     Divider(color: Colors.black,),
     Container(
       width: 300,
+   
+    child:  ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: fristappcolor,
+ 
+
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    ),
     
-    child: RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
       child: Row(
         children: [
-          Icon(Icons.image,color: Color.fromRGBO(0, 0, 77,1),),
+          Icon(Icons.image,color: secondappcolor),
 SizedBox(width: 10,),
           Text("المعرض",style: TextStyle(color: Colors.white),),
         ],
       ),
-       shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40.0)
-    ),
+      
       onPressed: (){
    
 getImage(ImageSource.gallery);
@@ -489,14 +503,18 @@ getImage(ImageSource.gallery);
        Container(
       width: 300,
     
-    child: RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
+    child:  ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: fristappcolor,
+ 
+
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
+    ),
       child: Row(
         children: [
-          Icon(Icons.add_a_photo,color: Color.fromRGBO(0, 0, 77,1),),
+          Icon(Icons.add_a_photo,color: secondappcolor,),
           SizedBox(width: 10,),
           Text("الكاميرا",style: TextStyle(color: Colors.white),),
         ],
@@ -521,7 +539,7 @@ getImage(ImageSource.camera);
     } ,
     child: Row(
       children: [
-        Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 13)),
+        Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 13,color: Colors.white)),
         SizedBox(width: 150,),
      Icon(Icons.add_a_photo), ],
     ),
@@ -542,11 +560,15 @@ getImage(ImageSource.camera);
                //زر انشاء حساب
              Container(child: Column(
   children: [
-          RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+
+    ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ textStyle: TextStyle(color: Colors.white),
+
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
     
     onPressed: (){
@@ -554,7 +576,7 @@ getImage(ImageSource.camera);
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
-  child: Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: Color.fromRGBO(77, 0, 77, 1),fontSize: 20,fontWeight: FontWeight.bold),)) ,
+  child: Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: secondappcolor,fontSize: 20,fontWeight: FontWeight.bold),)) ,
 content: Container(
 height: 50,
 child:Icon(Icons.add_task,color: Colors.green,size: 50,)
@@ -565,7 +587,7 @@ child:Icon(Icons.add_task,color: Colors.green,size: 50,)
 
          showDialog(builder: (context) => ok, context:context);
     },
-    child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15)),
+    child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15,color: Colors.white)),
     
     
     ),

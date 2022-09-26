@@ -48,51 +48,47 @@ Container(
         child: Drawer(
 child: ListView(children: [
   Container( height: 40,      
-   decoration: BoxDecoration(
-gradient: LinearGradient(colors: [
-  Color.fromRGBO(0, 0, 77,1),
-  Color.fromRGBO(77, 0, 77,1),
-  Color.fromRGBO(0, 0, 77,1),
- ] ),
- ),
+  child: Center(
+    child: Text('BusTrav',style:TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Lobster'))),
+  color: fristappcolor,
  ),
 SizedBox(height: 20),
-  ListTile(title: Text('شرح كيفيةاستخدام التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.video_call),
+  ListTile(title: Text('شرح كيفيةاستخدام التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+  trailing: Icon(Icons.video_call,color: fristappcolor,),
   onTap: ()=>{
     
     launchurl('$_url'),
   },),
-        ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.manage_accounts),
+        ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color:secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+  trailing: Icon(Icons.manage_accounts,color: fristappcolor,),
   onTap: ()=>{
 setState(() {
   select_page(context, 1);
 }),  
 
   },),
-         ListTile(title: Text('الإعدادات',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster',)),
-  trailing: Icon(Icons.settings),
+         ListTile(title: Text('الإعدادات',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',)),
+  trailing: Icon(Icons.settings,color: fristappcolor,),
   onTap: ()=>{
     setState(() {
   select_page(context, 2);
 }),
   },),
-         ListTile(title: Text('مشاركة التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
- trailing: Icon(Icons.share),
+         ListTile(title: Text('مشاركة التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+ trailing: Icon(Icons.share,color: fristappcolor,),
   onTap: ()=>{
     Share.share('رابط التطبيق في جوجل play com.example.tickets_booking_app'),
 
   },),
-         ListTile(title: Text('حول التطبيق',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.question_answer),
+         ListTile(title: Text('حول التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+  trailing: Icon(Icons.question_answer,color: fristappcolor,),
   onTap: ()=>{
  setState(() {
   select_page(context, 3);
 }),
   },),
-         ListTile(title: Text('المساعدة والدعم',style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster')),
-  trailing: Icon(Icons.help_sharp),
+         ListTile(title: Text('المساعدة والدعم',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+  trailing: Icon(Icons.help_sharp,color: fristappcolor,),
   onTap: ()=>{
    setState(() {
   select_page(context, 4);

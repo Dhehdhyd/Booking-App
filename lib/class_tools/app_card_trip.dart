@@ -3,6 +3,8 @@ import '../screens/create_an_account_traveler.dart';
 import '../screens/trip_details_page.dart';
 import '../screens/create_an_account_page.dart';
 import '../main.dart';
+import '../screens/settings.dart';
+
 //بطاقة الرحلة
 class AppCard extends StatefulWidget {
   @override
@@ -34,10 +36,14 @@ child: Column(
     Divider(color: Colors.black,),
     Container(
       width: 300,
-    child: RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,0.7),
+    child: 
+   
+   ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: fristappcolor,
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
       child: Row(
         children: [
@@ -63,10 +69,12 @@ child: Column(
     SizedBox(height: 10,),
        Container(
       width: 300,
-    child: RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,0.7),
+    child:   ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: fristappcolor,
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
       child: Row(
         children: [
@@ -122,13 +130,13 @@ elevation: 400,
                  width: 40,
                  height: 40,
                  alignment: Alignment.topLeft,
-                 child: Image.asset("assets/images/bus1.png",alignment: Alignment.center,fit: BoxFit.fill,)
+                 child: Image.asset("assets/images/bus5.jpg",alignment: Alignment.center,fit: BoxFit.fill,)
                  ),
             
                   
                   //العنوان
                  Center(
-                   child: Text(" باصات أبوسرهد",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(" باصات أبوسرهد",style:TextStyle(color:secondtextcolor,fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -144,7 +152,7 @@ elevation: 400,
                      Container(
                  margin: EdgeInsets.only(right: 35),
 
-                   child: Text("موعد الحضور",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("موعد الحضور",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -153,7 +161,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 80),
 
-                   child: Text("12:00",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("12:00",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -161,7 +169,7 @@ elevation: 400,
                        Container(
                  margin: EdgeInsets.only(right: 50),
 
-                   child: Text("من :  ",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("من :  ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -169,7 +177,7 @@ elevation: 400,
                        Container(
                  margin: EdgeInsets.only(right: 8),
 
-                   child: Text("صنعاء",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("صنعاء",style:TextStyle(color:thridtextcolor,fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ), ],
@@ -184,7 +192,7 @@ elevation: 400,
                      Container(
                  margin: EdgeInsets.only(right: 35),
 
-                   child: Text("ساعات الانتظار ",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("ساعات الانتظار ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -193,7 +201,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 70),
 
-                   child: Text("02:00",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("02:00",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -209,7 +217,7 @@ elevation: 400,
                      Container(
                  margin: EdgeInsets.only(right: 35),
 
-                   child: Text("موعد  الانطلاق",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("موعد  الانطلاق",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -218,7 +226,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 75),
 
-                   child: Text("02:00",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("02:00",style:TextStyle(color:thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -226,7 +234,7 @@ elevation: 400,
                        Container(
                  margin: EdgeInsets.only(right: 50),
 
-                   child: Text("الى : ",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("الى : ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -234,7 +242,7 @@ elevation: 400,
                        Container(
                  margin: EdgeInsets.only(right: 8),
 
-                   child: Text("اب",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("اب",style:TextStyle(color: thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ), ],
@@ -248,7 +256,7 @@ elevation: 400,
                      Container(
                  margin: EdgeInsets.only(right: 60),
 
-                   child: Text("نوع الباص ",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("نوع الباص ",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -257,7 +265,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 70),
 
-                   child: Text("إقتصادي",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("إقتصادي",style:TextStyle(color:thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -273,7 +281,7 @@ elevation: 400,
                      Container(
                  margin: EdgeInsets.only(right: 60),
 
-                   child: Text("سعر الرحلة",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("سعر الرحلة",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -282,7 +290,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 75),
 
-                   child: Text("7000",style:TextStyle(color: Color.fromRGBO(0,0 ,77,0.9),fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("7000",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -290,7 +298,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 10),
 
-                   child: Text("ر.ي",style:TextStyle(color: Color.fromRGBO(77,0 ,77,1),fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("ر.ي",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -299,15 +307,19 @@ elevation: 400,
         //زر الحجز
               Container(child: Column(
   children: [
-          RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+      ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0)
     ),
+    ),
+     
     
     onPressed:(){myDialog();},
-    child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 10)),
+    child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 10,color:Colors.white,)),
     
     
     ),

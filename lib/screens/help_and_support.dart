@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../screens/settings.dart';
 
 class Help_and_support extends StatefulWidget {
   @override
@@ -19,14 +20,13 @@ class _Help_and_supportState extends State<Help_and_support> {
           [ Padding(
              padding: const EdgeInsets.only(left: 210),
 
-             child: Text(" المساعدة والدعم ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
+             child: Text(" المساعدة والدعم ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-  Color.fromRGBO(0, 0, 77,1),
-  Color.fromRGBO(77, 0, 77,1),
-  Color.fromRGBO(0, 0, 77,1),
+fristappcolor,
+fristappcolor,
   
 
 
@@ -47,22 +47,25 @@ gradient: LinearGradient(colors: [
                Container(
   
                  margin: EdgeInsets.only(top: 20),
-                 child: Icon(Icons.call,color: Colors.green,size: 50,),
+                 child: Icon(Icons.call,color:fristappcolor,size: 50,),
                ),
 SizedBox(height: 30,),
 Container(
-  child:   RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40.0)
+  child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ textStyle: TextStyle(color: Colors.white),
+
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
      
      child: Row(
   
             children: [
   
-              Icon(Icons.call,color: Color.fromRGBO(0, 0, 77,1),),
+              Icon(Icons.call,color: fristappcolor,),
   
   SizedBox(width: 5,),
   
@@ -82,18 +85,21 @@ Container(
 ),
     SizedBox(height: 10,),
 Container(
-  child:   RaisedButton(
-     color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40.0)
+  child:   ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ textStyle: TextStyle(color: Colors.white),
+
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
      
      child: Row(
   
             children: [
   
-              Icon(Icons.call,color: Color.fromRGBO(0, 0, 77,1),),
+              Icon(Icons.call,color:fristappcolor,),
   
   SizedBox(width: 5,),
   
@@ -119,22 +125,25 @@ SizedBox(width: 10,),
           children: [
             Container(
                margin: EdgeInsets.only(top: 20),   
-                   child: Icon(Icons.whatsapp_rounded,color: Colors.green,size: 50,),
+                   child: Icon(Icons.whatsapp_rounded,color: fristappcolor,size: 50,),
               ),
         
         SizedBox(height: 30,),
 Container(
-  child:   RaisedButton(
-      color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+  child:   ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ textStyle: TextStyle(color: Colors.white),
+
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
      child: Row(
   
           children: [
   
-            Icon(Icons.whatsapp,color: Color.fromRGBO(0, 0, 77,1),),
+            Icon(Icons.whatsapp,color: fristappcolor),
   
   SizedBox(width: 10,),
   
@@ -154,17 +163,20 @@ Container(
 ),
     SizedBox(height: 10,),
 Container(
-  child:   RaisedButton(
-      color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+  child:   ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ textStyle: TextStyle(color: Colors.white),
+
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
+    ),
     ),
      child: Row(
   
           children: [
   
-            Icon(Icons.whatsapp,color: Color.fromRGBO(0, 0, 77,1),),
+            Icon(Icons.whatsapp,color:fristappcolor),
   
   SizedBox(width: 10,),
   

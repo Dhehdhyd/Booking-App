@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/settings.dart';
 import 'package:intl/intl.dart';//تنسيق التاريخ
 class Counter_date extends StatefulWidget {
   @override
@@ -183,12 +184,16 @@ dec(){
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-           RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+           ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(110.0)
     ),
+    ),
+     
     
     onPressed:(){dec();},
     child: Text('<<',style: TextStyle(fontSize: 12,color:Colors.white)),
@@ -198,12 +203,16 @@ dec(){
          
     Text(day.toString()+" - "+mounth.toString()+" - "+year.toString()
     ,style: TextStyle(fontSize: 15,color: Color.fromRGBO(0, 0, 77,1),fontFamily: 'Lobster')),
-     RaisedButton(
-    color: Color.fromRGBO(77, 0, 77,1),
-    textColor:Colors.white, 
-    shape: RoundedRectangleBorder(
+          ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(110.0)
     ),
+    ),
+    
     
     onPressed:(){inc();},
     child: Text('>>',style: TextStyle(fontSize: 12,color:Colors.white)),

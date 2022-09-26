@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../screens/create_an_account_page.dart';
+import '../screens/settings.dart';
+
 // الشريط السفلي
 class AppBottomNavigationBar extends StatefulWidget {
   @override
@@ -45,14 +47,14 @@ type: BottomNavigationBarType.shifting,
   
 items: [BottomNavigationBarItem(
   
- backgroundColor:Color.fromRGBO(77, 0, 77,1),
+ backgroundColor:fristappcolor,
  
 icon:Icon(Icons.home),
 label: "الصفحة الرئسية",
 
 ),
 BottomNavigationBarItem(
-  backgroundColor:Color.fromRGBO(77, 0, 77,1),
+  backgroundColor:fristappcolor,
   icon:Icon(Icons.create),
 
 label: "انشاء حساب",
