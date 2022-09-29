@@ -26,14 +26,19 @@ class _mystartpageState extends State<mystartpage> {
         body: 
         SplashScreen(
             photoSize: 200,
-            backgroundColor: Colors.white,
-            //لو اريد تدرج في اللوان
-           /* gradientBackground: LinearGradient(colors: [
-  Color.fromRGBO(0, 0, 77,1),
-  Color.fromRGBO(77, 0, 77,1),
-  Color.fromRGBO(0, 0, 77,1), ] ),*/
+            
+            
+            gradientBackground: LinearGradient(
+                begin : Alignment.topCenter,
+  end :Alignment.bottomCenter,
+  colors: [
+              
+  fristappcolor,
+  secondappcolor,
+  
+   ] ),
     
-          image: Image.asset("assets/images/bus.png",alignment: Alignment.center),
+          image: Image.asset("assets/images/bus6.png",alignment: Alignment.center),
           seconds: 1,
           navigateAfterSeconds:MyApp(),
           loaderColor: fristappcolor,  

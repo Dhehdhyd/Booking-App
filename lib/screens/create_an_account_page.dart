@@ -5,6 +5,7 @@ import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
+import 'package:shared_preferences/shared_preferences.dart';
 /*
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Allow this app to access your photos</string>
@@ -30,6 +31,12 @@ class _Mycreate_accountState extends State<Mycreate_account> {
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
     bool showimagebool=false;
+        _savevalues()async{
+          if(create_account==true)
+     {SharedPreferences prefs=await SharedPreferences.getInstance();
+        prefs.setBool("create_account", create_account)  ;
+     }
+     }
    /* List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
@@ -158,7 +165,8 @@ setState(() {
             } 
   @override
   Widget build(BuildContext context) {
-   
+     
+ 
     return 
     Scaffold(
        appBar: AppBar(
@@ -608,6 +616,7 @@ textStyle:TextStyle(color:Colors.white,),
             onPressed: (){
   setState(() {
             create_account=true;
+            _savevalues();
 
   });
       // غلق نافذة الرسالة 

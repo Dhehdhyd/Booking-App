@@ -14,15 +14,22 @@ import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
 import '../class_tools/counter_date_main.dart';
 import '../class_tools/app_BottomNavigationBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 ThemeMode tm=ThemeMode.light;
 bool _swval=false;
 bool darkMode=false;
-void main() {
-/*
-  SharedPreferences.getInstance().then((instance){
-  instance.getBool('darkMode');
- return runApp(mystartpage());
- });*/
+void main()async{
+  //عندما ينشاء حساب تتسجل بيانات العميل اي انه قد انشاء حساب فيتم ارجاع قيمة متغير الانشاء لكي لا اسمح له بانشاء حساب جديد
+WidgetsFlutterBinding.ensureInitialized();
+
+          if(create_account==false)
+{
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+  
+          create_account=prefs.getBool("create_account")as bool;
+      
+    }
+  
  return runApp(mystartpage());
 
 }
@@ -31,6 +38,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return 
     MaterialApp(
       title: 'BusTrav',
@@ -94,6 +102,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   
   
+          
   String? selectedItem='صنعاء';
   String? selectedItem1='اب';
 
@@ -120,6 +129,7 @@ _selectedDate1=date;
               _selectedDate=date.toString();
             });});}
   @override
+  
   Widget build(BuildContext context) {
 
     return 

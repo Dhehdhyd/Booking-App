@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../screens/about_the_application.dart';
+import '../screens/create_an_account_page.dart';
 import '../screens/help_and_support.dart';
 import '../screens/modifly_my_account_data.dart';
 import '../screens/settings.dart';
@@ -33,12 +34,104 @@ class _AppDrawerState extends State<AppDrawer> {
       builder: (_){
       
         
- return index_page==1?Modifly_my_account_data():index_page==2?Settingpage():index_page==3?About_the_application():Help_and_support();
+ return index_page==1?Modifly_my_account_data():index_page==2?Settingpage():index_page==3?About_the_application():index_page==4?Help_and_support():Mycreate_account();
 //arguments: {
 //مفتاح وقيمة'id':indexpage==1?10:20وهكذا كل القيم التي تحتاج لتمريرها
 
 }  ),
     );
+     }
+     //يختبر هل الشخص يملك حساب او لا 
+
+     modifly(){
+       
+        if(create_account==false)
+     { final AlertDialog booking=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Column(
+    children: [
+      Row(
+        children: [
+            Icon(Icons.warning_sharp,color: fristappcolor,size: 40,),
+          SizedBox(width: 8,),
+          Text("ارجاء إنشاء حساب لك في التطبيق  ",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+        ],
+      ),
+     SizedBox(height: 20,),
+
+    Row(
+      children: [
+        Container(
+          width: 100,
+        
+        child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    ),
+          child: Center(child: Text("انشاء حساب",style: TextStyle(color: Colors.white),)),
+          onPressed: (){
+   setState(() {
+       select_page(context, 5);
+   Navigator.of(context,rootNavigator: true).pop('booking');   
+      });
+        
+
+          },
+        ),
+        ),
+     
+    SizedBox(width: 70,),
+       Container(
+         
+      width: 100,
+   
+    child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    ),
+      child: Center(child: Text("تراجع",style: TextStyle(color: Colors.white),)),
+      onPressed: (){
+  setState(() {
+   Navigator.of(context,rootNavigator: true).pop('booking');         
+      
+    });
+           
+
+      },
+      
+    ),
+    ), 
+     ],
+    ),
+    ],
+ 
+  ),
+  ) ,
+
+      );
+               
+
+         showDialog(builder: (context) => booking, context:context);
+
+  }
+  //اذا الشخص قد انشاء حساب 
+  else if(create_account==true)
+    {
+     setState(() {
+  select_page(context, 1);
+}); 
+
+    } 
      }
   @override
   Widget build(BuildContext context) {
@@ -62,10 +155,8 @@ SizedBox(height: 20),
         ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color:secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
   trailing: Icon(Icons.manage_accounts,color: fristappcolor,),
   onTap: ()=>{
-setState(() {
-  select_page(context, 1);
-}),  
-
+       
+  modifly(),
   },),
          ListTile(title: Text('الإعدادات',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',)),
   trailing: Icon(Icons.settings,color: fristappcolor,),

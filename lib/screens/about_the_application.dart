@@ -41,7 +41,7 @@ gradient: LinearGradient(colors: [
                      height: 90,
                      margin: EdgeInsets.only(top: 5),
                      alignment: Alignment.center,
-                     child: Image.asset("assets/images/bus5.jpg",alignment: Alignment.center,fit: BoxFit.fill,)
+                     child: Image.asset("assets/images/W3A.png",alignment: Alignment.center,fit: BoxFit.fill,)
                      ),
                      SizedBox(height: 20,),
      Padding(

@@ -4,6 +4,7 @@ import '../screens/trip_details_page.dart';
 import '../screens/create_an_account_page.dart';
 import '../main.dart';
 import '../screens/settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //بطاقة الرحلة
 class AppCard extends StatefulWidget {
@@ -13,6 +14,7 @@ class AppCard extends StatefulWidget {
 
 class _AppCardState extends State<AppCard> {
   @override
+
   void select_page(BuildContext ctx,int index_page)
   {
     Navigator.of(ctx).push(MaterialPageRoute(
@@ -27,6 +29,7 @@ class _AppCardState extends State<AppCard> {
     );
      }
 myDialog(){
+  
      final AlertDialog ad=AlertDialog(
 title:Text("حجز الرحلة  ") ,
 content: Container(

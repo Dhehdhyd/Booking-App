@@ -222,9 +222,9 @@ keyboardType: TextInputType.text,
 Container(
   
  
-  child: Row(
+ child: Row(
     children: [
-      SizedBox(width: 2,),
+     /* SizedBox(width: 2,),
       Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
       SizedBox(width: 2,),
       Container( 
@@ -252,20 +252,20 @@ Container(
                   ).toList(),
                 ),
       ),
-       
-     SizedBox(width: 8,),
-      Text('تاريخ الميلاد',style:TextStyle(color:secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+       */
+     SizedBox(width: 15,),
+      Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
-  SizedBox(width: 2,),
+  SizedBox(width: 25,),
  Container( 
           height: 70,
-    width: 100,
+    width: 223,
     //margin: EdgeInsets.only(left:20.0),
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor )
+                borderSide: BorderSide(width: 2,color:fristappcolor)
             )
           ),
                   isExpanded: true,
@@ -286,6 +286,7 @@ Container(
     ],
   ),
     ),
+    /*
                SizedBox(height: 25,),
             
                //حقل المدينة
@@ -296,9 +297,9 @@ Container(
     
          labelText:"المدينة التي تسكن فيها",
     
-         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
     
-         prefixIcon: Icon(Icons.location_city_rounded,color:secondappcolor),
+         prefixIcon: Icon(Icons.location_city_rounded,color: secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
@@ -312,7 +313,7 @@ keyboardType: TextInputType.text,
 //controller:city ,
      ),
                ),
-     SizedBox(height: 25,),
+     SizedBox(height: 25,),*/
      //رقم الهاتف
                Container(
                  child: TextField(
@@ -539,7 +540,7 @@ alignment: Alignment.center,
   child: Text("تم تعديل الحساب بنجاح",style: TextStyle(color: secondappcolor,fontSize: 20,fontWeight: FontWeight.bold),)) ,
 content: Container(
 height: 50,
-child:Icon(Icons.add_task,color: Colors.green,size: 50,)
+child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
 
 ),
       );
