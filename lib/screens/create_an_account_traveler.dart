@@ -5,6 +5,7 @@ import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
+import '../screens/trip_details_page.dart';
 class Create_account extends StatefulWidget {
   @override
   _Create_accountState createState() => _Create_accountState();
@@ -15,7 +16,8 @@ class _Create_accountState extends State<Create_account> {
     final picker=ImagePicker();
     bool showimagebool=false;
     var name=TextEditingController();
-    var ID_number=TextEditingController();
+    var phone_no=TextEditingController();
+    var iD_number=TextEditingController();
     List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
@@ -211,13 +213,13 @@ keyboardType: TextInputType.text,
      ),
                ),
               SizedBox(height: 25,),
- // الجنس والتاريخ قائمة خيارات             
-Container(
+ // الجنس والتاريخ قائمة خيارات  
+ Container(
   
  
   child: Row(
     children: [
-      SizedBox(width: 2,),
+     /* SizedBox(width: 2,),
       Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
       SizedBox(width: 2,),
       Container( 
@@ -245,20 +247,20 @@ Container(
                   ).toList(),
                 ),
       ),
-       
-     SizedBox(width: 8,),
-      Text('تاريخ الميلاد',style:TextStyle(color: secondappcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+       */
+     SizedBox(width: 15,),
+      Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
-  SizedBox(width: 2,),
+  SizedBox(width: 15,),
  Container( 
           height: 70,
-    width: 100,
+    width: 223,
     //margin: EdgeInsets.only(left:20.0),
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor )
+                borderSide: BorderSide(width: 2,color:fristappcolor)
             )
           ),
                   isExpanded: true,
@@ -279,6 +281,31 @@ Container(
     ],
   ),
     ),
+    SizedBox(height: 25,),
+     //رقم الهاتف
+               Container(
+                 child: TextField(
+    
+     decoration: InputDecoration(
+    
+         labelText:"رقم الهاتف",
+    
+         labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+    
+         prefixIcon: Icon(Icons.phone_android,color: secondappcolor),
+    
+    enabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(width: 2,color:fristappcolor )
+    ),
+    
+              ), 
+    
+keyboardType: TextInputType.number,
+
+//controller:phone_no,
+     ),
+               ),
                SizedBox(height: 25,),
             
               
@@ -408,7 +435,7 @@ getImage(ImageSource.camera);
       children: [
         Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 13,color: Colors.white)),
         SizedBox(width: 150,),
-     Icon(Icons.add_a_photo), ],
+     Icon(Icons.add_a_photo,color: lightcolor,), ],
     ),
     
     
@@ -424,7 +451,7 @@ getImage(ImageSource.camera);
 ),   
                
                 showimage(),
-               //زر انشاء حساب
+               //زر  موافق
              Container(child: Column(
   children: [
      ElevatedButton(
@@ -438,21 +465,72 @@ getImage(ImageSource.camera);
     ),
     
     onPressed: (){
+    
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
-  child: Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),)) ,
-content: Container(
-height: 50,
-child:Icon(Icons.add_task,color: Colors.green,size: 50,)
+  child: Column(
+    children: [
+      Text("تم الموافقة بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+     Container(
+    
+    height: 50,
+    
+    child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
+    
+    
+    
+    ),
+    SizedBox(height: 8,),
+    Center(
+      child: Container(
+            width: 100,
+          height: 35,
+          child: ElevatedButton(
+       style: ElevatedButton.styleFrom(
+        primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+         shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0)
+      ),
+      ),
+            child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
+            onPressed: (){
+  
+      // غلق نافذة الرسالة 
+   Navigator.of(context, rootNavigator: true).pop('ok');         
 
-),
+//الانتقال الى الصفحة الرئسية
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (_){
+      
+        
+ return Trip_details_page ();
+
+
+}  ),
+    );
+          
+
+            },
+          ),
+          ),
+    ), ],
+  )
+  ) ,
+
+  
+
+       
+
       );
-               
-
          showDialog(builder: (context) => ok, context:context);
+               
+ 
+            
     },
-    child: Text('إنشاء حساب مسافر ',style: TextStyle(fontSize: 15,color: Colors.white)),
+    child: Text(' موافق ',style: TextStyle(fontSize: 15,color: Colors.white)),
     
     
     ),

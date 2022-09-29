@@ -309,7 +309,7 @@ AppCard(),
 
 ),
 //الشريط السفلي
- bottomNavigationBar:AppBottomNavigationBar(),
+// bottomNavigationBar:AppBottomNavigationBar(),
  
 
 // القائمة المنسدلة

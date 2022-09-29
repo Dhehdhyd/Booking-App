@@ -400,7 +400,8 @@ child: Column(
            child: Container(
                        margin: EdgeInsets.only(right: 35),
 
-             child: Text('في حالة إلغاء الحجز او التخلف عن السفر لن يتم ارجاع المبلغ المدفوع ,اما في حال اراد المسافر تاجيل سفره يحب علية إعلام المكتب قبل 12 ساعة من تاريخ السفر . الوزن المسموح للمسافر هو 30 كيلو فقط وعليه ان يتابع عفشه عند التحميل وعند التنزيل لان الشركة غير مسوؤله عنها .',style: TextStyle(fontFamily: 'Lobster',fontSize: 17,fontWeight: FontWeight.bold,height: 2,color: fristtextcolor)
+             child: Text('في حالة إلغاء الحجز او التخلف عن السفر لن يتم ارجاع المبلغ المدفوع ,اما في حال اراد المسافر تاجيل سفره يحب علية إعلام المكتب قبل 12 ساعة من تاريخ السفر . الوزن المسموح للمسافر هو 30 كيلو فقط وعليه ان يتابع عفشه عند التحميل وعند التنزيل لان الشركة غير مسوؤله عنها .',
+             style: TextStyle(fontFamily: 'Lobster',fontSize: 17,fontWeight: FontWeight.bold,height: 2,color: thridtextcolor)
              )
              ),
          ),

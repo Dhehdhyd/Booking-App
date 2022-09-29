@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';//حق الصور
 <string>Allow access to microphone</string>
         android:requestLegacyExternalStorage="true"
         image_picker: ^0.8.5+3 */
+       bool  create_account=false;
 class Mycreate_account extends StatefulWidget {
   @override
   _Mycreate_accountState createState() => _Mycreate_accountState();
@@ -23,16 +24,16 @@ class _Mycreate_accountState extends State<Mycreate_account> {
     bool passwordicon=true;
      bool passwordicon1=true;
     var name=TextEditingController();
-    var city=TextEditingController();
+   // var city=TextEditingController();
     var password=TextEditingController();
     var passwoord1=TextEditingController();
     var phone_no=TextEditingController();
-    var ID_number=TextEditingController();
+    var iD_number=TextEditingController();
     bool showimagebool=false;
-    List<String>list_gender=[
+   /* List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
-  String? selectedItem='ذكر';
+  String? selectedItem='ذكر';*/
     List<String>list_Date=[
   '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
@@ -229,7 +230,7 @@ Container(
  
   child: Row(
     children: [
-      SizedBox(width: 2,),
+     /* SizedBox(width: 2,),
       Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
       SizedBox(width: 2,),
       Container( 
@@ -257,20 +258,20 @@ Container(
                   ).toList(),
                 ),
       ),
-       
-     SizedBox(width: 8,),
-      Text('تاريخ الميلاد',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+       */
+     SizedBox(width: 15,),
+      Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
-  SizedBox(width: 2,),
+  SizedBox(width: 25,),
  Container( 
           height: 70,
-    width: 100,
+    width: 223,
     //margin: EdgeInsets.only(left:20.0),
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor )
+                borderSide: BorderSide(width: 2,color:fristappcolor)
             )
           ),
                   isExpanded: true,
@@ -291,6 +292,7 @@ Container(
     ],
   ),
     ),
+    /*
                SizedBox(height: 25,),
             
                //حقل المدينة
@@ -317,7 +319,7 @@ keyboardType: TextInputType.text,
 //controller:city ,
      ),
                ),
-     SizedBox(height: 25,),
+     SizedBox(height: 25,),*/
      //رقم الهاتف
                Container(
                  child: TextField(
@@ -326,7 +328,7 @@ keyboardType: TextInputType.text,
     
          labelText:"رقم الهاتف",
     
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.phone_android,color: secondappcolor),
     
@@ -351,7 +353,7 @@ keyboardType: TextInputType.number,
     
          labelText:"رقم الهوية",
     
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
     
@@ -378,7 +380,7 @@ obscureText: passwordicon,
     
          labelText:"كلمة المرور",
     
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     //هل تريد رؤية الكلمة او لا
         suffixIcon: IconButton(
          onPressed:(){setState(() {
@@ -414,7 +416,7 @@ obscureText: passwordicon1,
     
          labelText:"تأكيد كلمة المرور ",
     
-        labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
+        labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     //هل تريد رؤية الكلمة او لا
          suffixIcon: IconButton(
          onPressed:(){setState(() {
@@ -541,7 +543,7 @@ getImage(ImageSource.camera);
       children: [
         Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 13,color: Colors.white)),
         SizedBox(width: 150,),
-     Icon(Icons.add_a_photo), ],
+     Icon(Icons.add_a_photo,color: lightcolor,), ],
     ),
     
     
@@ -572,22 +574,78 @@ getImage(ImageSource.camera);
     ),
     
     onPressed: (){
-      
-        final AlertDialog ok=AlertDialog(
+      setState(() {
+            final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
-  child: Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: secondappcolor,fontSize: 20,fontWeight: FontWeight.bold),)) ,
-content: Container(
-height: 50,
-child:Icon(Icons.add_task,color: Colors.green,size: 50,)
+  child: Column(
+    children: [
+      Text("تم إنشاء الحساب بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+     Container(
+    
+    height: 50,
+    
+    child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
+    
+    
+    
+    ),
+    SizedBox(height: 8,),
+    Center(
+      child: Container(
+            width: 100,
+          height: 35,
+          child: ElevatedButton(
+       style: ElevatedButton.styleFrom(
+        primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+         shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0)
+      ),
+      ),
+            child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
+            onPressed: (){
+  setState(() {
+            create_account=true;
 
-),
+  });
+      // غلق نافذة الرسالة 
+   Navigator.of(context, rootNavigator: true).pop('ok');         
+
+//الانتقال الى الصفحة الرئسية
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (_){
+      
+        
+ return  MyHomePage();
+
+
+}  ),
+    );
+          
+
+            },
+          ),
+          ),
+    ), ],
+  )
+  ) ,
+
+  
+
+       
+
       );
-               
-
          showDialog(builder: (context) => ok, context:context);
+               
+      
+      });      
+     
+      
     },
     child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15,color: Colors.white)),
+    
     
     
     ),

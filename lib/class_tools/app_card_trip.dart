@@ -59,7 +59,10 @@ child: Column(
    //احدد رقم الصفحة
    setState(() {
       select_page(context, 1);
-   Navigator.of(context,rootNavigator: true).pop('dialog');         
+      // غلق نافذة الرسالة 
+   Navigator.of(context,
+   //يغلق النافذة عند النقر على اي مكان في الشاشة
+   rootNavigator: true).pop('dialog');         
 
       }); 
         
@@ -270,7 +273,14 @@ elevation: 400,
           ),
                  ),
                  
-                    ],
+                        //حالة الرحلة
+                    Container(
+                 margin: EdgeInsets.only(right: 55),
+
+                   child: Text("متاح",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+          ),
+          ),
+                 ),   ],
             ),
                  SizedBox(height: 6,),
                    Row(
@@ -302,7 +312,7 @@ elevation: 400,
           ),
           ),
                  ),
-                    ],
+           ],
             ), 
         //زر الحجز
               Container(child: Column(
@@ -318,7 +328,92 @@ textStyle:TextStyle(color:Colors.white,),
     ),
      
     
-    onPressed:(){myDialog();},
+    onPressed:(){
+      //يختبر هل الشخص يملك حساب او لا 
+        if(create_account==false)
+     { final AlertDialog booking=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Column(
+    children: [
+      Row(
+        children: [
+            Icon(Icons.warning_sharp,color: fristappcolor,size: 40,),
+          SizedBox(width: 8,),
+          Text("ارجاء إنشاء حساب لك في التطبيق  ",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+        ],
+      ),
+     SizedBox(height: 20,),
+
+    Row(
+      children: [
+        Container(
+          width: 100,
+        
+        child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    ),
+          child: Center(child: Text("انشاء حساب",style: TextStyle(color: Colors.white),)),
+          onPressed: (){
+   setState(() {
+       select_page(context, 2);
+   Navigator.of(context,rootNavigator: true).pop('booking');   
+      });
+        
+
+          },
+        ),
+        ),
+     
+    SizedBox(width: 70,),
+       Container(
+         
+      width: 100,
+   
+    child: ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0)
+    ),
+    ),
+      child: Center(child: Text("تراجع",style: TextStyle(color: Colors.white),)),
+      onPressed: (){
+  setState(() {
+   Navigator.of(context,rootNavigator: true).pop('booking');         
+      
+    });
+           
+
+      },
+      
+    ),
+    ), 
+     ],
+    ),
+    ],
+ 
+  ),
+  ) ,
+
+      );
+               
+
+         showDialog(builder: (context) => booking, context:context);
+
+  }
+  //اذا الشخص قد انشاء حساب 
+  else if(create_account==true)
+    {
+      myDialog();
+    }  },
     child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 10,color:Colors.white,)),
     
     
