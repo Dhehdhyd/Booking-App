@@ -142,7 +142,7 @@ Container(
 child: ListView(children: [
   Container( height: 40,      
   child: Center(
-    child: Text('BusTrav',style:TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Lobster'))),
+    child: Text('TravBus',style:TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Lobster'))),
   color: fristappcolor,
  ),
 SizedBox(height: 20),

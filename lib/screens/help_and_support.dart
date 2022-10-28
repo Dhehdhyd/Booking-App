@@ -44,6 +44,7 @@ fristappcolor,
           child: Column (
             
              children: [
+    
                Container(
   
                  margin: EdgeInsets.only(top: 20),
@@ -51,17 +52,9 @@ fristappcolor,
                ),
 SizedBox(height: 30,),
 Container(
-  child: ElevatedButton(
-     style: ElevatedButton.styleFrom(
-      primary: secondappcolor,
- textStyle: TextStyle(color: Colors.white),
-
-       shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40.0)
-    ),
-    ),
-     
-     child: Row(
+  child: InkWell(
+    
+ child: Row(
   
             children: [
   
@@ -69,14 +62,14 @@ Container(
   
   SizedBox(width: 5,),
   
-              Text("إدارة الحجوزات",style: TextStyle(color: Colors.white),),
+              Text(" شركة البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
             ],
   
           ),
   
   
-          onPressed: (){        
+          onTap: (){        
   launch('tel:+967777190123');
   
           },
@@ -85,42 +78,60 @@ Container(
 ),
     SizedBox(height: 10,),
 Container(
-  child:   ElevatedButton(
-     style: ElevatedButton.styleFrom(
-      primary: secondappcolor,
- textStyle: TextStyle(color: Colors.white),
-
-       shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40.0)
-    ),
-    ),
-     
-     child: Row(
+  child: InkWell(
+    
+ child: Row(
   
             children: [
   
-              Icon(Icons.call,color:fristappcolor,),
+              Icon(Icons.call,color: fristappcolor,),
   
   SizedBox(width: 5,),
   
-              Text("الشكاوى والاقتراحات",style: TextStyle(color: Colors.white),),
+              Text("شركة ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
             ],
   
           ),
   
   
-          onPressed: (){        
+          onTap: (){        
   launch('tel:+967777190123');
+  
           },
   
       ),
 ),
           
-             ],
+         
+         Container(
+  child: InkWell(
+    
+ child: Row(
+  
+            children: [
+  
+              Icon(Icons.call,color: fristappcolor,),
+  
+  SizedBox(width: 5,),
+  
+              Text(" الدعم الفني ",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+  
+            ],
+  
+          ),
+  
+  
+          onTap: (){        
+  launch('tel:+967777190123');
+  
+          },
+  
+      ),
+),    ],
            ),
         ),
-SizedBox(width: 10,),
+SizedBox(width: 130,),
         Column(
           children: [
             Container(
@@ -130,15 +141,8 @@ SizedBox(width: 10,),
         
         SizedBox(height: 30,),
 Container(
-  child:   ElevatedButton(
-     style: ElevatedButton.styleFrom(
-      primary: secondappcolor,
- textStyle: TextStyle(color: Colors.white),
+  child:   InkWell(
 
-       shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40.0)
-    ),
-    ),
      child: Row(
   
           children: [
@@ -147,52 +151,70 @@ Container(
   
   SizedBox(width: 10,),
   
-            Text("إدارة الحجوزات",style: TextStyle(color: Colors.white),),
+            Text(" شركة البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
           ],
   
         ),
   
   
-        onPressed: (){        
+        onTap: (){        
   launchWhatsapp(number: "+967777123456",message: "hello");
   
         },
   
       ),
 ),
-    SizedBox(height: 10,),
-Container(
-  child:   ElevatedButton(
-     style: ElevatedButton.styleFrom(
-      primary: secondappcolor,
- textStyle: TextStyle(color: Colors.white),
+    SizedBox(height: 10,),Container(
+  child:   InkWell(
 
-       shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40.0)
-    ),
-    ),
      child: Row(
   
           children: [
   
-            Icon(Icons.whatsapp,color:fristappcolor),
+            Icon(Icons.whatsapp,color: fristappcolor),
   
   SizedBox(width: 10,),
   
-            Text("الشكاوى والاقتراحات",style: TextStyle(color: Colors.white),),
+            Text(" شركة ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
           ],
   
         ),
   
   
-        onPressed: (){        
+        onTap: (){        
   launchWhatsapp(number: "+967777123456",message: "hello");
+  
         },
   
       ),
-),  ],
+), 
+Container(
+  child:   InkWell(
+
+     child: Row(
+  
+          children: [
+  
+            Icon(Icons.whatsapp,color: fristappcolor),
+  
+  SizedBox(width: 10,),
+  
+            Text("  الدعم الفني",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+  
+          ],
+  
+        ),
+  
+  
+        onTap: (){        
+  launchWhatsapp(number: "+967777123456",message: "hello");
+  
+        },
+  
+      ),
+), ],
         ),
          ],
      ), 

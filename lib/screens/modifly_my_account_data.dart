@@ -179,9 +179,11 @@ gradient: LinearGradient(colors: [
         padding: const EdgeInsets.all(20.0),
         child: Card(
           
-          color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor:  Color.fromRGBO(60, 90, 195, 0.1),
-elevation: 20,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+        side: BorderSide(color: secondappcolor,width: 2.5),
+    ),
+        color: lightcolor,
           child: SingleChildScrollView(
                     child: Column(
               children: [
@@ -277,7 +279,7 @@ Container(
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
           value:item,
-          child: Text(item),
+          child: Text(item,style: TextStyle(color: thridtextcolor),),
 ) 
                   ).toList(),
                 ),

@@ -115,11 +115,9 @@ fristappcolor,
                  
            shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide.none,
+        side: BorderSide(color: secondappcolor,width: 2.5),
     ),
-            color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor: Color.fromRGBO(255, 255, 255, 0.6),
-elevation: 400,
+        color: lightcolor,
 child: Column(
   children: [
         Center(child: Text("بيانات الرحلة",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
@@ -327,13 +325,11 @@ child: Column(
         height: 120,
                child: Card(
                  
-           shape: RoundedRectangleBorder(
+         shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide.none,
+        side: BorderSide(color: secondappcolor,width: 2.5),
     ),
-            color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor: Color.fromRGBO(255, 255, 255, 0.6),
-elevation: 400,
+        color: lightcolor,
 child: Column(
   children: [
         Center(child: Text("بيانات المسافر",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
@@ -382,13 +378,11 @@ child: Column(
         height: 400,
                child: Card(
                  
-           shape: RoundedRectangleBorder(
+          shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide.none,
+        side: BorderSide(color: secondappcolor,width: 2.5),
     ),
-            color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor: Color.fromRGBO(255, 255, 255, 0.6),
-elevation: 400,
+        color: lightcolor,
 child: Column(
   children: [
         Center(child: Text("سياسة الحجز في الشركة",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
@@ -418,13 +412,11 @@ child: Column(
         height: 350,
                child: Card(
                  
-           shape: RoundedRectangleBorder(
+          shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide.none,
+        side: BorderSide(color: secondappcolor,width: 2.5),
     ),
-            color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor: Color.fromRGBO(255, 255, 255, 0.6),
-elevation: 400,
+        color: lightcolor,
 child: Column(
   children: [
         Center(child: Text(" بيانات الدفع ",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
@@ -487,7 +479,7 @@ child: Column(
       ),
      SizedBox(height: 20,),
           Container(
-                     margin: EdgeInsets.only(right: 35),
+                     margin: EdgeInsets.only(right: 30),
 
            child: Text(' طريقة الدفع ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
@@ -498,6 +490,7 @@ child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Radio(
+              
             value: 1,
             groupValue: _radiovalue,
             onChanged: <int>(value){
@@ -510,6 +503,7 @@ child: Column(
           ),
           Text('الدفع نقدا',style: TextStyle(fontSize: 15,color: thridtextcolor),),
                 Radio(
+              
             value: 2,
             groupValue: _radiovalue,
             onChanged: <int>(value){

@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import '../class_tools/app_card_trip.dart';
+import '../main.dart';
 import '../screens/settings.dart';
 import 'package:intl/intl.dart';//تنسيق التاريخ
+
 class Counter_date extends StatefulWidget {
   @override
   _Counter_dateState createState() => _Counter_dateState();
 }
+//حقل التاريخ كامل
+ String dateday="${DateFormat.yMd().format(DateTime.now())}";
 
-class _Counter_dateState extends State<Counter_date> {
-
- List<String> s=[''];
  int day=16;
   int mounth=9;
   int year=2022;
- _Counter_dateState(){ s="${DateFormat.yMd().format(DateTime.now())}".split('/');
+class _Counter_dateState extends State<Counter_date> {
+List<String> s=[''];
+ _Counter_dateState(){ 
+   //التاريخ حق اليوم ثم يجزئه
+   s="${DateFormat.yMd().format(DateTime.now())}".split('/');
   String days=s[1];
    day= int.parse(days);
      String mounths=s[0];
@@ -195,14 +201,17 @@ textStyle:TextStyle(color:Colors.white,),
     ),
      
     
-    onPressed:(){dec();},
+    onPressed:(){dec();
+    filter_trips=1;
+          card=AppCard(filter_trips);
+    },
     child: Text('<<',style: TextStyle(fontSize: 12,color:Colors.white)),
     
     
     ),
          
     Text(day.toString()+" - "+mounth.toString()+" - "+year.toString()
-    ,style: TextStyle(fontSize: 15,color: Color.fromRGBO(0, 0, 77,1),fontFamily: 'Lobster')),
+    ,style: TextStyle(fontSize: 15,color: thridtextcolor,fontFamily: 'Lobster')),
           ElevatedButton(
      style: ElevatedButton.styleFrom(
       primary: secondappcolor,
@@ -214,7 +223,10 @@ textStyle:TextStyle(color:Colors.white,),
     ),
     
     
-    onPressed:(){inc();},
+    onPressed:(){inc();
+    filter_trips=1;
+          card=AppCard(filter_trips);
+    },
     child: Text('>>',style: TextStyle(fontSize: 12,color:Colors.white)),
     
     

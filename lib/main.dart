@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     
     return 
     MaterialApp(
-      title: 'BusTrav',
+      title: 'TravBus',
       //اتجاة الكتابة واللغة العربية
        localizationsDelegates: [
     GlobalMaterialLocalizations.delegate,
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
    supportedLocales: [
     Locale('ar', 'AE'), // English, no country code
   ],
-  themeMode:tm,
+  themeMode:ThemeMode.system,
       theme: ThemeData(
        //اللوان التطبيق الرئيسية 
         primarySwatch:Colors.lightBlue,
@@ -91,6 +91,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+  DateTime selectedDate1=DateTime.now();
+   String? selectedItem='صنعاء';
+  String? selectedItem1='اب';
+  String selectedDate=selectedDate1.toString();
+  int filter_trips=0;
+  var card=AppCard(filter_trips);
 
 class MyHomePage extends StatefulWidget {
 
@@ -103,16 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
   
   
           
-  String? selectedItem='صنعاء';
-  String? selectedItem1='اب';
+ 
 
 
   List<String>list_city=[
   'عدن', 'صنعاء', 'اب', 'جدة', 'رياض',
   ];
  
-  String _selectedDate="null";
-  DateTime _selectedDate1=DateTime.now();
+
   //عرض التاريخ
   void date_picker()
   {
@@ -125,8 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ).then((date){
       if(date==null){return;}
       setState(() {
-_selectedDate1=date;
-              _selectedDate=date.toString();
+selectedDate1=date;
+              selectedDate=date.toString();
             });});}
   @override
   
@@ -258,7 +262,7 @@ Container(child:Row(
 SizedBox(width: 10),
 
     InkWell(
-        child: Text(_selectedDate=="null"?"تاريخ الرحلة":"${DateFormat.yMd().format(_selectedDate1)}",style:TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster',
+        child: Text("${DateFormat.yMd().format(selectedDate1)}",style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
  
         ),),
         onTap:(){
@@ -279,15 +283,20 @@ Container(child: Column(
             ElevatedButton(
      style: ElevatedButton.styleFrom(
       disabledBackgroundColor: secondappcolor,
- 
 textStyle:TextStyle(color:Colors.white,),
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
     ),
     
-    onPressed: null,
-    child: Text('بحث ',style: TextStyle(fontSize: 15,color:Colors.white)),
+    onPressed:() {
+      setState(() {
+          filter_trips=2;
+          card=AppCard(filter_trips);
+        });
+    }
+    ,
+    child: Text('بحث ',style: TextStyle(fontSize: 15,color:lightcolor)),
     
     
     ),
@@ -300,15 +309,7 @@ textStyle:TextStyle(color:Colors.white,),
   Counter_date(),
 SizedBox(height: 30,),
 // الرحلات
-AppCard(),
-SizedBox(height: 10,),
-AppCard(),
-SizedBox(height: 10,),
-AppCard(),
-SizedBox(height: 10,),
-AppCard(),
-SizedBox(height: 10,),
-AppCard(),
+card,
 ],
 ),
 

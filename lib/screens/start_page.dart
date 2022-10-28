@@ -38,11 +38,11 @@ class _mystartpageState extends State<mystartpage> {
   
    ] ),
     
-          image: Image.asset("assets/images/bus6.png",alignment: Alignment.center),
+          image: Image.asset("assets/images/bus6.jpg",alignment: Alignment.center),
           seconds: 1,
           navigateAfterSeconds:MyApp(),
-          loaderColor: fristappcolor,  
-          loadingText: Text('...Loading',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 18),),
+          loaderColor: thridtextcolor,  
+          loadingText: Text('...Loading',style: TextStyle(fontWeight:FontWeight.bold,color: Color.fromRGBO(255, 255, 255, 0.8), fontSize: 18),),
           ),
            
       ),

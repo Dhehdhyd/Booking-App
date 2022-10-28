@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import '../Models/trip_model.dart';
+import '../Models/trips_model.dart';
+import '../Functions/fetch.dart';
 import '../screens/create_an_account_traveler.dart';
 import '../screens/trip_details_page.dart';
 import '../screens/create_an_account_page.dart';
 import '../main.dart';
 import '../screens/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 //بطاقة الرحلة
 class AppCard extends StatefulWidget {
+  AppCard(int filter_trips);
+
   @override
   _AppCardState createState() => _AppCardState();
 }
 
-class _AppCardState extends State<AppCard> {
+class _AppCardState extends State<AppCard> { 
   @override
 
+Fetch f=Fetch();
+//التنقل بين الصفحات
   void select_page(BuildContext ctx,int index_page)
   {
     Navigator.of(ctx).push(MaterialPageRoute(
@@ -111,38 +120,51 @@ select_page(context, 3);
           
         });  
   }
+
   Widget build(BuildContext context) {
+List tripss= f.checktrip(filter_trips);
+
     return 
 
       Container(
         width: 360,
         height: 310,
-        child: Card(
+        
+        child: FutureBuilder(
+          future: f.fetchTrips(),
+          builder:(context, snapshot) {
+                      if(snapshot.data!=null){
+                        return ListView.builder(
+                          itemCount: tripss.length,
+                          itemBuilder: (context, index) {
+return         Card(
+          
            shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide.none,
+        side: BorderSide(color: fristappcolor,width: 2.5),
     ),
-            color: Color.fromRGBO(255, 255, 255, 0.5),
-shadowColor: Color.fromRGBO(255, 255, 255, 0.6),
-elevation: 400,
+        color: lightcolor,
             child: SingleChildScrollView(
                       child: Column(
                 children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                SizedBox(height: 2,),
                 //صورة شعار الشركة
                 Container(
+                  margin: EdgeInsets.only(top: 5),
                  width: 40,
                  height: 40,
                  alignment: Alignment.topLeft,
-                 child: Image.asset("assets/images/bus5.jpg",alignment: Alignment.center,fit: BoxFit.fill,)
+                 child: Image.asset(tripss[index].office_logo_image,alignment: Alignment.center,fit: BoxFit.fill,)
                  ),
             
+                SizedBox(height: 1,),
                   
                   //العنوان
                  Center(
-                   child: Text(" باصات أبوسرهد",style:TextStyle(color:secondtextcolor,fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].office_logo,style:TextStyle(color:secondtextcolor,fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -167,7 +189,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 80),
 
-                   child: Text("12:00",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].attendance_date,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -183,7 +205,7 @@ elevation: 400,
                        Container(
                  margin: EdgeInsets.only(right: 8),
 
-                   child: Text("صنعاء",style:TextStyle(color:thridtextcolor,fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].from_city,style:TextStyle(color:thridtextcolor,fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ), ],
@@ -207,7 +229,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 70),
 
-                   child: Text("02:00",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].wait_date,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -232,7 +254,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 75),
 
-                   child: Text("02:00",style:TextStyle(color:thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].start_date,style:TextStyle(color:thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -248,7 +270,7 @@ elevation: 400,
                        Container(
                  margin: EdgeInsets.only(right: 8),
 
-                   child: Text("اب",style:TextStyle(color: thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].to_city,style:TextStyle(color: thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ), ],
@@ -271,7 +293,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 70),
 
-                   child: Text("إقتصادي",style:TextStyle(color:thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].bus_type,style:TextStyle(color:thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -280,7 +302,7 @@ elevation: 400,
                     Container(
                  margin: EdgeInsets.only(right: 55),
 
-                   child: Text("متاح",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].trip_state,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),   ],
@@ -303,7 +325,7 @@ elevation: 400,
                  Container(
                  margin: EdgeInsets.only(right: 75),
 
-                   child: Text("7000",style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].price,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
           ),
           ),
                  ),
@@ -318,7 +340,9 @@ elevation: 400,
            ],
             ), 
         //زر الحجز
-              Container(child: Column(
+              Container(
+               
+                child: Column(
   children: [
       ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -417,19 +441,31 @@ textStyle:TextStyle(color:Colors.white,),
     {
       myDialog();
     }  },
-    child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 10,color:Colors.white,)),
+    child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 15,color:Colors.white,)),
     
     
     ),
     
   ],
-       crossAxisAlignment: CrossAxisAlignment.stretch, 
+       crossAxisAlignment: CrossAxisAlignment.center, 
     ),
 ), 
 SizedBox(height: 5,),],    
     ),
       ),
-        ),
+        );
+
+                                                    }
+                                                    );
+                        
+                      }
+                      else{
+                        return CircularProgressIndicator();
+                      }
+                    }
+                    ) ,
+        
+     
       );
   }
 }
