@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Functions/fetch.dart';
 import '../screens/settings.dart';
 
 class Trip_details_page extends StatefulWidget {
@@ -10,6 +11,7 @@ class _Trip_details_pageState extends State<Trip_details_page> {
  int _radiovalue=0;
   String result="";
   int numberselect=0;
+  String booking_number=data_confirmation.booking_number;
 
    myDialog(){
     if(numberselect==0)
@@ -35,7 +37,7 @@ alignment: Alignment.center,
 title:Container(
 alignment: Alignment.center,
   child: Text('''الرجاء المسارعة في الدفع الى اقرب فرع للمكتب خلال 24 ساعة
- ورقم الحجز الخاص بك هو 24446 ''',style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),)) ,
+ ورقم الحجز الخاص بك هو $booking_number ''',style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),)) ,
 content: Container(
 height: 50,
 child:Row(
@@ -64,14 +66,15 @@ alignment: Alignment.center,
     children: [
       Icon(Icons.beenhere,color: Colors.green,size: 30),
         SizedBox(width: 20,),
-      Text( "تم الحجز بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+      Text( '''في حال تم وصول اشعار الإصال الى المكتب سوف ترسل لك صورة التذكره أرجاء المسارعة في السداد
+       ورقم الحجز الخاص بك هو $booking_number''',style: TextStyle(color: secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
     ],
   )) ,
-content: Container(
+/*content: Container(
 height: 50,
 width: 50,
 child: Text("صورة التذكره"),
-),
+),*/
       );
                
 
@@ -133,7 +136,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 75),
 
-       child: Text('ابو سرهد',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.office_name,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -152,7 +155,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 65),
 
-       child: Text(' 2022-09-15',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.trip_day,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -171,7 +174,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 100),
 
-       child: Text('صنعاء ',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.from_city.toString(),style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -190,7 +193,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 100),
 
-       child: Text('اب ',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.to_city.toString(),style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -211,7 +214,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text('12:00pm',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.attendance_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ), 
           ],
@@ -230,7 +233,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text('02:00 ',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.wait_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ), 
         ],
@@ -250,7 +253,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text('02:00pm',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.start_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          ],
@@ -270,7 +273,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(' مكتب ابو سرهد - صنعاء ',style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.bus_starting_station,style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
         ],
@@ -290,7 +293,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(' مكتب ابو سرهد - اب',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.bus_access_station,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          ],
@@ -309,7 +312,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 80),
 
-       child: Text('7000 ر.ي ',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.price,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),    
    ],
@@ -345,7 +348,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 90),
 
-       child: Text('رقم جواز المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('رقم هوية المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -356,14 +359,14 @@ child: Column(
           Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text('محمد ',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+           child: Text(booking.traveler_name,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
            )
            ),
      
          Container(
                  margin: EdgeInsets.only(right: 120),
 
-       child: Text('99877866',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.id_number,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
@@ -394,7 +397,7 @@ child: Column(
            child: Container(
                        margin: EdgeInsets.only(right: 35),
 
-             child: Text('في حالة إلغاء الحجز او التخلف عن السفر لن يتم ارجاع المبلغ المدفوع ,اما في حال اراد المسافر تاجيل سفره يحب علية إعلام المكتب قبل 12 ساعة من تاريخ السفر . الوزن المسموح للمسافر هو 30 كيلو فقط وعليه ان يتابع عفشه عند التحميل وعند التنزيل لان الشركة غير مسوؤله عنها .',
+             child: Text(booking.booking_policy,
              style: TextStyle(fontFamily: 'Lobster',fontSize: 17,fontWeight: FontWeight.bold,height: 2,color: thridtextcolor)
              )
              ),
@@ -432,7 +435,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(' اب - شارع العدين - جوار كلية الهندسة ',style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.company_headquarters,style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -452,7 +455,7 @@ child: Column(
                  margin: EdgeInsets.only(right: 10),
            padding: const EdgeInsets.all(15.0),
 
-       child: Text('SA5756567676756545777',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.bank_account,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
@@ -472,7 +475,7 @@ child: Column(
                  margin: EdgeInsets.only(right: 35),
            padding: const EdgeInsets.all(15.0),
 
-       child: Text('بنك الكريمي',style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking.bank_name,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],

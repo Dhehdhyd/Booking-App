@@ -1,3 +1,6 @@
+import '../Models/clients_model.dart';
+import '../Models/data_booking.dart';
+import '../Models/data_confirmation.dart';
 import '../Models/trip_model.dart';
 import '../Models/trips_model.dart';
 import 'package:http/http.dart' as http;
@@ -7,12 +10,11 @@ import 'package:date_format/date_format.dart';
 
 import '../class_tools/counter_date_main.dart';
 import '../main.dart';
-
+Clients client=Clients();
+Booking booking=Booking();
+Data_confirmation data_confirmation=Data_confirmation();
 class Fetch
 {
-
-
-
 
   //دالة جلب الرحلات من السرفر
 final String apiKey='5437535434789096';
@@ -31,14 +33,84 @@ final String apiKey='5437535434789096';
     }
 else
 {
+  //لو اريد الطبع رسالة الخط ابحث عن اداة حاليا هذا لي فقط
   print('اطبع لوحصل مشكلة= ${response.statusCode}');
 }
   }
   catch(Exc){
     print(Exc);
   }
+  
 
 }
+//--------------------------------------------دالة جلب بيانات العميل من اجل التعديل-------------------------------//
+fetchclient() async{
+  try{
+    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
+    if(response.statusCode==200)
+    {
+      var jsonData=json.decode(response.body);
+  
+  client=Clients.fromJson(jsonData);
+      
+      
+      
+    }
+
+  }
+  catch(Exc){
+    print(Exc);
+  }
+  
+
+}
+//--------------------------------------------------------------------------------------//
+
+//--------------------------------------------دالة جلب بيانات الحجز-------------------------------//
+fetchbooking() async{
+  try{
+    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
+    if(response.statusCode==200)
+    {
+      var jsonData=json.decode(response.body);
+  
+  booking=Booking.fromJson(jsonData);
+      
+      
+      
+    }
+
+  }
+  catch(Exc){
+    print(Exc);
+  }
+  
+
+}
+//--------------------------------------------------------------------------------------//
+
+//--------------------------------------------دالة جلب بيانات التأكيد-------------------------------//
+fetchdata_confirmation() async{
+  try{
+    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
+    if(response.statusCode==200)
+    {
+      var jsonData=json.decode(response.body);
+  
+  data_confirmation=Data_confirmation.fromJson(jsonData);
+      
+      
+      
+    }
+
+  }
+  catch(Exc){
+    print(Exc);
+  }
+  
+
+}
+//-----------------------------------------------دالة فلترة الرحلات---------------------------------------//
 change(String date)
 {
 

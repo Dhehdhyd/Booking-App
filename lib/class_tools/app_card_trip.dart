@@ -13,7 +13,6 @@ import 'dart:convert';
 
 //بطاقة الرحلة
 class AppCard extends StatefulWidget {
-  AppCard(int filter_trips);
 
   @override
   _AppCardState createState() => _AppCardState();
@@ -129,11 +128,10 @@ List tripss= f.checktrip(filter_trips);
       Container(
         width: 360,
         height: 310,
-        
         child: FutureBuilder(
-          future: f.fetchTrips(),
+          future:  f.checktrip(filter_trips),
           builder:(context, snapshot) {
-                      if(snapshot.data!=null){
+                      if(snapshot!=null){
                         return ListView.builder(
                           itemCount: tripss.length,
                           itemBuilder: (context, index) {
@@ -439,7 +437,18 @@ textStyle:TextStyle(color:Colors.white,),
   //اذا الشخص قد انشاء حساب 
   else if(create_account==true)
     {
-      myDialog();
+      //اذا الرحلة غير متاحة
+      if(tripss[index].trip_state=="غير متاح")
+       {
+     ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("الرحلة غير متاحة حالياً"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+   }
+   else
+     { myDialog();}
     }  },
     child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 15,color:Colors.white,)),
     
@@ -459,6 +468,7 @@ SizedBox(height: 5,),],
                                                     );
                         
                       }
+                      //لو لم يعد الرحلات يظهر الحلقة الدواره
                       else{
                         return CircularProgressIndicator();
                       }

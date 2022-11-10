@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
+import '../Functions/fetch.dart';
+import '../Functions/insert.dart';
 import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
@@ -12,15 +14,18 @@ class Modifly_my_account_data extends StatefulWidget {
 }
 
 class _Modifly_my_account_data extends State<Modifly_my_account_data> {
-   File _image=File('');
+   String imagee=client.image_model;
     final picker=ImagePicker();
     bool passwordicon=true;
+       Insert s=Insert();
+    
+File image=File('');    
     var name=TextEditingController();
-    var city=TextEditingController();
+   //var city=TextEditingController();
     var password=TextEditingController();
     var phone_no=TextEditingController();
-    var ID_number=TextEditingController();
-    bool showimagebool=false;
+    var iD_number=TextEditingController();
+    bool showimagebool=true;
     List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
@@ -30,7 +35,8 @@ class _Modifly_my_account_data extends State<Modifly_my_account_data> {
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
-  String? selectedItem1='2000';
+  String? birthyear=client.birthyear_model;
+
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
   {
@@ -42,7 +48,7 @@ if(showimagebool==true)
           height: 150,
 width: 250,
 child:
- Image.file(_image,fit: BoxFit.fill,),
+ Image.file(image,fit: BoxFit.fill,),
         ),
        SizedBox(height: 25,),
      ],
@@ -60,7 +66,7 @@ final PickedFile=await picker.getImage(source: scr);
 setState(() {
   if(PickedFile!=null)
   {
-    _image=File(PickedFile.path);
+    image=File(PickedFile.path);
      final AlertDialog adimage=AlertDialog(
 content: Container(
 height: 250,
@@ -73,7 +79,7 @@ child:
       height: 150,
 width: 250,
 child:
- _image==File('')?Text("لم تختر صورة"):Image.file(_image,fit: BoxFit.fill,),
+ image==File('')?Text("لم تختر صورة"):Image.file(image,fit: BoxFit.fill,),
     ),
     SizedBox(height: 20,),
 
@@ -151,7 +157,7 @@ setState(() {
   @override
   Widget build(BuildContext context) {
    
-       
+    image=File('$imagee');        
 
     return 
     Scaffold(
@@ -202,8 +208,9 @@ gradient: LinearGradient(colors: [
      decoration: InputDecoration(
     
          labelText:"الاسم بالكامل",
-    
-         labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+    hintText: client.name_model,
+    hintStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+            labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.person,color:secondappcolor,),
     
@@ -216,7 +223,7 @@ gradient: LinearGradient(colors: [
     textCapitalization: TextCapitalization.characters,
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
-//controller:name ,
+controller:name ,
      ),
                ),
               SizedBox(height: 25,),
@@ -271,10 +278,10 @@ Container(
             )
           ),
                   isExpanded: true,
-                  value:selectedItem1,
+                  value:birthyear,
                   onChanged: (newValue){
                     setState(() {
-                              selectedItem1 = newValue;
+                              birthyear = newValue;
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
@@ -323,7 +330,8 @@ keyboardType: TextInputType.text,
      decoration: InputDecoration(
     
          labelText:"رقم الهاتف",
-    
+     hintText: client.phone_no_model,
+    hintStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
          labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.phone_android,color: secondappcolor),
@@ -337,7 +345,7 @@ keyboardType: TextInputType.text,
     
 keyboardType: TextInputType.number,
 
-//controller:phone_no,
+controller:phone_no,
      ),
                ),
      SizedBox(height: 25,),
@@ -348,7 +356,8 @@ keyboardType: TextInputType.number,
      decoration: InputDecoration(
     
          labelText:"رقم الهوية",
-    
+     hintText: client.iD_number_model,
+    hintStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
          labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
@@ -362,7 +371,7 @@ keyboardType: TextInputType.number,
     
 keyboardType: TextInputType.number,
 
-//controller:ID_number,
+controller:iD_number,
      ),
                ),
               
@@ -374,7 +383,7 @@ obscureText: passwordicon,
    obscuringCharacter: "*", 
      decoration: InputDecoration(
     
-         labelText:"كلمة المرور",
+         labelText:"أدخل كلمة المرور السابقة لتاكيد",
     
          labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     //هل تريد رؤية الكلمة او لا
@@ -398,7 +407,7 @@ obscureText: passwordicon,
     
 keyboardType: TextInputType.visiblePassword,
 
-//controller:password,
+controller:password,
      ),
                ),
       SizedBox(height: 25,),
@@ -517,7 +526,7 @@ getImage(ImageSource.camera);
   ],
        
     ),
-),   
+),  
                //عرض الصورة
                 showimage(),
                //زر تعديل الحساب
@@ -534,8 +543,10 @@ getImage(ImageSource.camera);
     ),
     ),
     
-    onPressed: (){
-   
+    onPressed: (){  
+      if(password==client.password_model){
+        //عدل البيانات
+s.ModiflyDataclient(name,password,phone_no,iD_number,birthyear,image);
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
@@ -547,9 +558,17 @@ child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
 ),
       );
                
-
+   
          showDialog(builder: (context) => ok, context:context);
-    },
+   }else
+   {
+     ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("كلمة المرور خاطئة"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+   } },
     child: Text(' حفظ التعديلات ',style: TextStyle(fontSize: 15,color: lightcolor)),
     
     
