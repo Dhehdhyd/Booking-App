@@ -33,8 +33,9 @@ class _SettingpageState extends State<Settingpage> {
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-fristappcolor,
-fristappcolor,
+ secondappcolor,
+ secondappcolor,
+
   
 
 

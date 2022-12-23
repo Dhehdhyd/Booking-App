@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
+import '../Functions/insert.dart';
 import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
@@ -12,22 +13,23 @@ class Create_account extends StatefulWidget {
 }
 
 class _Create_accountState extends State<Create_account> {
-  File _image=File('');
+  File image=File('');
+       Insert s=Insert();
     final picker=ImagePicker();
     bool showimagebool=false;
     var name=TextEditingController();
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
-    List<String>list_gender=[
+   /* List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
-  String? selectedItem='ذكر';
+  String? selectedItem='ذكر';*/
     List<String>list_Date=[
   '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
-  String? selectedItem1='2000';
+  String? birthyear='2000';
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
   {
@@ -39,7 +41,7 @@ if(showimagebool==true)
           height: 150,
 width: 250,
 child:
- Image.file(_image,fit: BoxFit.fill,),
+ Image.file(image,fit: BoxFit.fill,),
         ),
        SizedBox(height: 25,),
      ],
@@ -57,7 +59,7 @@ final PickedFile=await picker.getImage(source: scr);
 setState(() {
   if(PickedFile!=null)
   {
-    _image=File(PickedFile.path);
+    image=File(PickedFile.path);
      final AlertDialog adimage=AlertDialog(
 content: Container(
 height: 250,
@@ -70,7 +72,7 @@ child:
       height: 150,
 width: 250,
 child:
- _image==File('')?Text("لم تختر صورة"):Image.file(_image,fit: BoxFit.fill,),
+ image==File('')?Text("لم تختر صورة"):Image.file(image,fit: BoxFit.fill,),
     ),
     SizedBox(height: 20,),
 
@@ -160,8 +162,8 @@ setState(() {
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-  fristappcolor,
-  fristappcolor,
+  secondappcolor,
+  secondappcolor,
   
 
 
@@ -211,7 +213,7 @@ gradient: LinearGradient(colors: [
     
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
-//controller:name ,
+controller:name ,
      ),
                ),
               SizedBox(height: 25,),
@@ -266,10 +268,10 @@ keyboardType: TextInputType.text,
             )
           ),
                   isExpanded: true,
-                  value:selectedItem1,
+                  value:birthyear,
                   onChanged: (newValue){
                     setState(() {
-                              selectedItem1 = newValue;
+                              birthyear = newValue;
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
@@ -305,7 +307,7 @@ keyboardType: TextInputType.text,
     
 keyboardType: TextInputType.number,
 
-//controller:phone_no,
+controller:phone_no,
      ),
                ),
                SizedBox(height: 25,),
@@ -332,7 +334,7 @@ keyboardType: TextInputType.number,
     
 keyboardType: TextInputType.number,
 
-//controller:ID_number,
+controller:iD_number,
      ),
                ),
               
@@ -500,7 +502,10 @@ textStyle:TextStyle(color:Colors.white,),
       ),
             child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
             onPressed: (){
-  
+  setState(() {
+    //يتم ارسال البيانات لسرفر
+     s.SendDatatraveler(name, phone_no, iD_number, birthyear, image); 
+    });
       // غلق نافذة الرسالة 
    Navigator.of(context, rootNavigator: true).pop('ok');         
 
@@ -508,7 +513,7 @@ textStyle:TextStyle(color:Colors.white,),
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (_){
       
-        
+        //يتم جلب بيانات الحجز قبل عرضها
  return Trip_details_page ();
 
 

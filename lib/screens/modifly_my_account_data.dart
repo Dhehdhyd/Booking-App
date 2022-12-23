@@ -171,8 +171,8 @@ setState(() {
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
- fristappcolor,
- fristappcolor,
+ secondappcolor,
+ secondappcolor,
   
 
 

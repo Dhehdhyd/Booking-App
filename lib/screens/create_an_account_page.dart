@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
+import '../Functions/insert.dart';
 import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
@@ -14,18 +15,18 @@ import 'package:shared_preferences/shared_preferences.dart';
         android:requestLegacyExternalStorage="true"
         image_picker: ^0.8.5+3 */
        bool  create_account=false;
+       Insert s=Insert();
 class Mycreate_account extends StatefulWidget {
   @override
   _Mycreate_accountState createState() => _Mycreate_accountState();
 }
 
 class _Mycreate_accountState extends State<Mycreate_account> {
-   File _image=File('');
+   File image=File('');
     final picker=ImagePicker();
     bool passwordicon=true;
      bool passwordicon1=true;
     var name=TextEditingController();
-   // var city=TextEditingController();
     var password=TextEditingController();
     var passwoord1=TextEditingController();
     var phone_no=TextEditingController();
@@ -46,7 +47,7 @@ class _Mycreate_accountState extends State<Mycreate_account> {
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
-  String? selectedItem1='2000';
+  String? birthyear='2000';
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
   {
@@ -58,7 +59,7 @@ if(showimagebool==true)
           height: 150,
 width: 250,
 child:
- Image.file(_image,fit: BoxFit.fill,),
+ Image.file(image,fit: BoxFit.fill,),
         ),
        SizedBox(height: 25,),
      ],
@@ -76,7 +77,7 @@ final PickedFile=await picker.getImage(source: scr);
 setState(() {
   if(PickedFile!=null)
   {
-    _image=File(PickedFile.path);
+    image=File(PickedFile.path);
      final AlertDialog adimage=AlertDialog(
 content: Container(
 height: 250,
@@ -89,7 +90,7 @@ child:
       height: 150,
 width: 250,
 child:
- _image==File('')?Text("لم تختر صورة"):Image.file(_image,fit: BoxFit.fill,),
+ image==File('')?Text("لم تختر صورة"):Image.file(image,fit: BoxFit.fill,),
     ),
     SizedBox(height: 20,),
 
@@ -179,8 +180,8 @@ setState(() {
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-fristappcolor,
-fristappcolor,
+secondappcolor,
+secondappcolor,
   
 
 
@@ -229,7 +230,7 @@ fristappcolor,
     textCapitalization: TextCapitalization.characters,
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
-//controller:name ,
+controller:name ,
      ),
                ),
               SizedBox(height: 25,),
@@ -284,10 +285,10 @@ Container(
             )
           ),
                   isExpanded: true,
-                  value:selectedItem1,
+                  value:birthyear,
                   onChanged: (newValue){
                     setState(() {
-                              selectedItem1 = newValue;
+                              birthyear = newValue;
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
@@ -350,7 +351,7 @@ keyboardType: TextInputType.text,
     
 keyboardType: TextInputType.number,
 
-//controller:phone_no,
+controller:phone_no,
      ),
                ),
      SizedBox(height: 25,),
@@ -375,7 +376,7 @@ keyboardType: TextInputType.number,
     
 keyboardType: TextInputType.number,
 
-//controller:ID_number,
+controller:iD_number,
      ),
                ),
               
@@ -411,7 +412,7 @@ obscureText: passwordicon,
     
 keyboardType: TextInputType.visiblePassword,
 
-//controller:password,
+controller:password,
      ),
                ),
       SizedBox(height: 25,),
@@ -448,7 +449,7 @@ obscureText: passwordicon1,
 keyboardType: TextInputType.visiblePassword,
 /*النص محمي
 obscureText: passwordicon1,*/
-//controller:passwoord1,
+controller:passwoord1,
      ),
                ),
                 SizedBox(height: 25,),
@@ -617,6 +618,7 @@ textStyle:TextStyle(color:Colors.white,),
   setState(() {
             create_account=true;
             _savevalues();
+            s.SendDataclient(name,password,passwoord1,phone_no,iD_number,birthyear,image);
 
   });
       // غلق نافذة الرسالة 

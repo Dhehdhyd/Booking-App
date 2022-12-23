@@ -25,8 +25,8 @@ class _Help_and_supportState extends State<Help_and_support> {
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-fristappcolor,
-fristappcolor,
+secondappcolor,
+secondappcolor,
   
 
 
@@ -58,9 +58,9 @@ Container(
   
             children: [
   
-              Icon(Icons.call,color: fristappcolor,),
+              
   
-  SizedBox(width: 5,),
+  SizedBox(width: 8,),
   
               Text(" شركة البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
@@ -84,9 +84,9 @@ Container(
   
             children: [
   
-              Icon(Icons.call,color: fristappcolor,),
+              
   
-  SizedBox(width: 5,),
+  SizedBox(width: 8,),
   
               Text("شركة ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
@@ -111,9 +111,9 @@ Container(
   
             children: [
   
-              Icon(Icons.call,color: fristappcolor,),
+              
   
-  SizedBox(width: 5,),
+  SizedBox(width: 8,),
   
               Text(" الدعم الفني ",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
@@ -147,9 +147,9 @@ Container(
   
           children: [
   
-            Icon(Icons.whatsapp,color: fristappcolor),
+            
   
-  SizedBox(width: 10,),
+  SizedBox(width: 14,),
   
             Text(" شركة البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
@@ -172,9 +172,9 @@ Container(
   
           children: [
   
-            Icon(Icons.whatsapp,color: fristappcolor),
+          
   
-  SizedBox(width: 10,),
+  SizedBox(width: 14,),
   
             Text(" شركة ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
@@ -197,9 +197,9 @@ Container(
   
           children: [
   
-            Icon(Icons.whatsapp,color: fristappcolor),
+            
   
-  SizedBox(width: 10,),
+  SizedBox(width: 14,),
   
             Text("  الدعم الفني",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   

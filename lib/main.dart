@@ -18,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeMode tm=ThemeMode.light;
 bool _swval=false;
 bool darkMode=false;
+
 void main()async{
   //عندما ينشاء حساب تتسجل بيانات العميل اي انه قد انشاء حساب فيتم ارجاع قيمة متغير الانشاء لكي لا اسمح له بانشاء حساب جديد
 WidgetsFlutterBinding.ensureInitialized();
@@ -96,7 +97,7 @@ class MyApp extends StatelessWidget {
   String? selectedItem1='اب';
   String selectedDate=selectedDate1.toString();
   int filter_trips=0;
-  var card=AppCard(filter_trips);
+ // var card=AppCard();
 
 class MyHomePage extends StatefulWidget {
 
@@ -116,8 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
   'عدن', 'صنعاء', 'اب', 'جدة', 'رياض',
   ];
  
-
   //عرض التاريخ
+  List<String> s=[''];
+  String datetrip="تاريخ الرحلة";
   void date_picker()
   {
     showDatePicker(
@@ -131,7 +133,11 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
 selectedDate1=date;
               selectedDate=date.toString();
-            });});}
+              s=selectedDate.split(' ');
+              datetrip=s[0];
+              
+            });});
+            }
   @override
   
   Widget build(BuildContext context) {
@@ -146,10 +152,10 @@ selectedDate1=date;
           [ Padding(
              padding: const EdgeInsets.only(left: 210.0),
 
-             child: Text('الصفحة الرئيسية',style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
+             child: Text('الصفحة الرئيسية',style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color:lightcolor)),
            ),
 
-          ],backgroundColor: fristappcolor,
+          ],backgroundColor: secondappcolor,
            /*
          flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -260,9 +266,10 @@ Container(child:Row(
     SizedBox(width: 6,),
    Icon(Icons.date_range,color: secondappcolor,), 
 SizedBox(width: 10),
+ //String Day=formatDate(DateTime.parse(date),[D]);
 
     InkWell(
-        child: Text("${DateFormat.yMd().format(selectedDate1)}",style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
+        child: Text("${datetrip}",style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
  
         ),),
         onTap:(){
@@ -282,7 +289,7 @@ Container(child: Column(
   children: [
             ElevatedButton(
      style: ElevatedButton.styleFrom(
-      disabledBackgroundColor: secondappcolor,
+      backgroundColor: secondappcolor,
 textStyle:TextStyle(color:Colors.white,),
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
@@ -291,8 +298,9 @@ textStyle:TextStyle(color:Colors.white,),
     
     onPressed:() {
       setState(() {
+        //يتم عرض الرحلات التي تم البحث عنها حيث يتغير قيمة متغير الفلتره ثم يتغير قيمة متغير الرحلات
           filter_trips=2;
-          card=AppCard(filter_trips);
+        //  card=AppCard();
         });
     }
     ,
@@ -308,8 +316,9 @@ textStyle:TextStyle(color:Colors.white,),
 // الزيادة والنقصان في التاريخ
   Counter_date(),
 SizedBox(height: 30,),
-// الرحلات
-card,
+// متغير الرحلات
+//card,
+
 ],
 ),
 

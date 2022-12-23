@@ -25,7 +25,7 @@ class _mystartpageState extends State<mystartpage> {
       home: Scaffold(
         body: 
         SplashScreen(
-            photoSize: 200,
+            photoSize: 250,
             
             
             gradientBackground: LinearGradient(
@@ -38,8 +38,8 @@ class _mystartpageState extends State<mystartpage> {
   
    ] ),
     
-          image: Image.asset("assets/images/bus6.jpg",alignment: Alignment.center),
-          seconds: 1,
+          image: Image.asset("assets/images/bus5.png",alignment: Alignment.bottomCenter,),
+          seconds: 5,
           navigateAfterSeconds:MyApp(),
           loaderColor: thridtextcolor,  
           loadingText: Text('...Loading',style: TextStyle(fontWeight:FontWeight.bold,color: Color.fromRGBO(255, 255, 255, 0.8), fontSize: 18),),

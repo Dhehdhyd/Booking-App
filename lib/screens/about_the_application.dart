@@ -13,15 +13,15 @@ class _About_the_applicationState extends State<About_the_application> {
        appBar: AppBar(
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 250),
+             padding: const EdgeInsets.only(left: 230),
 
              child: Text(" حول التطبيق ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
- fristappcolor,
- fristappcolor,
+ secondappcolor,
+ secondappcolor,
 
   
 
@@ -41,7 +41,7 @@ gradient: LinearGradient(colors: [
                      height: 90,
                      margin: EdgeInsets.only(top: 5),
                      alignment: Alignment.center,
-                     child: Image.asset("assets/images/W3A.png",alignment: Alignment.center,fit: BoxFit.fill,)
+                     child: Image.asset("assets/images/W3A.jpg",alignment: Alignment.center,fit: BoxFit.fill,)
                      ),
                      SizedBox(height: 20,),
      Padding(

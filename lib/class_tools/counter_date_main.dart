@@ -201,9 +201,12 @@ textStyle:TextStyle(color:Colors.white,),
     ),
      
     
-    onPressed:(){dec();
+    onPressed:(){setState(() {
+              dec();
     filter_trips=1;
-          card=AppCard(filter_trips);
+        //  card=AppCard();
+        });
+   
     },
     child: Text('<<',style: TextStyle(fontSize: 12,color:Colors.white)),
     
@@ -223,9 +226,13 @@ textStyle:TextStyle(color:Colors.white,),
     ),
     
     
-    onPressed:(){inc();
+    onPressed:(){setState(() {
+          inc();
+
     filter_trips=1;
-          card=AppCard(filter_trips);
+         // card=AppCard();
+        });
+      
     },
     child: Text('>>',style: TextStyle(fontSize: 12,color:Colors.white)),
     

@@ -88,15 +88,15 @@ child: Text("صورة التذكره"),
        appBar: AppBar(
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 210),
+             padding: const EdgeInsets.only(left: 240),
 
              child: Text("تأكيد الحجز ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: lightcolor)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(
 gradient: LinearGradient(colors: [
-fristappcolor,
-fristappcolor,
+secondappcolor,
+secondappcolor,
   
 
 
