@@ -16,6 +16,8 @@ import 'package:shared_preferences/shared_preferences.dart';
         image_picker: ^0.8.5+3 */
        bool  create_account=false;
        Insert s=Insert();
+    var cname=TextEditingController();
+
 class Mycreate_account extends StatefulWidget {
   @override
   _Mycreate_accountState createState() => _Mycreate_accountState();
@@ -26,11 +28,11 @@ class _Mycreate_accountState extends State<Mycreate_account> {
     final picker=ImagePicker();
     bool passwordicon=true;
      bool passwordicon1=true;
-    var name=TextEditingController();
     var password=TextEditingController();
     var passwoord1=TextEditingController();
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
+  
     bool showimagebool=false;
         _savevalues()async{
           if(create_account==true)
@@ -230,7 +232,7 @@ secondappcolor,
     textCapitalization: TextCapitalization.characters,
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
-controller:name ,
+controller:cname ,
      ),
                ),
               SizedBox(height: 25,),
@@ -618,7 +620,7 @@ textStyle:TextStyle(color:Colors.white,),
   setState(() {
             create_account=true;
             _savevalues();
-            s.SendDataclient(name,password,passwoord1,phone_no,iD_number,birthyear,image);
+            s.SendDataclient(cname,password,passwoord1,phone_no,iD_number,birthyear,image);
 
   });
       // غلق نافذة الرسالة 

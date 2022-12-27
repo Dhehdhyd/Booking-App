@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
+import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
+import '../class_tools/app_card_trip.dart';
 import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
@@ -17,7 +19,7 @@ class _Create_accountState extends State<Create_account> {
        Insert s=Insert();
     final picker=ImagePicker();
     bool showimagebool=false;
-    var name=TextEditingController();
+    var tname=TextEditingController();
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
    /* List<String>list_gender=[
@@ -213,7 +215,7 @@ gradient: LinearGradient(colors: [
     
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
-controller:name ,
+controller:tname ,
      ),
                ),
               SizedBox(height: 25,),
@@ -504,7 +506,7 @@ textStyle:TextStyle(color:Colors.white,),
             onPressed: (){
   setState(() {
     //يتم ارسال البيانات لسرفر
-     s.SendDatatraveler(name, phone_no, iD_number, birthyear, image); 
+     s.SendDatatraveler(tname, phone_no, iD_number, birthyear, image); 
     });
       // غلق نافذة الرسالة 
    Navigator.of(context, rootNavigator: true).pop('ok');         
@@ -512,6 +514,8 @@ textStyle:TextStyle(color:Colors.white,),
 //الانتقال الى الصفحة الرئسية
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (_){
+        //ارسال البيانات من اجل جلب البيانات الحجز المحددة لرحلة معينه وشخص محدد ارسل اسم المسافر وكذا اسم المكتب وتاريخ الرحلة ومدينة الوصول والمغادره
+s.SendBooking_data(tname, office_name, trip_date, tocity, fromcity);
       
         //يتم جلب بيانات الحجز قبل عرضها
  return Trip_details_page ();

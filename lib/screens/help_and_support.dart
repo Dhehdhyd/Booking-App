@@ -20,7 +20,7 @@ class _Help_and_supportState extends State<Help_and_support> {
           [ Padding(
              padding: const EdgeInsets.only(left: 210),
 
-             child: Text(" المساعدة والدعم ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
+             child: Text(" المساعدة و الدعم ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(

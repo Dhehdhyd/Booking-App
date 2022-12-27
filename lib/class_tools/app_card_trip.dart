@@ -1,4 +1,5 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '../Functions/insert.dart';
 import '../Models/trip_model.dart';
 import '../Models/trips_model.dart';
 import '../Functions/fetch.dart';
@@ -14,10 +15,13 @@ import 'dart:convert';
 
 
 //بطاقة الرحلة
+//متغيرات سوف ترسل من اجل معرفة اي رحلة تم حجزها
+String office_name="";
+String tocity="";
+String fromcity="";
+
 
 class AppCard extends StatefulWidget {
-
-
 
   @override
 
@@ -32,7 +36,7 @@ class _AppCardState extends State<AppCard> {
   @override
 
 
-
+Insert s=Insert();
 Fetch f=Fetch();
 
 //التنقل بين الصفحات
@@ -130,6 +134,8 @@ child: Column(
    setState(() {
 
       select_page(context, 1);
+      //ارسال البيانات بدالة الارسال والمتغيرات منها من تتغير قيمتها هنا ومنها من تتغير في صفحة انشاء حساب اسم العميل وصفحة جلب البيانات مثل التاريخ
+s.SendBooking_data(cname, office_name, trip_date, tocity, fromcity);
 
       // غلق نافذة الرسالة 
 
@@ -236,7 +242,6 @@ select_page(context, 3);
 List tripss= f.checktrip(filter_trips);
 
 
-
     return 
 
 
@@ -248,7 +253,6 @@ List tripss= f.checktrip(filter_trips);
         height: 310,
 
         child: FutureBuilder(
-
           future:  f.checktrip(filter_trips),
 
           builder:(context, snapshot) {
@@ -311,7 +315,7 @@ return         Card(
 
                   
 
-                  //العنوان
+                  //اسم المكتب
 
                  Center(
 
@@ -887,7 +891,12 @@ textStyle:TextStyle(color:Colors.white,),
 
    else
 
-     { myDialog();}
+     { myDialog();
+     office_name=tripss[index].office_logo;
+     fromcity=tripss[index].from_city;
+      tocity=tripss[index].to_city;
+
+     }
 
     }  },
 
@@ -947,4 +956,4 @@ SizedBox(height: 5,),],
 
   }
 
-}*/
+}

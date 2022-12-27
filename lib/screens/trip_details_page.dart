@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Functions/fetch.dart';
+import '../Functions/insert.dart';
 import '../screens/settings.dart';
 
 class Trip_details_page extends StatefulWidget {
@@ -11,6 +12,8 @@ class _Trip_details_pageState extends State<Trip_details_page> {
  int _radiovalue=0;
   String result="";
   int numberselect=0;
+  String typepay="";
+  Insert s=Insert();
   String booking_number=data_confirmation.booking_number;
 
    myDialog(){
@@ -130,7 +133,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 35),
 
-       child: Text('اسم الشركة',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('اسم المكتب',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          Container(
@@ -429,7 +432,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 35),
 
-       child: Text(' مقر الشركة',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text(' مقر المكتب',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          Container(
@@ -500,6 +503,7 @@ child: Column(
               setState(() {
                               _radiovalue=value;
                               numberselect=1;
+                              typepay="كاش";
 
                             });
             },
@@ -513,6 +517,7 @@ child: Column(
               setState(() {
                               _radiovalue=value;
                               numberselect=2;
+                              typepay="إلكتروني";
                             });
             },
           ),
@@ -548,6 +553,8 @@ child: Column(
     onPressed: (){
    setState(() {
        myDialog(); 
+        //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب واسم المكتب وتاريخ الرحلة ومدينة الوصول والمغادرة وكذا موع الدفع 
+       s.SendBookingdata(booking.traveler_name, booking.office_name, booking.trip_day, booking.to_city.toString(), booking.from_city.toString(), typepay);
       });
      
     },
