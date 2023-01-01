@@ -48,11 +48,11 @@ final String apiKey='5437535434789096';
   }
   }
    //--------------------------------------------------------  ارسال بيانات للمساعدة في عملية جلب بيانات الحجز----------------------------------//
-   SendBooking_data(client_name,office_name,tripdate,tocity,fromcity) async{
+   SendBooking_data(client_name,office_name,trip_id) async{
   try{
     http.Response response=await http.post(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'),
     //حقول json البرتقالي الابيض قيم الحقول الموجوده في تطبيق
-  body:{"client_name":client_name.text,"office_name":office_name,"tripdate":tripdate,"tocity":tocity,"fromcity":fromcity},
+  body:{"client_name":client_name.text,"office_name":office_name,"trip_id":trip_id.toString(),},
   );
    return response;
 
@@ -63,11 +63,11 @@ final String apiKey='5437535434789096';
   }
   }
    //--------------------------------------------------------  ارسال بيانات للمساعدة في عملية تاكيدالحجز----------------------------------//
-   SendBookingdata(client_name,office_name,tripdate,tocity,fromcity,typepay) async{
+   SendBookingdata(client_name,office_name,trip_id,typepay) async{
   try{
     http.Response response=await http.post(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'),
     //حقول json البرتقالي الابيض قيم الحقول الموجوده في تطبيق
-  body:{"client_name":client_name.text,"office_name":office_name,"tripdate":tripdate,"tocity":tocity,"fromcity":fromcity,"typepay":typepay},
+  body:{"client_name":client_name.text,"office_name":office_name,"trip_id":trip_id.toString(),"typepay":typepay},
   );
    return response;
 

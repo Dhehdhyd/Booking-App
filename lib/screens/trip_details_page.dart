@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
+import '../class_tools/app_card_trip.dart';
 import '../screens/settings.dart';
 
 class Trip_details_page extends StatefulWidget {
@@ -554,7 +555,7 @@ child: Column(
    setState(() {
        myDialog(); 
         //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب واسم المكتب وتاريخ الرحلة ومدينة الوصول والمغادرة وكذا موع الدفع 
-       s.SendBookingdata(booking.traveler_name, booking.office_name, booking.trip_day, booking.to_city.toString(), booking.from_city.toString(), typepay);
+       s.SendBookingdata(booking.traveler_name, booking.office_name,trip_id.toString(), typepay);
       });
      
     },

@@ -514,8 +514,8 @@ textStyle:TextStyle(color:Colors.white,),
 //الانتقال الى الصفحة الرئسية
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (_){
-        //ارسال البيانات من اجل جلب البيانات الحجز المحددة لرحلة معينه وشخص محدد ارسل اسم المسافر وكذا اسم المكتب وتاريخ الرحلة ومدينة الوصول والمغادره
-s.SendBooking_data(tname, office_name, trip_date, tocity, fromcity);
+        //ارسال البيانات من اجل جلب البيانات الحجز المحددة لرحلة معينه وشخص محدد ارسل اسم المسافر وكذا اسم المكتب رقم الرحلة 
+s.SendBooking_data(tname, office_name, trip_id);
       
         //يتم جلب بيانات الحجز قبل عرضها
  return Trip_details_page ();

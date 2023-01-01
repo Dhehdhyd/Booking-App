@@ -17,8 +17,8 @@ import 'dart:convert';
 //بطاقة الرحلة
 //متغيرات سوف ترسل من اجل معرفة اي رحلة تم حجزها
 String office_name="";
-String tocity="";
-String fromcity="";
+String trip_id="";
+
 
 
 class AppCard extends StatefulWidget {
@@ -135,7 +135,7 @@ child: Column(
 
       select_page(context, 1);
       //ارسال البيانات بدالة الارسال والمتغيرات منها من تتغير قيمتها هنا ومنها من تتغير في صفحة انشاء حساب اسم العميل وصفحة جلب البيانات مثل التاريخ
-s.SendBooking_data(cname, office_name, trip_date, tocity, fromcity);
+s.SendBooking_data(cname, office_name , trip_id);
 
       // غلق نافذة الرسالة 
 
@@ -893,8 +893,8 @@ textStyle:TextStyle(color:Colors.white,),
 
      { myDialog();
      office_name=tripss[index].office_logo;
-     fromcity=tripss[index].from_city;
-      tocity=tripss[index].to_city;
+     trip_id=tripss[index].trip_id;
+     
 
      }
 

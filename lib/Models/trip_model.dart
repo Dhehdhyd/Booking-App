@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 @JsonSerializable()
 class Trip {
+  int trip_id;
   String office_logo;
   String trip_day;
    String office_logo_image;
@@ -15,6 +16,7 @@ class Trip {
    String ?to_city;
    Trip({this.office_logo="",
    this.price=1,
+   this.trip_id=1,
    this.office_logo_image="",
    this.attendance_date="",
    this.bus_type="",
@@ -29,6 +31,7 @@ class Trip {
          factory Trip.fromJson(Map<String,dynamic>jsonDate)
          {
            return Trip(
+              trip_id:jsonDate['trip_id'] , 
              office_logo:jsonDate['office_logo'] , 
              office_logo_image:jsonDate['office_logo_image'],  
              attendance_date:jsonDate['attendance_date'],  
