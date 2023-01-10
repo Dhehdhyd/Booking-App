@@ -5,17 +5,18 @@ import '../Models/trip_model.dart';
 import '../Models/trips_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
-
+import '../class_tools/app_drawer.dart';
 import '../class_tools/counter_date_main.dart';
 import '../main.dart';
 Clients client=Clients();
 Booking booking=Booking();
 Data_confirmation data_confirmation=Data_confirmation();
+String trip_date="";
+String massage_error="";
+
 class Fetch
 {
-
   //دالة جلب الرحلات من السرفر
 final String apiKey='5437535434789096';
 
@@ -34,28 +35,37 @@ final String apiKey='5437535434789096';
 else
 {
   //لو اريد الطبع رسالة الخط ابحث عن اداة حاليا هذا لي فقط
-  print('اطبع لوحصل مشكلة= ${response.statusCode}');
+  massage_error='اطبع لوحصل مشكلة= ${response.statusCode}';
 }
   }
   catch(Exc){
-    print(Exc);
+ massage_error=Exc.toString();
+    
   }
   
 
 }
 //--------------------------------------------دالة جلب بيانات العميل من اجل التعديل-------------------------------//
-fetchclient() async{
+fetchclient(String passwordforupdate) async{
   try{
-    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
+    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg/$passwordforupdate'));
     if(response.statusCode==200)
     {
       var jsonData=json.decode(response.body);
   
   client=Clients.fromJson(jsonData);
       
-      
+      return true;
       
     }
+    
+else
+{
+  //لو اريد الطبع رسالة الخط ابحث عن اداة حاليا هذا لي فقط
+  massage_error='اطبع لوحصل مشكلة= ${response.statusCode}';
+      return false;
+
+}
 
   }
   catch(Exc){
@@ -66,10 +76,10 @@ fetchclient() async{
 }
 //--------------------------------------------------------------------------------------//
 
-//--------------------------------------------دالة جلب بيانات الحجز-------------------------------//
-fetchbooking() async{
+//-------------------------------------------  دالة جلب بيانات الحجز لصفحة تاكيد الحجز حسب رقم الرحلة  -------------------------------//
+fetchbooking(int id) async{
   try{
-    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
+    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg/$id'));
     if(response.statusCode==200)
     {
       var jsonData=json.decode(response.body);
@@ -184,11 +194,30 @@ counter_trips++;
  }
  counter_trips=0;
 if(filter==1)
+{
+//تاريخ الرحلة
+  trip_date=Dateday;
 return trips_inc_and_dec_date;
+
+}
 else if(filter==2)
+{
+  //تاريخ الرحلة
+
+  trip_date=select_date;
+
 return trips_search_button;
+
+}
 else if(filter==0)
+{
+  //تاريخ الرحلة
+
+  trip_date=Dateday;
+
 return trips_date_now;
+
+}
 }
 
 }

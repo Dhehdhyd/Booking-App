@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
@@ -14,9 +16,16 @@ class Modifly_my_account_data extends StatefulWidget {
 }
 
 class _Modifly_my_account_data extends State<Modifly_my_account_data> {
-   String imagee=client.image_model;
+   String imagee=base64Decode(client.image_model).toString();
     final picker=ImagePicker();
     bool passwordicon=true;
+    String mimage_convert="";//الصوره المحولة
+  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
+  Future convertimage(File image)async{
+    Uint8List imageBytes=await image.readAsBytes();
+    String base64string=base64.encode(imageBytes);
+    mimage_convert=base64string;
+  }
        Insert s=Insert();
     
 File image=File('');    
@@ -156,7 +165,7 @@ setState(() {
             } 
   @override
   Widget build(BuildContext context) {
-   
+   //اجعل امتغير الصوره يحول الصوره السابقة
     image=File('$imagee');        
 
     return 
@@ -207,10 +216,10 @@ gradient: LinearGradient(colors: [
    
      decoration: InputDecoration(
     
-         labelText:"الاسم بالكامل",
-    hintText: client.name_model,
-    hintStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
-            labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         
+    labelText: client.name_model,
+    labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         
     
          prefixIcon: Icon(Icons.person,color:secondappcolor,),
     
@@ -329,10 +338,10 @@ keyboardType: TextInputType.text,
     
      decoration: InputDecoration(
     
-         labelText:"رقم الهاتف",
-     hintText: client.phone_no_model,
-    hintStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
-         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+        
+     labelText: client.phone_no_model,
+    labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+ 
     
          prefixIcon: Icon(Icons.phone_android,color: secondappcolor),
     
@@ -355,11 +364,10 @@ controller:phone_no,
   
      decoration: InputDecoration(
     
-         labelText:"رقم الهوية",
-     hintText: client.iD_number_model,
-    hintStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
-         labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
-    
+ 
+     labelText: client.iD_number_model,
+    labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+      
          prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
@@ -544,9 +552,20 @@ getImage(ImageSource.camera);
     ),
     
     onPressed: (){  
-      if(password==client.password_model){
-        //عدل البيانات
-s.ModiflyDataclient(name,password,phone_no,iD_number,birthyear,image);
+     
+         if(password.text.isEmpty ||name.text.isEmpty||iD_number.text.isEmpty||phone_no.text.isEmpty||image==File(''))  
+  { 
+        ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(" احد الحقول فارغة"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );     
+      } 
+ else       //---------------------------------  اعدل البيانات في السرفر لهذا العميل من خلال ارسال البيانات الجديده وكذا ارسال رقم هذا العميل id----------------//
+{
+s.ModiflyDataclient(name,password,phone_no,iD_number,birthyear,mimage_convert,client.client_id);
+        // الرسائل تعرض حسب الراجع من الداله ضروري اعدل جميع الرسائل نفس حق زر تحقق
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
@@ -560,15 +579,8 @@ child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
                
    
          showDialog(builder: (context) => ok, context:context);
-   }else
-   {
-     ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text("كلمة المرور خاطئة"),
-         behavior: SnackBarBehavior.floating,
-       )
-     );
-   } },
+        }// رسالة الخطا
+    },
     child: Text(' حفظ التعديلات ',style: TextStyle(fontSize: 15,color: lightcolor)),
     
     

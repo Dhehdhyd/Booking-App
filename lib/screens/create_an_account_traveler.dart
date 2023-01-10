@@ -4,8 +4,10 @@ import 'package:intl/intl.dart';//تنسيق التاريخ
 import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
 import '../class_tools/app_card_trip.dart';
-import '../main.dart';
 import 'dart:io';
+import '../screens/create_an_account_page.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 import '../screens/settings.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
 import '../screens/trip_details_page.dart';
@@ -13,6 +15,7 @@ class Create_account extends StatefulWidget {
   @override
   _Create_accountState createState() => _Create_accountState();
 }
+Fetch f=Fetch();
 
 class _Create_accountState extends State<Create_account> {
   File image=File('');
@@ -32,6 +35,13 @@ class _Create_accountState extends State<Create_account> {
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
   String? birthyear='2000';
+  String timage_convert="";//الصوره المحولة
+  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
+  Future convertimage(File image)async{
+    Uint8List imageBytes=await image.readAsBytes();
+    String base64string=base64.encode(imageBytes);
+    timage_convert=base64string;
+  }
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
   {
@@ -48,6 +58,8 @@ child:
        SizedBox(height: 25,),
      ],
    );
+      //احول الصوره بهذا الدالة
+convertimage(image);
   }
   else
   {
@@ -472,7 +484,17 @@ getImage(ImageSource.camera);
     ),
     
     onPressed: (){
-    
+       if(tname.text.isEmpty||iD_number.text.isEmpty||phone_no.text.isEmpty||image==File(''))  
+  { 
+        ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(" احد الحقول فارغة"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );     
+      } 
+      else
+    {
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
@@ -505,17 +527,27 @@ textStyle:TextStyle(color:Colors.white,),
             child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
             onPressed: (){
   setState(() {
+    //تغير هذا القيم من اجل ارسالها الى السرفر من اجل المساعدة في الحجز لرحلة معينه في صفحة تاكيد الحجز
+    
+shprname=tname.text;
+shprimage=timage_convert;
+shprphon_no=phone_no.text;
+
+    //---------------------------------------------------------------------------//
+            //جلب بيانات الحجز لداخل متغير Booking من اجل عرضها في صفحة تاكيد الحجز
+f.fetchbooking(tthis_trip_id);//رقم رحلة معينة
+
+//-------------------------------------------------------------------//
     //يتم ارسال البيانات لسرفر
-     s.SendDatatraveler(tname, phone_no, iD_number, birthyear, image); 
+    // s.SendDatatraveler(tname, phone_no, iD_number, birthyear, image); 
     });
       // غلق نافذة الرسالة 
    Navigator.of(context, rootNavigator: true).pop('ok');         
 
-//الانتقال الى الصفحة الرئسية
+//الانتقال الى الصفحة تاكيد الحجز
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (_){
-        //ارسال البيانات من اجل جلب البيانات الحجز المحددة لرحلة معينه وشخص محدد ارسل اسم المسافر وكذا اسم المكتب رقم الرحلة 
-s.SendBooking_data(tname, office_name, trip_id);
+
       
         //يتم جلب بيانات الحجز قبل عرضها
  return Trip_details_page ();
@@ -539,7 +571,7 @@ s.SendBooking_data(tname, office_name, trip_id);
       );
          showDialog(builder: (context) => ok, context:context);
                
- 
+    }
             
     },
     child: Text(' موافق ',style: TextStyle(fontSize: 15,color: Colors.white)),

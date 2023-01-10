@@ -12,12 +12,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'counter_date_main.dart';
+
 
 
 //بطاقة الرحلة
 //متغيرات سوف ترسل من اجل معرفة اي رحلة تم حجزها
 String office_name="";
-String trip_id="";
+int tthis_trip_id=1;
 
 
 
@@ -38,7 +40,6 @@ class _AppCardState extends State<AppCard> {
 
 Insert s=Insert();
 Fetch f=Fetch();
-
 //التنقل بين الصفحات
 
   void select_page(BuildContext ctx,int index_page)
@@ -134,8 +135,8 @@ child: Column(
    setState(() {
 
       select_page(context, 1);
-      //ارسال البيانات بدالة الارسال والمتغيرات منها من تتغير قيمتها هنا ومنها من تتغير في صفحة انشاء حساب اسم العميل وصفحة جلب البيانات مثل التاريخ
-s.SendBooking_data(cname, office_name , trip_id);
+         //جلب بيانات الحجز لداخل متغير Booking من اجل عرضها في صفحة تاكيد الحجز
+f.fetchbooking(tthis_trip_id);// رقم رحلة معينه
 
       // غلق نافذة الرسالة 
 
@@ -257,7 +258,7 @@ List tripss= f.checktrip(filter_trips);
 
           builder:(context, snapshot) {
 
-                      if(snapshot!=null){
+                      if(snapshot.data!=null){
 
                         return ListView.builder(
 
@@ -265,7 +266,7 @@ List tripss= f.checktrip(filter_trips);
 
                           itemBuilder: (context, index) {
 
-return         Card(
+return          Card(
 
           
 
@@ -305,7 +306,7 @@ return         Card(
 
                  alignment: Alignment.topLeft,
 
-                 child: Image.asset(tripss[index].office_logo_image,alignment: Alignment.center,fit: BoxFit.fill,)
+                 child: Image.asset(tripss[index].logo_image,alignment: Alignment.center,fit: BoxFit.fill,)
 
                  ),
 
@@ -319,7 +320,7 @@ return         Card(
 
                  Center(
 
-                   child: Text(tripss[index].office_logo,style:TextStyle(color:secondtextcolor,fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].office_name,style:TextStyle(color:secondtextcolor,fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -369,7 +370,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].attendance_date,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].attendance_time,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -401,7 +402,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].from_city,style:TextStyle(color:thridtextcolor,fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].departure_city,style:TextStyle(color:thridtextcolor,fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -449,7 +450,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].wait_date,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].waiting_time,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -499,7 +500,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].start_date,style:TextStyle(color:thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].departure_time,style:TextStyle(color:thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -531,7 +532,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].to_city,style:TextStyle(color: thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].arrival_city,style:TextStyle(color: thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -595,7 +596,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].trip_state,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].status,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -641,7 +642,7 @@ return         Card(
 
 
 
-                   child: Text(tripss[index].price,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index].ticket_price,style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -871,7 +872,7 @@ textStyle:TextStyle(color:Colors.white,),
 
       //اذا الرحلة غير متاحة
 
-      if(tripss[index].trip_state=="غير متاح")
+      if(tripss[index].status=="غير متاح")
 
        {
 
@@ -892,8 +893,8 @@ textStyle:TextStyle(color:Colors.white,),
    else
 
      { myDialog();
-     office_name=tripss[index].office_logo;
-     trip_id=tripss[index].trip_id;
+     office_name=tripss[index].office_name;
+    tthis_trip_id=tripss[index].trip_id;
      
 
      }

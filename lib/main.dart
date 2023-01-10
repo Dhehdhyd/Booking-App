@@ -16,7 +16,6 @@ import '../class_tools/counter_date_main.dart';
 import '../class_tools/app_BottomNavigationBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 ThemeMode tm=ThemeMode.light;
-bool _swval=false;
 bool darkMode=false;
 
 void main()async{
@@ -26,8 +25,13 @@ WidgetsFlutterBinding.ensureInitialized();
           if(create_account==false)
 {
     SharedPreferences prefs=await SharedPreferences.getInstance();
-  
+  //بعض من بيانات العميل يتم حفظها مثل الاسم والصوره ورقم الهاتف من اجل ارسالها عند الحاجة
           create_account=prefs.getBool("create_account")as bool;
+          shprname=prefs.getString("shprname").toString();
+          shprphon_no=prefs.getString("shprphon_no").toString();
+          shprimage=prefs.getString("shprimage").toString();
+
+
       
     }
   
@@ -97,7 +101,7 @@ class MyApp extends StatelessWidget {
   String? selectedItem1='اب';
   String selectedDate=selectedDate1.toString();
   int filter_trips=0;
- // var card=AppCard();
+  var card=AppCard();
 
 class MyHomePage extends StatefulWidget {
 
@@ -300,7 +304,7 @@ textStyle:TextStyle(color:Colors.white,),
       setState(() {
         //يتم عرض الرحلات التي تم البحث عنها حيث يتغير قيمة متغير الفلتره ثم يتغير قيمة متغير الرحلات
           filter_trips=2;
-        //  card=AppCard();
+          card=AppCard();
         });
     }
     ,
@@ -317,7 +321,7 @@ textStyle:TextStyle(color:Colors.white,),
   Counter_date(),
 SizedBox(height: 30,),
 // متغير الرحلات
-//card,
+card,
 
 ],
 ),

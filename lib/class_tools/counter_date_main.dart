@@ -4,12 +4,13 @@ import '../main.dart';
 import '../screens/settings.dart';
 import 'package:intl/intl.dart';//تنسيق التاريخ
 
+//حقل التاريخ كامل
+ String dateday="${DateFormat.yMd().format(DateTime.now())}";
 class Counter_date extends StatefulWidget {
   @override
   _Counter_dateState createState() => _Counter_dateState();
 }
-//حقل التاريخ كامل
- String dateday="${DateFormat.yMd().format(DateTime.now())}";
+
 
  int day=16;
   int mounth=9;
@@ -204,7 +205,7 @@ textStyle:TextStyle(color:Colors.white,),
     onPressed:(){setState(() {
               dec();
     filter_trips=1;
-        //  card=AppCard();
+          card=AppCard();
         });
    
     },
@@ -230,7 +231,7 @@ textStyle:TextStyle(color:Colors.white,),
           inc();
 
     filter_trips=1;
-         // card=AppCard();
+          card=AppCard();
         });
       
     },

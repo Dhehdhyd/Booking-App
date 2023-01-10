@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
 import '../class_tools/app_card_trip.dart';
+import '../main.dart';
+import '../screens/create_an_account_page.dart';
 import '../screens/settings.dart';
-
+import '../class_tools/counter_date_main.dart';
 class Trip_details_page extends StatefulWidget {
   @override
   _Trip_details_pageState createState() => _Trip_details_pageState();
@@ -15,6 +17,8 @@ class _Trip_details_pageState extends State<Trip_details_page> {
   int numberselect=0;
   String typepay="";
   Insert s=Insert();
+ Fetch f=Fetch();
+
   String booking_number=data_confirmation.booking_number;
 
    myDialog(){
@@ -28,13 +32,156 @@ alignment: Alignment.center,
       SizedBox(width: 8,),
       Text("الرجاء تحديد طريقة الدفع",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
     ],
-  )) ,
+  ),) ,
 
       );
                
 
          showDialog(builder: (context) => ok1, context:context);
   }
+else if(numberselect==1)
+{
+   final AlertDialog ok2=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Column(
+    children: [
+      Text("تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+     Container(
+    
+    height: 50,
+    
+    child:Icon(Icons.alarm,color:fristappcolor,size: 50,)
+    
+    
+    
+    ),
+    SizedBox(height: 8,),
+    Center(
+      child: Container(
+            width: 100,
+          height: 35,
+          child: ElevatedButton(
+       style: ElevatedButton.styleFrom(
+        primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+         shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0)
+      ),
+      ),
+            child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
+            onPressed: (){
+  setState(() {
+     
+
+  });
+      // غلق نافذة الرسالة 
+   Navigator.of(context, rootNavigator: true).pop('ok2');         
+
+//الانتقال الى الصفحة الرئسية
+                    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_){
+      
+        
+ return  MyHomePage();
+
+
+}  ),
+    );
+          
+
+            },
+          ),
+          ),
+    ), ],
+  )
+  ) ,
+
+  
+
+       
+
+      );
+         showDialog(builder: (context) => ok2, context:context);
+               
+     
+
+
+   }
+
+else if(numberselect==2)
+{
+   final AlertDialog ok3=AlertDialog(
+title:Container(
+alignment: Alignment.center,
+  child: Column(
+    children: [
+      Text("تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+     Container(
+    
+    height: 50,
+    
+    child:Icon(Icons.alarm,color:fristappcolor,size: 50,)
+    
+    
+    
+    ),
+    SizedBox(height: 8,),
+    Center(
+      child: Container(
+            width: 100,
+          height: 35,
+          child: ElevatedButton(
+       style: ElevatedButton.styleFrom(
+        primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+         shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0)
+      ),
+      ),
+            child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
+            onPressed: (){
+  setState(() {
+     
+
+  });
+      // غلق نافذة الرسالة 
+   Navigator.of(context, rootNavigator: true).pop('ok3');         
+
+//الانتقال الى الصفحة الرئسية
+                    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_){
+      
+        
+ return  MyHomePage();
+
+
+}  ),
+    );
+          
+
+            },
+          ),
+          ),
+    ), ],
+  )
+  ) ,
+
+  
+
+       
+
+      );
+         showDialog(builder: (context) => ok3, context:context);
+               
+     
+
+
+   }
+   
+  /*
   else if(numberselect==1)
      {
   final AlertDialog ok2=AlertDialog(
@@ -74,16 +221,16 @@ alignment: Alignment.center,
        ورقم الحجز الخاص بك هو $booking_number''',style: TextStyle(color: secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
     ],
   )) ,
-/*content: Container(
+content: Container(
 height: 50,
 width: 50,
 child: Text("صورة التذكره"),
-),*/
+),
       );
                
 
          showDialog(builder: (context) => ok3, context:context);
-  }
+   }*/
   }
   @override
   Widget build(BuildContext context) {
@@ -327,7 +474,7 @@ child: Column(
              ),
              SizedBox(height: 10,),
              //بيانات المسافر
-              Container(
+             Container(
                width: 390,
         height: 120,
                child: Card(
@@ -352,7 +499,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 90),
 
-       child: Text('رقم هوية المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('رقم هاتف المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -363,14 +510,14 @@ child: Column(
           Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text(booking.traveler_name,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+           child: Text(shprname,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
            )
            ),
      
          Container(
                  margin: EdgeInsets.only(right: 120),
 
-       child: Text(booking.id_number,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(shprphon_no,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
@@ -554,8 +701,8 @@ child: Column(
     onPressed: (){
    setState(() {
        myDialog(); 
-        //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب واسم المكتب وتاريخ الرحلة ومدينة الوصول والمغادرة وكذا موع الدفع 
-       s.SendBookingdata(booking.traveler_name, booking.office_name,trip_id.toString(), typepay);
+        //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
+       s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, dateday, typepay);
       });
      
     },

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
@@ -14,7 +17,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 <string>Allow access to microphone</string>
         android:requestLegacyExternalStorage="true"
         image_picker: ^0.8.5+3 */
+        // المتغيرات التي يتم حفظها
+        String shprname="";
+        String shprimage="";
+        String shprphon_no="";
        bool  create_account=false;
+       //-------------------------------//
        Insert s=Insert();
     var cname=TextEditingController();
 
@@ -34,12 +42,20 @@ class _Mycreate_accountState extends State<Mycreate_account> {
     var iD_number=TextEditingController();
   
     bool showimagebool=false;
+    //هنا المتغيرات التي تحفظ في جهاز المستخدم
         _savevalues()async{
           if(create_account==true)
      {SharedPreferences prefs=await SharedPreferences.getInstance();
         prefs.setBool("create_account", create_account)  ;
+        prefs.setString("shprname", shprname)  ;
+        prefs.setString("shprimage", shprimage)  ;
+        prefs.setString("shprimage", shprphon_no)  ;
+
+
+
      }
      }
+     //------------------------------------------------------------------------//
    /* List<String>list_gender=[
   'أنثى', 'ذكر',
   ];
@@ -50,6 +66,13 @@ class _Mycreate_accountState extends State<Mycreate_account> {
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
   String? birthyear='2000';
+  String cimage_convert="";//الصوره المحولة
+  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
+  Future convertimage(File image)async{
+    Uint8List imageBytes=await image.readAsBytes();
+    String base64string=base64.encode(imageBytes);
+    cimage_convert=base64string;
+  }
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
   {
@@ -66,6 +89,8 @@ child:
        SizedBox(height: 25,),
      ],
    );
+   //احول الصوره بهذا الدالة
+convertimage(image);
   }
   else
   {
@@ -80,6 +105,7 @@ setState(() {
   if(PickedFile!=null)
   {
     image=File(PickedFile.path);
+
      final AlertDialog adimage=AlertDialog(
 content: Container(
 height: 250,
@@ -228,7 +254,11 @@ secondappcolor,
             borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
-              ), 
+              ),
+           
+
+                            
+                            //---------------------------------//
     textCapitalization: TextCapitalization.characters,
 keyboardType: TextInputType.text,
 //استلم القيمة من المستخدم
@@ -568,6 +598,7 @@ getImage(ImageSource.camera);
        
     ),
 ),   
+
                
                 showimage(),
                //زر انشاء حساب
@@ -585,8 +616,21 @@ getImage(ImageSource.camera);
     ),
     
     onPressed: (){
-      setState(() {
-            final AlertDialog ok=AlertDialog(
+setState(() {
+  if(passwoord1.text.isEmpty||password.text.isEmpty||passwoord1.text!=password.text
+  || cname.text.isEmpty||iD_number.text.isEmpty||phone_no.text.isEmpty||image==File(''))  
+  { 
+        ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(" كلمة المرور خاطئةاو احد الحقول فارغة"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );     
+      }      
+   
+    else
+    {
+  final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
   child: Column(
@@ -619,8 +663,15 @@ textStyle:TextStyle(color:Colors.white,),
             onPressed: (){
   setState(() {
             create_account=true;
+// حفظ البيانات الخاصة بالعميل داخل جهازه من اجل ارساللها عند تاكيد عملية الحجز
+shprname=cname.text;
+shprphon_no=phone_no.text;
+shprimage=cimage_convert;
+
             _savevalues();
-            s.SendDataclient(cname,password,passwoord1,phone_no,iD_number,birthyear,image);
+      //-----------------------------------------------------------------------//
+            //ارسال البيانات الى السرفر
+            s.SendDataclient(cname,password,phone_no,iD_number,birthyear,cimage_convert);
 
   });
       // غلق نافذة الرسالة 
@@ -652,10 +703,13 @@ textStyle:TextStyle(color:Colors.white,),
       );
          showDialog(builder: (context) => ok, context:context);
                
-      
-      });      
      
-      
+
+
+
+
+   
+   } });   
     },
     child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15,color: Colors.white)),
     
