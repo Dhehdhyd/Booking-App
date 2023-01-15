@@ -16,7 +16,6 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-   bool passwordicon=true;
 Fetch f=Fetch();
 
   //const AppDrawer({Key key}) : super(key: key);
@@ -32,6 +31,7 @@ Fetch f=Fetch();
       throw 'could not lanuch $url';
     }
   }
+
   
   // الانتقال بين الصفحات
    void select_page(BuildContext ctx,int index_page)
@@ -133,6 +133,7 @@ textStyle:TextStyle(color:Colors.white,),
   //اذا الشخص قد انشاء حساب 
   else if(create_account==true)
     {
+
      setState(() {
 final AlertDialog passwordshow=AlertDialog(
 title:Container(
@@ -150,36 +151,26 @@ alignment: Alignment.center,
 
     Column(
       children: [
-         Container(
-           width: 200,
+        //حقل كلمة المرور
+       Container(
                  child: TextField(
-obscureText: passwordicon,
-   obscuringCharacter: "*", 
+
      decoration: InputDecoration(
     
          labelText:"كلمة المرور",
     
          labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
-    //هل تريد رؤية الكلمة او لا
-        suffixIcon: IconButton(
-         onPressed:(){setState(() {
-                     if( passwordicon)
-                 { passwordicon=false;}
-                     else{passwordicon=true;}
-                      
-                    });
-                    },icon:Icon(passwordicon?Icons.visibility:Icons.visibility_off,color:secondappcolor,),
-                    ),
+   
                   
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor)
+            borderSide: BorderSide(width: 2,color:fristappcolor )
     ),
     
               ), 
     
-keyboardType: TextInputType.visiblePassword,
+keyboardType: TextInputType.text,
 
 controller:passwordforupdate,
      ),
@@ -201,6 +192,7 @@ controller:passwordforupdate,
       child: Center(child: Text("تحقق",style: TextStyle(color: Colors.white),)),
       onPressed: (){
   setState(() {
+   
     // استدعي دالة جلب بيانات العميل مع ارسال كلمة المرور المدخله اذا الكلمة صحيحة استرجعها لو خطا اظهر رسالة
 if( f.fetchclient(passwordforupdate.text)==true)
 {

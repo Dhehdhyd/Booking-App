@@ -165,8 +165,8 @@ setState(() {
             } 
   @override
   Widget build(BuildContext context) {
-   //اجعل امتغير الصوره يحول الصوره السابقة
-    image=File('$imagee');        
+   //اجعل امتغير الصوره يحوي الصوره السابقة
+   image=File('$imagee');        
 
     return 
     Scaffold(
@@ -365,7 +365,7 @@ controller:phone_no,
      decoration: InputDecoration(
     
  
-     labelText: client.iD_number_model,
+     labelText:client.iD_number_model,
     labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
       
          prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
@@ -391,7 +391,7 @@ obscureText: passwordicon,
    obscuringCharacter: "*", 
      decoration: InputDecoration(
     
-         labelText:"أدخل كلمة المرور السابقة لتاكيد",
+         labelText:client.password_model,
     
          labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     //هل تريد رؤية الكلمة او لا
@@ -569,16 +569,71 @@ s.ModiflyDataclient(name,password,phone_no,iD_number,birthyear,mimage_convert,cl
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
-  child: Text("تم تعديل الحساب بنجاح",style: TextStyle(color: secondappcolor,fontSize: 20,fontWeight: FontWeight.bold),)) ,
-content: Container(
-height: 50,
-child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
+  child: Column(
+    children: [
+      Text("تم تعديل الحساب بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+     Container(
+    
+    height: 50,
+    
+    child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
+    
+    
+    
+    ),
+    SizedBox(height: 8,),
+    Center(
+      child: Container(
+            width: 100,
+          height: 35,
+          child: ElevatedButton(
+       style: ElevatedButton.styleFrom(
+        primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+         shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0)
+      ),
+      ),
+            child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
+            onPressed: (){
+  setState(() {
 
+
+  });
+      // غلق نافذة الرسالة 
+   Navigator.of(context, rootNavigator: true).pop('ok');         
+
+//الانتقال الى الصفحة الرئسية
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (_){
+      
+        
+ return  MyHomePage();
+
+
+}
 ),
+    );
+          
+
+            },
+          ),
+          ),
+    ), ],
+  )
+  ) ,
+
+  
+
+       
+
       );
+         showDialog(builder: (context) => ok, context:context);
+     
                
    
-         showDialog(builder: (context) => ok, context:context);
+       
         }// رسالة الخطا
     },
     child: Text(' حفظ التعديلات ',style: TextStyle(fontSize: 15,color: lightcolor)),

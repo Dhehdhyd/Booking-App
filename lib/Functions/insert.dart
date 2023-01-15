@@ -10,6 +10,7 @@ final String apiKey='5437535434789096';
     //حقول json البرتقالي الابيض قيم الحقول الموجوده في تطبيق
   body:{"name":name.text,"password":password.text,"phone_no":phone_no.text,"iD_number":iD_number.text,"iD_number":iD_number.text,"birthyear":birthyear.toString(),"image":image},
   );
+  //اطبع الرد في نافذة الرد
    return response;
 
     }

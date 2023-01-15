@@ -101,7 +101,7 @@ class MyApp extends StatelessWidget {
   String? selectedItem1='اب';
   String selectedDate=selectedDate1.toString();
   int filter_trips=0;
-  var card=AppCard();
+ var card=AppCard();
 
 class MyHomePage extends StatefulWidget {
 
