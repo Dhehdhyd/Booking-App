@@ -270,7 +270,7 @@ SizedBox(height: 20),
    
      ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-         content: Text("سيتم اضافة بعض الاعدادات في التحديثات السابقة"),
+         content: Text("سيتم اضافة بعض الاعدادات في التحديثات القادمة"),
          behavior: SnackBarBehavior.floating,
        )
      );
