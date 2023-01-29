@@ -14,30 +14,40 @@ Booking booking=Booking();
 Data_confirmation data_confirmation=Data_confirmation();
 String trip_date="";
 String massage_error="";
+     List tripslist=[];
 
 class Fetch
 {
   //دالة جلب الرحلات من السرفر
-final String apiKey='5437535434789096';
 
- fetchTrips() async{
+
+ Future fetchTrips() async{
   try{
-    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
+    var response=await http.get(Uri.parse('http://34.133.61.239:8080/trips'));
+
+
+    
+
+   
+    
     if(response.statusCode==200)
-    {
-      var jsonData=json.decode(response.body);
-  
-      Trips trips=Trips.fromJson(jsonData);
-      List <Trip>tripslist=trips.trips.map((e)=>Trip.fromJson(e)).toList();
+    {Trip t=Trip();
+    
+       tripslist.addAll(json.decode(response.body));
+//for(var item in tripslist){
+  //Trip.fromJson(item);
+//}
+  // tripslist=jsonData.map((e)=>Trip.fromJson(e)).toList();
       
-      return  tripslist;
+      return tripslist;
+
     }
 else
 {
   //لو اريد الطبع رسالة الخط ابحث عن اداة حاليا هذا لي فقط
   massage_error='اطبع لوحصل مشكلة= ${response.statusCode}';
-}
-  }
+} 
+ }
   catch(Exc){
  massage_error=Exc.toString();
     
@@ -48,7 +58,7 @@ else
 //--------------------------------------------دالة جلب بيانات العميل من اجل التعديل-------------------------------//
 fetchclient(String passwordforupdate) async{
   try{
-    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg/$passwordforupdate'));
+    http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/users/$passwordforupdate'));
     if(response.statusCode==200)
     {
       var jsonData=json.decode(response.body);
@@ -79,14 +89,14 @@ else
 //-------------------------------------------  دالة جلب بيانات الحجز لصفحة تاكيد الحجز حسب رقم الرحلة  -------------------------------//
 fetchbooking(int id) async{
   try{
-    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg/$id'));
+    http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/trips/$id'));
     if(response.statusCode==200)
     {
       var jsonData=json.decode(response.body);
   
   booking=Booking.fromJson(jsonData);
       
-      
+      return booking;
       
     }
 
@@ -99,27 +109,6 @@ fetchbooking(int id) async{
 }
 //--------------------------------------------------------------------------------------//
 
-//--------------------------------------------دالة جلب بيانات التأكيد-------------------------------//
-fetchdata_confirmation() async{
-  try{
-    http.Response response=await http.get(Uri.parse('https://newsapi.org/h/jjj=jjj?hg&apiKey=$apiKey'));
-    if(response.statusCode==200)
-    {
-      var jsonData=json.decode(response.body);
-  
-  data_confirmation=Data_confirmation.fromJson(jsonData);
-      
-      
-      
-    }
-
-  }
-  catch(Exc){
-    print(Exc);
-  }
-  
-
-}
 //-----------------------------------------------دالة فلترة الرحلات---------------------------------------//
 change(String date)
 {
@@ -128,77 +117,81 @@ change(String date)
  String Day=formatDate(DateTime.parse(date),[D]);
  //نحول الاختصارات الى الايام الانه ترسل من المكتب ايام
  if(Day=='Sat')
- Day=='السبت';
+ Day='السبت';
  else if(Day=='Sun')
-Day=='الأحد';
+Day='الاحد';
  else if(Day=='Mon')
-Day=='الأثنين';
- else if(Day=='Tues')
-Day=='الثلاثاء';
+Day='الأثنين';
+ else if(Day=='Tue')
+Day='الثلاثاء';
  else if(Day=='Wed')
-Day=='الأربعاء';
- else if(Day=='Thurs')
-Day=='الخميس';
+Day='الأربعاء';
+ else if(Day=='Thur')
+Day='الخميس';
  else if(Day=='Fri')
-Day=='الجمعة';
+Day='الجمعة';
 return Day;
 }
 // الرحلات المفلترة باستخدام حقل الزيادة والنقصان او تاريخ اليوم الماخوذ من نفس الحقل
-List trips_inc_and_dec_date=[]; 
+List<dynamic> trips_inc_and_dec_date=[]; 
 //رحلات اليوم
-List trips_date_now=[]; 
+List<dynamic> trips_date_now=[]; 
 //الرحلات المفلترة باستخدام زر البحث
-List trips_search_button=[]; 
-
-int counter_trips=0;
-checktrip(int filter){
-List listtrips=fetchTrips();
-//قد يكون تاريخ اليوم ,التاريخ في حقل الزيادة والنقصان
-String Dateday=year.toString() +"/"+mounth.toString()+"/"+day.toString();
-//مايتم الفلتره على اساسه تاريخ الرحلة ومدينة الوصول ومدينة المغادرة
+List<dynamic> trips_search_button=[]; 
+List<dynamic> filtertrips2=[];
+ 
 String select_date=selectedDate;
 String ?from_city=selectedItem;
 String ?to_city=selectedItem1;
 
+String h=tripslist.length.toString();
+Future checktrip(int filter)async{
+List<dynamic> filtertrips=await fetchTrips();
+//قد يكون تاريخ اليوم ,التاريخ في حقل الزيادة والنقصان
+String Dateday=years+mounths+days;
+//مايتم الفلتره على اساسه تاريخ الرحلة ومدينة الوصول ومدينة المغادرة
+
+
+
 //يساوي التاريخ الحالي 
 
   //نضيف الرحلات التي في نفس التاريخ الى قائمة
-  for(var trip in listtrips)
- { if(trip.trip_day==change(Dateday))
+ for(int i=0;i<filtertrips.length;i++)
+  
+ { if(filtertrips[i]['trip_day']==change(Dateday))
   {
-    trips_inc_and_dec_date[counter_trips]=trip;
-counter_trips++;
-  }
+    trips_inc_and_dec_date.add(filtertrips);
 
+  }
  }
- counter_trips=0;
+
+
  //تاريخ اليوم بدون مايضفط على اي زر اول مايشتغل التطبيق
- for(var trip in listtrips)
- { if(trip.trip_day==change(Dateday))
+ for(int i=0;i<filtertrips.length;i++)
+ { if(filtertrips[i]['trip_day']==change(Dateday))
   {
-    trips_date_now[counter_trips]=trip;
-counter_trips++;
+    trips_date_now.add(filtertrips[i]);
   }
 
  }
- counter_trips=0;
  //نضيف الرحلات التي في نفس التاريخ وكذا في نفس مدينة الوصول والمغادرة
-  for(var trip in listtrips)
- { if(trip.trip_day==change(select_date)&&trip.to_city==to_city&&trip.from_city==from_city)
+ for(int i=0;i<filtertrips.length;i++)
+
+ { if(filtertrips[i]['trip_day']==change(select_date)&&filtertrips[i]['attendance_time']==to_city&&filtertrips[i]['departure_time']==from_city)
   {
     
-    trips_search_button[counter_trips]=trip;
-counter_trips++;
+    trips_search_button.add(filtertrips[i]);
+
   }
 
  }
- counter_trips=0;
+
 if(filter==1)
 {
 //تاريخ الرحلة
   trip_date=Dateday;
-return trips_inc_and_dec_date;
-
+filtertrips2.addAll(trips_inc_and_dec_date);
+filtertrips=filtertrips[2]['trip_day'];
 }
 else if(filter==2)
 {
@@ -206,7 +199,7 @@ else if(filter==2)
 
   trip_date=select_date;
 
-return trips_search_button;
+filtertrips2.addAll(trips_search_button);
 
 }
 else if(filter==0)
@@ -215,9 +208,10 @@ else if(filter==0)
 
   trip_date=Dateday;
 
-return trips_date_now;
+filtertrips2.addAll(trips_date_now);
 
 }
+return filtertrips;
 }
 
 }

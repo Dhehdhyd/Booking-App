@@ -13,23 +13,32 @@ class Counter_date extends StatefulWidget {
 
 
  int day=16;
-  int mounth=9;
+  int mounth=09;
   int year=2022;
+  List s1=[];
+  List<String> s=[''];
+String mounths="";
+  String days="";
+  String years="";
+
 class _Counter_dateState extends State<Counter_date> {
 List<String> s=[''];
  _Counter_dateState(){ 
    //التاريخ حق اليوم ثم يجزئه
-   s="${DateFormat.yMd().format(DateTime.now())}".split('/');
-  String days=s[1];
+ s1= DateTime.now().toString().split(' ');
+   s="${s1[0]}".split('-');
+   days=s[2];
    day= int.parse(days);
-     String mounths=s[0];
+          mounths=s[1];
+
    mounth= int.parse(mounths);
-     String years=s[2];
+    years=s[0];
    year= int.parse(years);
  }
 
  
   inc(){
+
     if(mounth==4||mounth==6||mounth==9||mounth==11)
     {
       if(day<30)
@@ -204,7 +213,18 @@ textStyle:TextStyle(color:Colors.white,),
     
     onPressed:(){setState(() {
               dec();
+                if(mounth==1||mounth==2||mounth==3||mounth==4||mounth==5||mounth==6||mounth==7||mounth==8||mounth==9)
+{mounths="0"+mounth.toString();}
+else
+{mounths=mounth.toString();}
+  if(day==1||day==2||day==3||day==4||day==5||day==6||day==7||day==8||day==9)
+{days="0"+day.toString();}
+else
+{days=day.toString();}
+years=year.toString();
     filter_trips=1;
+          card={} as AppCard;
+
           card=AppCard();
         });
    
@@ -229,8 +249,19 @@ textStyle:TextStyle(color:Colors.white,),
     
     onPressed:(){setState(() {
           inc();
+           if(mounth==1||mounth==2||mounth==3||mounth==4||mounth==5||mounth==6||mounth==7||mounth==8||mounth==9)
+{mounths="0"+mounth.toString();}
+else
+{mounths=mounth.toString();}
+  if(day==1||day==2||day==3||day==4||day==5||day==6||day==7||day==8||day==9)
+{days="0"+day.toString();}
+else
+{days=day.toString();}
+years=year.toString();
 
     filter_trips=1;
+          card={} as AppCard;
+
           card=AppCard();
         });
       

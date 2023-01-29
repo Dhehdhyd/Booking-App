@@ -10,13 +10,7 @@ import 'dart:io';
 import '../screens/settings.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
 import 'package:shared_preferences/shared_preferences.dart';
-/*
-<key>NSPhotoLibraryUsageDescription</key>
-<string>Allow this app to access your photos</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>Allow access to microphone</string>
-        android:requestLegacyExternalStorage="true"
-        image_picker: ^0.8.5+3 */
+
         // المتغيرات التي يتم حفظها
         String shprname="";
         String shprimage="";
@@ -56,10 +50,7 @@ class _Mycreate_accountState extends State<Mycreate_account> {
      }
      }
      //------------------------------------------------------------------------//
-   /* List<String>list_gender=[
-  'أنثى', 'ذكر',
-  ];
-  String? selectedItem='ذكر';*/
+
     List<String>list_Date=[
   '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
@@ -266,41 +257,13 @@ controller:cname ,
      ),
                ),
               SizedBox(height: 25,),
- // الجنس والتاريخ قائمة خيارات             
+ //  والتاريخ قائمة خيارات             
 Container(
   
  
   child: Row(
     children: [
-     /* SizedBox(width: 2,),
-      Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
-      SizedBox(width: 2,),
-      Container( 
-          height: 70,
-  width: 80,
- // margin: EdgeInsets.only(left:200.0),
-          child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor )
-            )
-          ),
-                  isExpanded: true,
-                  value:selectedItem,
-                  onChanged: (newValue){
-                    setState(() {
-                              selectedItem = newValue;
-                            });
-                  },
-                  items: list_gender.map((item)=> DropdownMenuItem(
-          value:item,
-          child: Text(item),
-) 
-                  ).toList(),
-                ),
-      ),
-       */
+   
      SizedBox(width: 15,),
       Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
@@ -334,34 +297,7 @@ Container(
     ],
   ),
     ),
-    /*
-               SizedBox(height: 25,),
-            
-               //حقل المدينة
-               Container(
-                 child: TextFormField(
-    
-     decoration: InputDecoration(
-    
-         labelText:"المدينة التي تسكن فيها",
-    
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    
-         prefixIcon: Icon(Icons.location_city_rounded,color: secondappcolor,),
-    
-    enabledBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor )
-    ),
-    
-              ), 
-    
-keyboardType: TextInputType.text,
-
-//controller:city ,
-     ),
-               ),
-     SizedBox(height: 25,),*/
+  
      //رقم الهاتف
                Container(
                  child: TextField(
@@ -662,7 +598,7 @@ textStyle:TextStyle(color:Colors.white,),
             child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
             onPressed: (){
   setState(() {
-            create_account=true;
+            create_account=false;
 // حفظ البيانات الخاصة بالعميل داخل جهازه من اجل ارساللها عند تاكيد عملية الحجز
 shprname=cname.text;
 shprphon_no=phone_no.text;

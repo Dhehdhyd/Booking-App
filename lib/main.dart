@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
-import 'package:splashscreen/splashscreen.dart';//صفحة التحميل
 import '../screens/start_page.dart';
 import '../screens/create_an_account_page.dart';
-import '../screens/about_the_application.dart';
-import '../screens/help_and_support.dart';
-import '../screens/modifly_my_account_data.dart';
-import '../screens/create_an_account_traveler.dart';
-import '../screens/trip_details_page.dart';
 import '../screens/settings.dart';
 import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
 import '../class_tools/counter_date_main.dart';
-import '../class_tools/app_BottomNavigationBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Functions/fetch.dart';
+
 ThemeMode tm=ThemeMode.light;
 bool darkMode=false;
+
+Fetch f=Fetch();
+
 
 void main()async{
   //عندما ينشاء حساب تتسجل بيانات العميل اي انه قد انشاء حساب فيتم ارجاع قيمة متغير الانشاء لكي لا اسمح له بانشاء حساب جديد
@@ -34,6 +33,7 @@ WidgetsFlutterBinding.ensureInitialized();
 
       
     }
+    
   
  return runApp(mystartpage());
 
@@ -82,13 +82,7 @@ class MyApp extends StatelessWidget {
        initialRoute: '/',
       routes: {
         '/': (context) =>MyHomePage() ,
-         '/help_and_support': (context) =>Help_and_support() ,
-               '/mycreate_account': (context) =>Mycreate_account() ,
-                           '/create_account': (context) =>Create_account() ,
-                                 '/modifly_my_account_data ': (context) =>Modifly_my_account_data () ,
-                                       '/settingpage': (context) =>Settingpage() ,
-                                       '/about_the_application': (context) =>About_the_application() ,
-                                       '/trip_details_page': (context) =>Trip_details_page() ,
+        
                                       
 
                                        
@@ -97,8 +91,8 @@ class MyApp extends StatelessWidget {
   }
 }
   DateTime selectedDate1=DateTime.now();
-   String? selectedItem='صنعاء';
-  String? selectedItem1='اب';
+   String? selectedItem='تعز';
+  String? selectedItem1='عدن';
   String selectedDate=selectedDate1.toString();
   int filter_trips=0;
  var card=AppCard();
@@ -118,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   List<String>list_city=[
-  'عدن', 'صنعاء', 'اب', 'جدة', 'رياض',
+'تعز','عدن', 'صنعاء', 'اب', 'جدة', 'رياض',
   ];
  
   //عرض التاريخ
@@ -142,6 +136,8 @@ selectedDate1=date;
               
             });});
             }
+
+            
   @override
   
   Widget build(BuildContext context) {
@@ -304,7 +300,18 @@ textStyle:TextStyle(color:Colors.white,),
       setState(() {
         //يتم عرض الرحلات التي تم البحث عنها حيث يتغير قيمة متغير الفلتره ثم يتغير قيمة متغير الرحلات
           filter_trips=2;
+          card={} as AppCard;
           card=AppCard();
+        /* f.checktrip(1).then((Value){
+       ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(Value[0]['trip_day'].toString()),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+         }   
+         );*/
+        
         });
     }
     ,

@@ -6,7 +6,7 @@ class Trip {
   String logo_image;
   String trip_day;
    String office_name;
-   double ticket_price;
+   String ticket_price;
    String status;
    String attendance_time;
    String waiting_time;
@@ -15,7 +15,7 @@ class Trip {
     String? departure_city;
    String ?arrival_city;
    Trip({this.logo_image="",
-   this.ticket_price=1,
+   this.ticket_price="",
    this.trip_id=1,
    this.office_name="",
    this.attendance_time="",
@@ -31,18 +31,19 @@ class Trip {
          factory Trip.fromJson(Map<String,dynamic>jsonDate)
          {
            return Trip(
-              trip_id:jsonDate['trip_id'] , 
-             logo_image:jsonDate['logo_image'] , 
-             office_name:jsonDate['office_name'],  
-             attendance_time:jsonDate['attendance_time'],  
-             bus_type:jsonDate['bus_type'],  
-             departure_city:jsonDate['departure_city'],  
-             ticket_price:jsonDate['ticket_price'],  
-             departure_time:jsonDate['departure_time'],  
-             arrival_city:jsonDate['arrival_city'],  
-             trip_day:jsonDate['trip_day'],  
-             status:jsonDate['status'],  
-             waiting_time:jsonDate['waiting_time']);
+              trip_id:jsonDate['trip_id'] as int, 
+             logo_image:jsonDate['logo_image']as String , 
+             office_name:jsonDate['office_name']as String,  
+             attendance_time:jsonDate['attendance_time']as String,  
+             bus_type:jsonDate['bus_type']as String,  
+             departure_city:jsonDate['departure_city'] as String?,  
+             ticket_price:jsonDate['ticket_price'] as String,  
+             departure_time:jsonDate['departure_time']as String,  
+             arrival_city:jsonDate['arrival_city'] as String?,  
+             trip_day:jsonDate['trip_day']as String,  
+             status:jsonDate['status']as String,  
+             waiting_time:jsonDate['waiting_time']as String
+             );
          }
 
  
