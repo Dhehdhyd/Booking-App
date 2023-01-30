@@ -31,7 +31,7 @@ class Fetch
    
     
     if(response.statusCode==200)
-    {Trip t=Trip();
+    {
     
        tripslist.addAll(json.decode(response.body));
 //for(var item in tripslist){
@@ -56,7 +56,7 @@ else
 
 }
 //--------------------------------------------دالة جلب بيانات العميل من اجل التعديل-------------------------------//
-fetchclient(String passwordforupdate) async{
+ fetchclient(String passwordforupdate) async{
   try{
     http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/users/$passwordforupdate'));
     if(response.statusCode==200)
@@ -89,7 +89,7 @@ else
 //-------------------------------------------  دالة جلب بيانات الحجز لصفحة تاكيد الحجز حسب رقم الرحلة  -------------------------------//
 fetchbooking(int id) async{
   try{
-    http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/trips/$id'));
+    http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/trips/id=$id'));
     if(response.statusCode==200)
     {
       var jsonData=json.decode(response.body);
@@ -140,44 +140,69 @@ List<dynamic> trips_date_now=[];
 List<dynamic> trips_search_button=[]; 
 List<dynamic> filtertrips2=[];
  
-String select_date=selectedDate;
-String ?from_city=selectedItem;
-String ?to_city=selectedItem1;
-
-String h=tripslist.length.toString();
-Future checktrip(int filter)async{
-List<dynamic> filtertrips=await fetchTrips();
 //قد يكون تاريخ اليوم ,التاريخ في حقل الزيادة والنقصان
-String Dateday=years+mounths+days;
 //مايتم الفلتره على اساسه تاريخ الرحلة ومدينة الوصول ومدينة المغادرة
 
+String select_date=datetrip;
+String ?from_city=selectedItem;
+String ?to_city=selectedItem1;
+String Dateday=years+mounths+days;
+
+String h=tripslist.length.toString();
+String h1=tripslist.length.toString();
+
+Future checktrip(int filter)async{
+
+List<dynamic> filtertrips=await fetchTrips();
 
 
+if(filter==1)
+{
+//تاريخ الرحلة
 //يساوي التاريخ الحالي 
 
   //نضيف الرحلات التي في نفس التاريخ الى قائمة
  for(int i=0;i<filtertrips.length;i++)
   
- { if(filtertrips[i]['trip_day']==change(Dateday))
+ { if(change(Dateday)==filtertrips[i]['trip_day'])
   {
-    trips_inc_and_dec_date.add(filtertrips);
+    trips_inc_and_dec_date.add(filtertrips[i]);
 
   }
  }
+ trip_date=Dateday;
+filtertrips2.addAll(trips_inc_and_dec_date);
+//h=filtertrips[0]['trip_day'];
+//h1=filtertrips2[0]['trip_day'];
 
+}
+ 
+else if(filter==0)
+{
+  //تاريخ الرحلة
 
  //تاريخ اليوم بدون مايضفط على اي زر اول مايشتغل التطبيق
  for(int i=0;i<filtertrips.length;i++)
- { if(filtertrips[i]['trip_day']==change(Dateday))
+ { if(filtertrips[i]['trip_day']=='السبت')//change(Dateday))
   {
     trips_date_now.add(filtertrips[i]);
   }
 
  }
+  //تاريخ الرحلة
+
+  trip_date=Dateday;
+
+filtertrips2.addAll(trips_date_now);
+
+}
+else if(filter==2)
+{
+ 
  //نضيف الرحلات التي في نفس التاريخ وكذا في نفس مدينة الوصول والمغادرة
  for(int i=0;i<filtertrips.length;i++)
 
- { if(filtertrips[i]['trip_day']==change(select_date)&&filtertrips[i]['attendance_time']==to_city&&filtertrips[i]['departure_time']==from_city)
+ { if(filtertrips[i]['trip_day']==change(select_date)&&filtertrips[i]['arrival_city']==to_city.toString()&&filtertrips[i]['departure_city']==from_city.toString())
   {
     
     trips_search_button.add(filtertrips[i]);
@@ -186,32 +211,17 @@ String Dateday=years+mounths+days;
 
  }
 
-if(filter==1)
-{
-//تاريخ الرحلة
-  trip_date=Dateday;
-filtertrips2.addAll(trips_inc_and_dec_date);
-filtertrips=filtertrips[2]['trip_day'];
-}
-else if(filter==2)
-{
-  //تاريخ الرحلة
+
 
   trip_date=select_date;
+
+
 
 filtertrips2.addAll(trips_search_button);
 
 }
-else if(filter==0)
-{
-  //تاريخ الرحلة
 
-  trip_date=Dateday;
-
-filtertrips2.addAll(trips_date_now);
-
-}
-return filtertrips;
+return filtertrips2;
 }
 
 }

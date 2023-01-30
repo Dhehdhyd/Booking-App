@@ -62,7 +62,7 @@ Container(
   
   SizedBox(width: 8,),
   
-              Text(" شركة البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+              Text(" مكتب البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
             ],
   
@@ -70,7 +70,7 @@ Container(
   
   
           onTap: (){        
-  launch('tel:+967777190123');
+  launch('tel:+967 770066616');
   
           },
   
@@ -88,7 +88,7 @@ Container(
   
   SizedBox(width: 8,),
   
-              Text("شركة ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+              Text("مكتب ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
             ],
   
@@ -96,7 +96,7 @@ Container(
   
   
           onTap: (){        
-  launch('tel:+967777190123');
+  launch('tel:+967 7774880893');
   
           },
   
@@ -123,7 +123,7 @@ Container(
   
   
           onTap: (){        
-  launch('tel:+967777190123');
+  launch('tel:+967 774205096');
   
           },
   
@@ -151,7 +151,7 @@ Container(
   
   SizedBox(width: 14,),
   
-            Text(" شركة البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+            Text(" مكتب البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
           ],
   
@@ -159,7 +159,7 @@ Container(
   
   
         onTap: (){        
-  launchWhatsapp(number: "+967777123456",message: "hello");
+  launchWhatsapp(number: "+967 770066616",message: "hello");
   
         },
   
@@ -176,7 +176,7 @@ Container(
   
   SizedBox(width: 14,),
   
-            Text(" شركة ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+            Text(" مكتب ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
   
           ],
   
@@ -184,7 +184,7 @@ Container(
   
   
         onTap: (){        
-  launchWhatsapp(number: "+967777123456",message: "hello");
+  launchWhatsapp(number: "++967 7774880893",message: "hello");
   
         },
   
@@ -209,7 +209,7 @@ Container(
   
   
         onTap: (){        
-  launchWhatsapp(number: "+967777123456",message: "hello");
+  launchWhatsapp(number: "+967 779746008 ",message: "hello");
   
         },
   

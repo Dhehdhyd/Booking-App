@@ -306,8 +306,7 @@ return          Card(
                  height: 40,
 
                  alignment: Alignment.topLeft,
-
-                 child: Image.memory(base64Decode(base64Encode(tripss[index]['logo_image']['data'].cast<int>())),alignment: Alignment.center,fit: BoxFit.fill,)
+                 child: Image.memory(base64Decode(String.fromCharCodes( tripss[index]['logo_image']['data'].cast<int>())),alignment: Alignment.center,fit: BoxFit.fill,)
 
                  ),
 
@@ -433,7 +432,7 @@ return          Card(
 
 
 
-                   child: Text("ساعات الانتظار ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("مدة الانتظار ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
 
           ),
 
@@ -459,7 +458,20 @@ return          Card(
 
                  ),
 
-             
+               Container(
+
+                 margin: EdgeInsets.only(right: 10),
+
+
+
+                   child: Text("دقيقة",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+
+          ),
+
+          ),
+
+                 ),
+
 
                     ],
 

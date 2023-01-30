@@ -23,6 +23,12 @@ String mounths="";
 
 class _Counter_dateState extends State<Counter_date> {
 List<String> s=[''];
+//تحديث التاريخ بعد الزيادة او النقصان
+ update(dayss,mounthss,yearss){
+      setState(() {
+ f.Dateday=yearss+mounthss+dayss;
+      });
+}
  _Counter_dateState(){ 
    //التاريخ حق اليوم ثم يجزئه
  s1= DateTime.now().toString().split(' ');
@@ -222,10 +228,12 @@ else
 else
 {days=day.toString();}
 years=year.toString();
+update(days,mounths,years);
     filter_trips=1;
-          card={} as AppCard;
 
           card=AppCard();
+         // card={} as AppCard;
+
         });
    
     },
@@ -234,7 +242,7 @@ years=year.toString();
     
     ),
          
-    Text(day.toString()+" - "+mounth.toString()+" - "+year.toString()
+    Text(days+" - "+mounths+" - "+years
     ,style: TextStyle(fontSize: 15,color: thridtextcolor,fontFamily: 'Lobster')),
           ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -260,7 +268,9 @@ else
 years=year.toString();
 
     filter_trips=1;
-          card={} as AppCard;
+update(days,mounths,years);
+
+         // card={} as AppCard;
 
           card=AppCard();
         });

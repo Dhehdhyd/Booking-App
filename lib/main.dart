@@ -90,10 +90,20 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+  
+
   DateTime selectedDate1=DateTime.now();
    String? selectedItem='تعز';
   String? selectedItem1='عدن';
+
+
+
   String selectedDate=selectedDate1.toString();
+    List<String> s=selectedDate.split(' ');
+  String datetrip=s[0];
+ 
+              
+              
   int filter_trips=0;
  var card=AppCard();
 
@@ -112,12 +122,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   List<String>list_city=[
-'تعز','عدن', 'صنعاء', 'اب', 'جدة', 'رياض',
+'تعز','عدن', 'صنعاء', 'اب', 'جدة', 'الرياض',
+'رداع','البيضاء', 'الحديدة', 'العبر', 'مارب', 'الطائف',
+'لحج','حضرموت', 'ابين', 'المكلا', 'شبوة', 'ذمار',
+'الجوف','حجة', 'المحويت', 'الضالع', 'صعدة', 'ريمه',
+'يريم','زنجبار', 'بن عيفان', 'سيئون', 'عمران', 'المهرة',
+'وادي الدواسر','شرورة', 'الوديعة', 'تريم', 'دوعن', 'مكة',
+'رنية','يافع', 'زبيد', 'محايل عسير', 'المدينة المنورة', 'الدمام',
+'ابها','خميس مشيط', 'بيشة', 'بريدة', 'حفر الباطن', 'الخرمة',
+'باجل','القاعدة', 'جازان', 'نجران', 'صيبا', 'الدرب',
+'الافراج','الخرج', 'مويه', 'بيت الفقية', 'الجراحي', 'الحسينية',
+'معبر','الرويك', 'المنصورية', 'ظهران الجنوب', 'القطن', 'شبام',
+'عزان','الحزم',
   ];
- 
+ //تحديث البيانات عند النقر على الخيارات
+ update(selectedDate,selectedItem,selectedItem1){
+      setState(() {
+  f.select_date=selectedDate;
+f.from_city=selectedItem;
+f.to_city=selectedItem1;
+      });
+}
   //عرض التاريخ
-  List<String> s=[''];
-  String datetrip="تاريخ الرحلة";
   void date_picker()
   {
     showDatePicker(
@@ -133,7 +159,7 @@ selectedDate1=date;
               selectedDate=date.toString();
               s=selectedDate.split(' ');
               datetrip=s[0];
-              
+              update(datetrip,selectedItem,selectedItem1);
             });});
             }
 
@@ -207,6 +233,7 @@ Container(
           onChanged: (newValue){
             setState(() {
                       selectedItem = newValue;
+                      update(datetrip,selectedItem,selectedItem1);
                     });
           },
           items: list_city.map((item)=> DropdownMenuItem(
@@ -250,6 +277,8 @@ Container(
           onChanged: (newValue){
             setState(() {
                       selectedItem1 = newValue;
+                      update(datetrip,selectedItem,selectedItem1);
+
                     });
           },
           items: list_city.map((item)=> DropdownMenuItem(
@@ -300,17 +329,29 @@ textStyle:TextStyle(color:Colors.white,),
       setState(() {
         //يتم عرض الرحلات التي تم البحث عنها حيث يتغير قيمة متغير الفلتره ثم يتغير قيمة متغير الرحلات
           filter_trips=2;
-          card={} as AppCard;
           card=AppCard();
-        /* f.checktrip(1).then((Value){
+
+       f.checktrip(1).then((Value){
        ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-         content: Text(Value[0]['trip_day'].toString()),
+         content: Text(Value[0]['trip_id'].toString()),
          behavior: SnackBarBehavior.floating,
        )
      );
-         }   
-         );*/
+     }
+     );   f.checktrip(2).then((Value){
+       ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(Value[0]['trip_id'].toString()),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+     }
+     );
+
+         //card={} as AppCard;
+
+         
         
         });
     }
