@@ -1,36 +1,39 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
 import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
+import '../class_tools/app_drawer.dart';
 import '../main.dart';
 import 'dart:io';
 import '../screens/settings.dart';
-import 'package:image_picker/image_picker.dart';//حق الصور 
+import 'package:image_picker/image_picker.dart';
 
+import 'create_an_account_page.dart';//حق الصور 
+String mcnameimage="";
+    String mctypeimage="";
 class Modifly_my_account_data extends StatefulWidget {
   @override
   _Modifly_my_account_data createState() => _Modifly_my_account_data();
 }
-
+ int birthyearsend=client[0]['birthdate'];
+ 
+String? birthyear=birthyearsend.toString();
 class _Modifly_my_account_data extends State<Modifly_my_account_data> {
-   String imagee=base64Decode(client.image_model).toString();
+
+   String imagee=base64Decode(String.fromCharCodes( client[0]['identity_image'].cast<int>())).toString();
     final picker=ImagePicker();
     bool passwordicon=true;
-    String mimage_convert="";//الصوره المحولة
-  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
-  Future convertimage(File image)async{
-    Uint8List imageBytes=await image.readAsBytes();
-    String base64string=base64.encode(imageBytes);
-    mimage_convert=base64string;
-  }
-       Insert s=Insert();
-    
+     Insert s=Insert();
+    String mcsendpassword="";
+        String mcsendiD_number="";
+         int mcsendbirthyear=2000;
 File image=File('');    
     var name=TextEditingController();
-   //var city=TextEditingController();
+
     var password=TextEditingController();
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
@@ -44,8 +47,47 @@ File image=File('');
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
-  String? birthyear=client.birthyear_model;
 
+ 
+    String mimage_convert="";//الصوره المحولة
+  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
+  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
+bool oksaveimage=false;
+  
+  Future convertimage(File image,String path)async{
+//ضغط الصورة
+   var result = await FlutterImageCompress.compressAndGetFile(
+        image.absolute.path, path,
+        quality: 40,
+
+      );
+
+     
+    List<int> imageBytes=await result!.readAsBytes();
+       setState(() {
+        
+    String base64string=base64.encode(imageBytes.cast<int>());
+   
+    mimage_convert=base64string;
+      oksaveimage=true;    
+        });
+  }
+  //دالة استخراج نوع الصوره واسمها
+  nameimageandtypy(File image)
+  {
+    setState(() {
+         String path=image.path.toString();
+    List<String>part_path=path.split('/');
+    String name_type=part_path.last;
+    List<String>part_name_type=name_type.split('.');
+     mcnameimage=part_name_type[0];
+     mctypeimage=part_name_type[1];   
+        });
+  
+
+
+
+  }
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
   {
@@ -62,6 +104,7 @@ child:
        SizedBox(height: 25,),
      ],
    );
+
   }
   else
   {
@@ -111,6 +154,10 @@ child:
    
 setState(() {
   showimagebool=true;
+        //احول الصوره بهذا الدالة
+convertimage(image,image.path.toString());
+nameimageandtypy(image);
+
   
 });
  
@@ -128,7 +175,7 @@ setState(() {
     child: ElevatedButton(
      style: ElevatedButton.styleFrom(
       primary: secondappcolor,
- 
+
 
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
@@ -217,7 +264,7 @@ gradient: LinearGradient(colors: [
      decoration: InputDecoration(
     
          
-    labelText: client.name_model,
+    labelText: client[0]['name'],
     labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
          
     
@@ -242,35 +289,7 @@ Container(
  
  child: Row(
     children: [
-     /* SizedBox(width: 2,),
-      Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
-      SizedBox(width: 2,),
-      Container( 
-          height: 70,
-  width: 80,
- // margin: EdgeInsets.only(left:200.0),
-          child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor )
-            )
-          ),
-                  isExpanded: true,
-                  value:selectedItem,
-                  onChanged: (newValue){
-                    setState(() {
-                              selectedItem = newValue;
-                            });
-                  },
-                  items: list_gender.map((item)=> DropdownMenuItem(
-          value:item,
-          child: Text(item),
-) 
-                  ).toList(),
-                ),
-      ),
-       */
+    
      SizedBox(width: 15,),
       Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
@@ -278,7 +297,7 @@ Container(
  Container( 
           height: 70,
     width: 223,
-    //margin: EdgeInsets.only(left:20.0),
+ 
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
@@ -291,6 +310,7 @@ Container(
                   onChanged: (newValue){
                     setState(() {
                               birthyear = newValue;
+                              mcsendbirthyear=int.parse(birthyear.toString()) ;
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
@@ -304,34 +324,7 @@ Container(
     ],
   ),
     ),
-    /*
-               SizedBox(height: 25,),
-            
-               //حقل المدينة
-               Container(
-                 child: TextFormField(
-    
-     decoration: InputDecoration(
-    
-         labelText:"المدينة التي تسكن فيها",
-    
-         labelStyle: TextStyle(color: Color.fromRGBO(0,0 , 0,0.7),fontSize: 18,fontFamily: 'Lobster'),
-    
-         prefixIcon: Icon(Icons.location_city_rounded,color: secondappcolor,),
-    
-    enabledBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor )
-    ),
-    
-              ), 
-    
-keyboardType: TextInputType.text,
-
-//controller:city ,
-     ),
-               ),
-     SizedBox(height: 25,),*/
+   
      //رقم الهاتف
                Container(
                  child: TextField(
@@ -339,7 +332,7 @@ keyboardType: TextInputType.text,
      decoration: InputDecoration(
     
         
-     labelText: client.phone_no_model,
+     labelText: client[0]['phoneno'],
     labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
  
     
@@ -365,7 +358,7 @@ controller:phone_no,
      decoration: InputDecoration(
     
  
-     labelText:client.iD_number_model,
+     labelText:client[0]['identityno'],
     labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
       
          prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
@@ -391,7 +384,7 @@ obscureText: passwordicon,
    obscuringCharacter: "*", 
      decoration: InputDecoration(
     
-         labelText:client.password_model,
+         labelText:client[0]['password'],
     
          labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
     //هل تريد رؤية الكلمة او لا
@@ -564,8 +557,19 @@ getImage(ImageSource.camera);
       } 
  else       //---------------------------------  اعدل البيانات في السرفر لهذا العميل من خلال ارسال البيانات الجديده وكذا ارسال رقم هذا العميل id----------------//
 {
-s.ModiflyDataclient(name,password,phone_no,iD_number,birthyear,mimage_convert,client.client_id);
-        // الرسائل تعرض حسب الراجع من الداله ضروري اعدل جميع الرسائل نفس حق زر تحقق
+   if(oksaveimage==true&&mimage_convert=="")
+      {
+          ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(" إنتظر قليلا"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+       
+               
+    }
+    else
+  {      // الرسائل تعرض حسب الراجع من الداله ضروري اعدل جميع الرسائل نفس حق زر تحقق
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
@@ -598,7 +602,20 @@ textStyle:TextStyle(color:Colors.white,),
             child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
             onPressed: (){
   setState(() {
+     create_account=true;
+// حفظ البيانات الخاصة بالعميل داخل جهازه من اجل ارساللها عند تاكيد عملية الحجز
+shprname=name.text;
+shprphon_no=phone_no.text;
+shprimage=mimage_convert;
 
+
+            savevalues();
+
+   mcsendpassword=password.text;
+         mcsendiD_number=iD_number.text;
+         
+          int user_id=client[0]['user_id'];
+s.ModiflyDataclient(shprname,mcsendpassword,shprphon_no,mcsendiD_number,mcsendbirthyear,shprimage,user_id);
 
   });
       // غلق نافذة الرسالة 
@@ -632,7 +649,7 @@ textStyle:TextStyle(color:Colors.white,),
          showDialog(builder: (context) => ok, context:context);
      
                
-   
+}
        
         }// رسالة الخطا
     },

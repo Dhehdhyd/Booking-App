@@ -7,8 +7,8 @@ import '../class_tools/app_card_trip.dart';
 import 'dart:io';
 import '../screens/create_an_account_page.dart';
 import 'dart:convert';
-import 'dart:typed_data';
 import '../screens/settings.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
 import '../screens/trip_details_page.dart';
 class Create_account extends StatefulWidget {
@@ -16,7 +16,8 @@ class Create_account extends StatefulWidget {
   _Create_accountState createState() => _Create_accountState();
 }
 Fetch f=Fetch();
-
+String nameimage="";
+    String typeimage="";
 class _Create_accountState extends State<Create_account> {
   File image=File('');
        Insert s=Insert();
@@ -25,10 +26,6 @@ class _Create_accountState extends State<Create_account> {
     var tname=TextEditingController();
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
-   /* List<String>list_gender=[
-  'أنثى', 'ذكر',
-  ];
-  String? selectedItem='ذكر';*/
     List<String>list_Date=[
   '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
@@ -36,11 +33,43 @@ class _Create_accountState extends State<Create_account> {
   ];
   String? birthyear='2000';
   String timage_convert="";//الصوره المحولة
+  
   //تحويل الصوره الى سلسلة لتخزينها في السرفر 
-  Future convertimage(File image)async{
-    Uint8List imageBytes=await image.readAsBytes();
-    String base64string=base64.encode(imageBytes);
+bool oksaveimage=false;
+  
+  Future convertimage(File image,String path)async{
+//ضغط الصورة
+   var result = await FlutterImageCompress.compressAndGetFile(
+        image.absolute.path, path,
+        quality: 40,
+
+      );
+
+     
+    List<int> imageBytes=await result!.readAsBytes();
+       setState(() {
+        
+    String base64string=base64.encode(imageBytes.cast<int>());
+   
     timage_convert=base64string;
+      oksaveimage=true;    
+        });
+  }
+  //دالة استخراج نوع الصوره واسمها
+  nameimageandtypy(File image)
+  {
+    setState(() {
+         String path=image.path.toString();
+    List<String>part_path=path.split('/');
+    String name_type=part_path.last;
+    List<String>part_name_type=name_type.split('.');
+     nameimage=part_name_type[0];
+     typeimage=part_name_type[1];   
+        });
+  
+
+
+
   }
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
@@ -58,8 +87,7 @@ child:
        SizedBox(height: 25,),
      ],
    );
-      //احول الصوره بهذا الدالة
-convertimage(image);
+
   }
   else
   {
@@ -109,6 +137,10 @@ child:
    
 setState(() {
   showimagebool=true;
+        //احول الصوره بهذا الدالة
+convertimage(image,image.path.toString());
+nameimageandtypy(image);
+
   
 });
  
@@ -237,35 +269,7 @@ controller:tname ,
  
   child: Row(
     children: [
-     /* SizedBox(width: 2,),
-      Text(' نوع الجنس',style:TextStyle(color: secondtextcolor,fontSize:15,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
-      SizedBox(width: 2,),
-      Container( 
-          height: 70,
-  width: 80,
- // margin: EdgeInsets.only(left:200.0),
-          child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor )
-            )
-          ),
-                  isExpanded: true,
-                  value:selectedItem,
-                  onChanged: (newValue){
-                    setState(() {
-                              selectedItem = newValue;
-                            });
-                  },
-                  items: list_gender.map((item)=> DropdownMenuItem(
-          value:item,
-          child: Text(item),
-) 
-                  ).toList(),
-                ),
-      ),
-       */
+   
      SizedBox(width: 15,),
       Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
@@ -273,7 +277,7 @@ controller:tname ,
  Container( 
           height: 70,
     width: 223,
-    //margin: EdgeInsets.only(left:20.0),
+
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
@@ -495,6 +499,20 @@ getImage(ImageSource.camera);
       } 
       else
     {
+      if(oksaveimage==true&&timage_convert=="")
+      {
+          ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(" إنتظر قليلا"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+       
+               
+    }
+    else
+    {
+   
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
@@ -534,18 +552,34 @@ shprimage=timage_convert;
 shprphon_no=phone_no.text;
 
     //---------------------------------------------------------------------------//
-            //جلب بيانات الحجز لداخل متغير Booking من اجل عرضها في صفحة تاكيد الحجز
-f.fetchbooking(tthis_trip_id);//رقم رحلة معينة
+   
+// رقم رحلة معينه
+    f.fetchbooking(tthis_trip_id).then((Value){
 
-//-------------------------------------------------------------------//
-    //يتم ارسال البيانات لسرفر
-    // s.SendDatatraveler(tname, phone_no, iD_number, birthyear, image); 
+booking_trip.add(Value![0]);
+   
+
+}
+
+);
+
+  ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("شكرا لك لختيرك الرحلة المقدمة من مكتب"+" "+booking_trip[0]['office_name']),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
+         //جلب بيانات الحجز لداخل متغير Booking من اجل عرضها في صفحة تاكيد الحجز
+
+
+      // غلق نافذة الرسالة 
+
     });
       // غلق نافذة الرسالة 
    Navigator.of(context, rootNavigator: true).pop('ok');         
 
 //الانتقال الى الصفحة تاكيد الحجز
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
       builder: (_){
 
       
@@ -570,7 +604,7 @@ f.fetchbooking(tthis_trip_id);//رقم رحلة معينة
 
       );
          showDialog(builder: (context) => ok, context:context);
-               
+    }
     }
             
     },

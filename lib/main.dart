@@ -8,20 +8,20 @@ import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
 import '../class_tools/counter_date_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'dart:async';
 import 'Functions/fetch.dart';
 
 ThemeMode tm=ThemeMode.light;
 bool darkMode=false;
+var card=AppBar();
 
-Fetch f=Fetch();
 
 
 void main()async{
   //عندما ينشاء حساب تتسجل بيانات العميل اي انه قد انشاء حساب فيتم ارجاع قيمة متغير الانشاء لكي لا اسمح له بانشاء حساب جديد
 WidgetsFlutterBinding.ensureInitialized();
-
-          if(create_account==false)
+//هذا الشرط لي لانه جهازي قد حفظ البيانات افعل هذا الشرط بس
+         // if(create_account==true)
 {
     SharedPreferences prefs=await SharedPreferences.getInstance();
   //بعض من بيانات العميل يتم حفظها مثل الاسم والصوره ورقم الهاتف من اجل ارسالها عند الحاجة
@@ -100,12 +100,16 @@ class MyApp extends StatelessWidget {
 
   String selectedDate=selectedDate1.toString();
     List<String> s=selectedDate.split(' ');
+    
   String datetrip=s[0];
+      List<String> s2=s[0].split('-');
+
+  String datetrip1=s2[2]+'-'+s2[1]+'-'+s2[0];
  
               
               
   int filter_trips=0;
- var card=AppCard();
+
 
 class MyHomePage extends StatefulWidget {
 
@@ -115,7 +119,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+
   
           
  
@@ -136,11 +140,12 @@ class _MyHomePageState extends State<MyHomePage> {
 'عزان','الحزم',
   ];
  //تحديث البيانات عند النقر على الخيارات
- update(selectedDate,selectedItem,selectedItem1){
+ update(selectedDate,selectedItem,selectedItem1,selectedDate1){
       setState(() {
-  f.select_date=selectedDate;
-f.from_city=selectedItem;
-f.to_city=selectedItem1;
+  select_date=selectedDate;
+  select_date1=selectedDate1;
+from_city=selectedItem;
+to_city=selectedItem1;
       });
 }
   //عرض التاريخ
@@ -159,11 +164,30 @@ selectedDate1=date;
               selectedDate=date.toString();
               s=selectedDate.split(' ');
               datetrip=s[0];
-              update(datetrip,selectedItem,selectedItem1);
+              s2=s[0].split('-');
+             datetrip1=s2[2]+'-'+s2[1]+'-'+s2[0];
+              update(datetrip,selectedItem,selectedItem1,datetrip1);
+           final timer=Timer(const Duration(seconds: 20), (){
+             Navigator.of(context).push(MaterialPageRoute(
+
+      builder: (_){
+
+ return MyHomePage();
+
+}  ),
+
+    );
+                                  });
+
+
             });});
             }
 
-            
+    @override
+      void initState() {
+        card=AppBar();
+        super.initState();
+      }     
   @override
   
   Widget build(BuildContext context) {
@@ -182,18 +206,7 @@ selectedDate1=date;
            ),
 
           ],backgroundColor: secondappcolor,
-           /*
-         flexibleSpace: Container(
-          decoration: BoxDecoration(
-gradient: LinearGradient(colors: [
-fristappcolor,
-  
-
-
-],),
-          ),
-          ),
-*/
+    
         ),
         
         body://الحقول  
@@ -233,7 +246,20 @@ Container(
           onChanged: (newValue){
             setState(() {
                       selectedItem = newValue;
-                      update(datetrip,selectedItem,selectedItem1);
+                      update(datetrip,selectedItem,selectedItem1,datetrip1);
+                                  
+                                  final timer=Timer(const Duration(seconds: 20), (){
+             Navigator.of(context).push(MaterialPageRoute(
+
+      builder: (_){
+
+ return MyHomePage();
+
+}  ),
+
+    );
+                                  });
+
                     });
           },
           items: list_city.map((item)=> DropdownMenuItem(
@@ -277,7 +303,18 @@ Container(
           onChanged: (newValue){
             setState(() {
                       selectedItem1 = newValue;
-                      update(datetrip,selectedItem,selectedItem1);
+                      update(datetrip,selectedItem,selectedItem1,datetrip1);
+       final timer=Timer(const Duration(seconds: 20), (){
+             Navigator.of(context).push(MaterialPageRoute(
+
+      builder: (_){
+
+ return MyHomePage();
+
+}  ),
+
+    );
+                                  });
 
                     });
           },
@@ -329,27 +366,23 @@ textStyle:TextStyle(color:Colors.white,),
       setState(() {
         //يتم عرض الرحلات التي تم البحث عنها حيث يتغير قيمة متغير الفلتره ثم يتغير قيمة متغير الرحلات
           filter_trips=2;
-          card=AppCard();
+              Navigator.of(context).push(MaterialPageRoute(
 
-       f.checktrip(1).then((Value){
-       ScaffoldMessenger.of(context).showSnackBar(
+      builder: (_){
+
+ return MyHomePage();
+
+}  ),
+
+    );
+ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-         content: Text(Value[0]['trip_id'].toString()),
+         content: Text(trip_date+select_date1+Dateday+select_date+from_city.toString()),
          behavior: SnackBarBehavior.floating,
        )
-     );
-     }
-     );   f.checktrip(2).then((Value){
-       ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text(Value[0]['trip_id'].toString()),
-         behavior: SnackBarBehavior.floating,
-       )
-     );
-     }
-     );
+     ); 
 
-         //card={} as AppCard;
+         
 
          
         
@@ -369,7 +402,9 @@ textStyle:TextStyle(color:Colors.white,),
   Counter_date(),
 SizedBox(height: 30,),
 // متغير الرحلات
-card,
+
+AppCard(),
+
 
 ],
 ),

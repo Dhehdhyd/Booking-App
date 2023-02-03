@@ -1,6 +1,6 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Functions/insert.dart';
 import '../Functions/fetch.dart';
 import '../main.dart';
@@ -17,7 +17,8 @@ import '../screens/settings.dart';
 //متغيرات سوف ترسل من اجل معرفة اي رحلة تم حجزها
 String office_name="";
 int tthis_trip_id=1;
-  
+//متغير جلب بيانات رحلة المحجوزه
+  List<dynamic> booking_trip=[];
 
 
 class AppCard extends StatefulWidget {
@@ -29,14 +30,16 @@ class AppCard extends StatefulWidget {
 }
 
 
+List tripss=[];
 
-class _AppCardState extends State<AppCard>  { 
+class _AppCardState extends State<AppCard>{ 
+  Insert s=Insert();
+Fetch f=Fetch();
+
 
   @override
 
-Insert s=Insert();
-Fetch f=Fetch();
-List tripss=[];
+
 
 //التنقل بين الصفحات
 
@@ -52,7 +55,7 @@ List tripss=[];
 
         
 
- return   index_page==1?Trip_details_page():index_page==2?Mycreate_account():Create_account();
+ return   index_page==1?Trip_details_page():index_page==2?Mycreate_account():index_page==3?Create_account():MyHomePage();
 
 //arguments: {
 
@@ -131,25 +134,50 @@ child: Column(
    //احدد رقم الصفحة
 
    setState(() {
+     
+// رقم رحلة معينه
+    f.fetchbooking(tthis_trip_id).then((Value)async{
 
-      select_page(context, 1);
+   SharedPreferences prefs=await SharedPreferences.getInstance();
+  //بعض من بيانات العميل يتم حفظها مثل الاسم والصوره ورقم الهاتف من اجل ارسالها عند الحاجة
+          create_account=prefs.getBool("create_account")as bool;
+          shprname=prefs.getString("shprname").toString();
+          shprphon_no=prefs.getString("shprphon_no").toString();
+          shprimage=prefs.getString("shprimage").toString();
+booking_trip.add(Value![0]);
+
+   select_page(context, 1);     
+
+
+   
+
+}
+
+);
+
+  ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("شكرا لك لختيرك الرحلة المقدمة من مكتب"+" "+booking_trip[0]['office_name']),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
          //جلب بيانات الحجز لداخل متغير Booking من اجل عرضها في صفحة تاكيد الحجز
-f.fetchbooking(tthis_trip_id);// رقم رحلة معينه
- 
+
 
       // غلق نافذة الرسالة 
 
-   Navigator.of(context,
-
-   //يغلق النافذة عند النقر على اي مكان في الشاشة
-
-   rootNavigator: true).pop('dialog');         
 
 
 
       }); 
 
-        
+
+   
+          Navigator.of(context,
+
+   //يغلق النافذة عند النقر على اي مكان في الشاشة
+
+   rootNavigator: true).pop('dialog');   
 
     },
 
@@ -235,10 +263,7 @@ select_page(context, 3);
 
   }
 
-
-
-  Widget build(BuildContext context) {
-
+Widget appbar(){
     return 
 
 
@@ -249,13 +274,14 @@ select_page(context, 3);
 
         height: 310,
 
-        child: FutureBuilder(
+        child:
+         FutureBuilder(
           future:f.checktrip(filter_trips) ,
 
           builder:(context, snapshot) {
 tripss=snapshot.data as List<dynamic>;
 
-                       if(snapshot.data!=null)
+                       if(snapshot.data!=null&&tripss.length!=0)
                        
                       {
      
@@ -716,6 +742,8 @@ textStyle:TextStyle(color:Colors.white,),
     
 
     onPressed:(){
+setState(() {
+  
 
       //يختبر هل الشخص يملك حساب او لا 
 
@@ -879,7 +907,7 @@ textStyle:TextStyle(color:Colors.white,),
 
   //اذا الشخص قد انشاء حساب 
 
-  else if(create_account==true)
+  else  if(create_account==true)
 
     {
 
@@ -908,11 +936,13 @@ textStyle:TextStyle(color:Colors.white,),
      { myDialog();
      office_name=tripss[index]['office_name'];
     tthis_trip_id=tripss[index]['trip_id'];
-     
+  
 
      }
 
-    }  },
+    }  
+    });
+    },
 
     child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 15,color:Colors.white,)),
 
@@ -940,15 +970,8 @@ SizedBox(height: 5,),],
 
         );
 
-
-
-                                                    }
-
-                                                    );
-
-                        
-
-                      
+                                                  }
+                                           );
 
           }
  else
@@ -972,7 +995,11 @@ SizedBox(height: 5,),],
 
      
 
-      );
+      );}
+
+  Widget build(BuildContext context) {
+
+return appbar();
 
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
 import '../Functions/insert.dart';
@@ -10,7 +11,8 @@ import 'dart:io';
 import '../screens/settings.dart';
 import 'package:image_picker/image_picker.dart';//حق الصور 
 import 'package:shared_preferences/shared_preferences.dart';
-
+String cnameimage="";
+    String ctypeimage="";
         // المتغيرات التي يتم حفظها
         String shprname="";
         String shprimage="";
@@ -19,7 +21,22 @@ import 'package:shared_preferences/shared_preferences.dart';
        //-------------------------------//
        Insert s=Insert();
     var cname=TextEditingController();
+    var cphone_no=TextEditingController();
 
+ //هنا المتغيرات التي تحفظ في جهاز المستخدم
+        savevalues()async{
+          if(create_account==true)
+     {SharedPreferences prefs=await SharedPreferences.getInstance();
+        prefs.setBool("create_account", create_account)  ;
+        prefs.setString("shprname", shprname)  ;
+        prefs.setString("shprimage", shprimage)  ;
+        prefs.setString("shprphon_no", shprphon_no)  ;
+
+
+
+     }
+     }
+     //------------------------------------------------------------------------//
 class Mycreate_account extends StatefulWidget {
   @override
   _Mycreate_accountState createState() => _Mycreate_accountState();
@@ -32,24 +49,13 @@ class _Mycreate_accountState extends State<Mycreate_account> {
      bool passwordicon1=true;
     var password=TextEditingController();
     var passwoord1=TextEditingController();
-    var phone_no=TextEditingController();
     var iD_number=TextEditingController();
-  
+          String sendpassword="";
+        String sendiD_number="";
+         int sendbirthyear=2000;
+        
     bool showimagebool=false;
-    //هنا المتغيرات التي تحفظ في جهاز المستخدم
-        _savevalues()async{
-          if(create_account==true)
-     {SharedPreferences prefs=await SharedPreferences.getInstance();
-        prefs.setBool("create_account", create_account)  ;
-        prefs.setString("shprname", shprname)  ;
-        prefs.setString("shprimage", shprimage)  ;
-        prefs.setString("shprimage", shprphon_no)  ;
-
-
-
-     }
-     }
-     //------------------------------------------------------------------------//
+   
 
     List<String>list_Date=[
   '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
@@ -58,11 +64,42 @@ class _Mycreate_accountState extends State<Mycreate_account> {
   ];
   String? birthyear='2000';
   String cimage_convert="";//الصوره المحولة
-  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
-  Future convertimage(File image)async{
-    Uint8List imageBytes=await image.readAsBytes();
-    String base64string=base64.encode(imageBytes);
+ //تحويل الصوره الى سلسلة لتخزينها في السرفر 
+bool oksaveimage=false;
+  
+  Future convertimage(File image,String path)async{
+//ضغط الصورة
+   var result = await FlutterImageCompress.compressAndGetFile(
+        image.absolute.path, path,
+        quality: 40,
+
+      );
+
+     
+    List<int> imageBytes=await result!.readAsBytes();
+       setState(() {
+        
+    String base64string=base64.encode(imageBytes.cast<int>());
+   
     cimage_convert=base64string;
+      oksaveimage=true;    
+        });
+  }
+  //دالة استخراج نوع الصوره واسمها
+  nameimageandtypy(File image)
+  {
+    setState(() {
+         String path=image.path.toString();
+    List<String>part_path=path.split('/');
+    String name_type=part_path.last;
+    List<String>part_name_type=name_type.split('.');
+     cnameimage=part_name_type[0];
+     ctypeimage=part_name_type[1];   
+        });
+  
+
+
+
   }
   //عرض الصوره في الصفحة بعد تأكيد الاختيار
   Widget showimage()
@@ -80,8 +117,7 @@ child:
        SizedBox(height: 25,),
      ],
    );
-   //احول الصوره بهذا الدالة
-convertimage(image);
+
   }
   else
   {
@@ -96,7 +132,6 @@ setState(() {
   if(PickedFile!=null)
   {
     image=File(PickedFile.path);
-
      final AlertDialog adimage=AlertDialog(
 content: Container(
 height: 250,
@@ -118,11 +153,11 @@ child:
         Container(
           width: 100,
         
-        child: ElevatedButton(
+        child:  ElevatedButton(
      style: ElevatedButton.styleFrom(
       primary: secondappcolor,
- 
-textStyle:TextStyle(color:Colors.white,),
+
+
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
@@ -132,6 +167,10 @@ textStyle:TextStyle(color:Colors.white,),
    
 setState(() {
   showimagebool=true;
+        //احول الصوره بهذا الدالة
+convertimage(image,image.path.toString());
+nameimageandtypy(image);
+
   
 });
  
@@ -149,7 +188,8 @@ setState(() {
     child: ElevatedButton(
      style: ElevatedButton.styleFrom(
       primary: secondappcolor,
- 
+
+
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
@@ -284,6 +324,7 @@ Container(
                   onChanged: (newValue){
                     setState(() {
                               birthyear = newValue;
+                              sendbirthyear=int.parse(birthyear.toString()) ;
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
@@ -319,7 +360,7 @@ Container(
     
 keyboardType: TextInputType.number,
 
-controller:phone_no,
+controller:cphone_no,
      ),
                ),
      SizedBox(height: 25,),
@@ -554,7 +595,7 @@ getImage(ImageSource.camera);
     onPressed: (){
 setState(() {
   if(passwoord1.text.isEmpty||password.text.isEmpty||passwoord1.text!=password.text
-  || cname.text.isEmpty||iD_number.text.isEmpty||phone_no.text.isEmpty||image==File(''))  
+  || cname.text.isEmpty||iD_number.text.isEmpty||cphone_no.text.isEmpty||image==File(''))  
   { 
         ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
@@ -566,6 +607,20 @@ setState(() {
    
     else
     {
+      if(oksaveimage==true&&cimage_convert=="")
+      {
+          ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(" إنتظر قليلا"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );
+       
+               
+    }
+    else
+    {
+   
   final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
@@ -598,23 +653,35 @@ textStyle:TextStyle(color:Colors.white,),
             child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
             onPressed: (){
   setState(() {
-            create_account=false;
+
 // حفظ البيانات الخاصة بالعميل داخل جهازه من اجل ارساللها عند تاكيد عملية الحجز
+ create_account=true;
 shprname=cname.text;
-shprphon_no=phone_no.text;
+shprphon_no=cphone_no.text;
 shprimage=cimage_convert;
 
-            _savevalues();
+
+            savevalues();
+            sendiD_number=iD_number.text;
+            sendpassword=iD_number.text;
       //-----------------------------------------------------------------------//
             //ارسال البيانات الى السرفر
-            s.SendDataclient(cname,password,phone_no,iD_number,birthyear,cimage_convert);
+            s.SendDataclient(shprname,sendpassword,shprphon_no,sendiD_number,sendbirthyear,shprimage).then((Value)
+            {
+              ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(Value.toString()),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
+            });
 
   });
       // غلق نافذة الرسالة 
    Navigator.of(context, rootNavigator: true).pop('ok');         
 
 //الانتقال الى الصفحة الرئسية
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
       builder: (_){
       
         
@@ -645,7 +712,7 @@ shprimage=cimage_convert;
 
 
 
-   
+    }
    } });   
     },
     child: Text('إنشاء حساب ',style: TextStyle(fontSize: 15,color: Colors.white)),

@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import '../Functions/fetch.dart';
 import '../class_tools/app_card_trip.dart';
 import '../main.dart';
 import '../screens/settings.dart';
 import 'package:intl/intl.dart';//تنسيق التاريخ
 
-//حقل التاريخ كامل
- String dateday="${DateFormat.yMd().format(DateTime.now())}";
+
+//حقل التاريخ اليوم
+  DateTime d=DateTime.now();
+
+String dd=d.toString();
+    List<String> ss=dd.split(' ');
+    
+      List<String> ss2=ss[0].split('-');
+
+  String dateday=ss2[2]+'-'+ss2[1]+'-'+ss2[0];
 class Counter_date extends StatefulWidget {
   @override
   _Counter_dateState createState() => _Counter_dateState();
@@ -22,11 +31,10 @@ String mounths="";
   String years="";
 
 class _Counter_dateState extends State<Counter_date> {
-List<String> s=[''];
 //تحديث التاريخ بعد الزيادة او النقصان
  update(dayss,mounthss,yearss){
       setState(() {
- f.Dateday=yearss+mounthss+dayss;
+ Dateday=yearss+mounthss+dayss;
       });
 }
  _Counter_dateState(){ 
@@ -34,11 +42,13 @@ List<String> s=[''];
  s1= DateTime.now().toString().split(' ');
    s="${s1[0]}".split('-');
    days=s[2];
+
    day= int.parse(days);
           mounths=s[1];
 
    mounth= int.parse(mounths);
     years=s[0];
+
    year= int.parse(years);
  }
 
@@ -231,8 +241,15 @@ years=year.toString();
 update(days,mounths,years);
     filter_trips=1;
 
-          card=AppCard();
-         // card={} as AppCard;
+                   Navigator.of(context).push(MaterialPageRoute(
+
+      builder: (_){
+
+ return MyHomePage();
+
+}  ),
+
+    );
 
         });
    
@@ -270,9 +287,15 @@ years=year.toString();
     filter_trips=1;
 update(days,mounths,years);
 
-         // card={} as AppCard;
+                     Navigator.of(context).push(MaterialPageRoute(
 
-          card=AppCard();
+      builder: (_){
+
+ return MyHomePage();
+
+}  ),
+
+    );
         });
       
     },

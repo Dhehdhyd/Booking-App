@@ -39,7 +39,7 @@ class _mystartpageState extends State<mystartpage> {
    ] ),
     
           image: Image.asset("assets/images/bus5.png",alignment: Alignment.bottomCenter,),
-          seconds: 5,
+          seconds: 1,
           navigateAfterSeconds:MyApp(),
           loaderColor: thridtextcolor,  
           loadingText: Text('...Loading',style: TextStyle(fontWeight:FontWeight.bold,color: Color.fromRGBO(255, 255, 255, 0.8), fontSize: 18),),

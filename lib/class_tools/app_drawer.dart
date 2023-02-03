@@ -9,7 +9,8 @@ import '../screens/modifly_my_account_data.dart';
 import '../screens/settings.dart';
 //القائمة المنسدلة
    var passwordforupdate=TextEditingController();
-
+String sendpasswordforupdate =passwordforupdate.text;
+List<dynamic>client=[];
 class AppDrawer extends StatefulWidget {
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -192,9 +193,15 @@ controller:passwordforupdate,
       child: Center(child: Text("تحقق",style: TextStyle(color: Colors.white),)),
       onPressed: (){
   setState(() {
+   f.fetchclient(sendpasswordforupdate).then((Value){
+setState(() {
+client.add(Value![0]);
    
+});
+    
+   });
     // استدعي دالة جلب بيانات العميل مع ارسال كلمة المرور المدخله اذا الكلمة صحيحة استرجعها لو خطا اظهر رسالة
-if( f.fetchclient(passwordforupdate.text)==true)
+if( massage_error=="تم")
 {
   //ينتقل لصفحة التعديل
   select_page(context, 1);

@@ -6,6 +6,7 @@ import '../main.dart';
 import '../screens/create_an_account_page.dart';
 import '../screens/settings.dart';
 import '../class_tools/counter_date_main.dart';
+import 'create_an_account_traveler.dart';
 class Trip_details_page extends StatefulWidget {
   @override
   _Trip_details_pageState createState() => _Trip_details_pageState();
@@ -19,7 +20,7 @@ class _Trip_details_pageState extends State<Trip_details_page> {
   Insert s=Insert();
  Fetch f=Fetch();
 
-  String booking_number=data_confirmation.booking_number;
+ 
 
    myDialog(){
     if(numberselect==0)
@@ -74,7 +75,17 @@ textStyle:TextStyle(color:Colors.white,),
             onPressed: (){
   setState(() {
      
+        //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
+ s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, dateday, typepay) .then((Value){
+   ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(Value.toString()),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
+      });
 
+ 
   });
       // غلق نافذة الرسالة 
    Navigator.of(context, rootNavigator: true).pop('ok2');         
@@ -144,7 +155,15 @@ textStyle:TextStyle(color:Colors.white,),
             child: Center(child: Text(" تم",style: TextStyle(color: Colors.white),)),
             onPressed: (){
   setState(() {
-     
+          //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
+ s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, dateday, typepay) .then((Value){
+   ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(Value.toString()),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
+      });
 
   });
       // غلق نافذة الرسالة 
@@ -181,56 +200,7 @@ textStyle:TextStyle(color:Colors.white,),
 
    }
    
-  /*
-  else if(numberselect==1)
-     {
-  final AlertDialog ok2=AlertDialog(
-title:Container(
-alignment: Alignment.center,
-  child: Text('''الرجاء المسارعة في الدفع الى اقرب فرع للمكتب خلال 24 ساعة
- ورقم الحجز الخاص بك هو $booking_number ''',style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),)) ,
-content: Container(
-height: 50,
-child:Row(
-  children: [
-        SizedBox(width: 20,),
-        Icon(Icons.alarm,color: fristappcolor,size: 40,),
-        SizedBox(width: 30,),
-        Icon(Icons.airport_shuttle,color: fristappcolor,size: 40,),
-
-
-  ],
-)
-
-),
-      );
-               
-
-         showDialog(builder: (context) => ok2, context:context);
-  }
-  else if(numberselect==2)
-     {
-  final AlertDialog ok3=AlertDialog(
-title:Container(
-alignment: Alignment.center,
-  child: Row(
-    children: [
-      Icon(Icons.beenhere,color: Colors.green,size: 30),
-        SizedBox(width: 20,),
-      Text( '''في حال تم وصول اشعار الإصال الى المكتب سوف ترسل لك صورة التذكره أرجاء المسارعة في السداد
-       ورقم الحجز الخاص بك هو $booking_number''',style: TextStyle(color: secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
-    ],
-  )) ,
-content: Container(
-height: 50,
-width: 50,
-child: Text("صورة التذكره"),
-),
-      );
-               
-
-         showDialog(builder: (context) => ok3, context:context);
-   }*/
+ 
   }
   @override
   Widget build(BuildContext context) {
@@ -287,7 +257,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 75),
 
-       child: Text(booking.office_name,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['office_name'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -306,7 +276,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 65),
 
-       child: Text(booking.trip_day,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(trip_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -325,7 +295,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 100),
 
-       child: Text(booking.from_city.toString(),style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['departure_city'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -344,7 +314,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 100),
 
-       child: Text(booking.to_city.toString(),style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['arrival_city'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -365,7 +335,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text(booking.attendance_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['attendance_time'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ), 
           ],
@@ -376,7 +346,7 @@ child: Column(
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text('ساعات الانتظار ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('مدة الانتظار ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
           
@@ -384,7 +354,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text(booking.wait_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['waiting_time'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ), 
         ],
@@ -404,7 +374,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text(booking.start_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['departure_time'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          ],
@@ -424,7 +394,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(booking.bus_starting_station,style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['departure_station'],style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
         ],
@@ -444,7 +414,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(booking.bus_access_station,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['arrival_station'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          ],
@@ -463,7 +433,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 80),
 
-       child: Text(booking.price,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['ticket_price'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),    
    ],
@@ -497,7 +467,7 @@ child: Column(
        )
        ),
          Container(
-                 margin: EdgeInsets.only(right: 90),
+                 margin: EdgeInsets.only(right: 85),
 
        child: Text('رقم هاتف المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
@@ -508,14 +478,14 @@ child: Column(
       Row(
         children: [
           Container(
-                     margin: EdgeInsets.only(right: 35),
+                     margin: EdgeInsets.only(right: 2),
 
            child: Text(shprname,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
            )
            ),
      
          Container(
-                 margin: EdgeInsets.only(right: 120),
+                 margin: EdgeInsets.only(right: 50),
 
        child: Text(shprphon_no,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
@@ -548,7 +518,7 @@ child: Column(
            child: Container(
                        margin: EdgeInsets.only(right: 35),
 
-             child: Text(booking.booking_policy,
+             child: Text(booking_trip[0]['booking_policy'],
              style: TextStyle(fontFamily: 'Lobster',fontSize: 17,fontWeight: FontWeight.bold,height: 2,color: thridtextcolor)
              )
              ),
@@ -586,7 +556,7 @@ child: Column(
          Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(booking.company_headquarters,style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['location'],style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
@@ -606,7 +576,7 @@ child: Column(
                  margin: EdgeInsets.only(right: 10),
            padding: const EdgeInsets.all(15.0),
 
-       child: Text(booking.bank_account,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['bank_account'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
@@ -626,7 +596,7 @@ child: Column(
                  margin: EdgeInsets.only(right: 35),
            padding: const EdgeInsets.all(15.0),
 
-       child: Text(booking.bank_name,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['bank_name'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
@@ -665,7 +635,7 @@ child: Column(
               setState(() {
                               _radiovalue=value;
                               numberselect=2;
-                              typepay="إلكتروني";
+                              typepay="الكتروني";
                             });
             },
           ),
@@ -701,8 +671,7 @@ child: Column(
     onPressed: (){
    setState(() {
        myDialog(); 
-        //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
-       s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, dateday, typepay);
+     
       });
      
     },
