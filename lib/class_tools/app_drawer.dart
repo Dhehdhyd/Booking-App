@@ -189,34 +189,38 @@ controller:passwordforupdate,
        shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0)
     ),
-    ),
+    ), // استدعي دالة جلب بيانات العميل مع ارسال كلمة المرور المدخله اذا الكلمة صحيحة استرجعها لو خطا اظهر رسالة
+
       child: Center(child: Text("تحقق",style: TextStyle(color: Colors.white),)),
       onPressed: (){
-  setState(() {
+
    f.fetchclient(sendpasswordforupdate).then((Value){
 setState(() {
-client.add(Value![0]);
-   
-});
-    
-   });
-    // استدعي دالة جلب بيانات العميل مع ارسال كلمة المرور المدخله اذا الكلمة صحيحة استرجعها لو خطا اظهر رسالة
-if( massage_error=="تم")
-{
-  //ينتقل لصفحة التعديل
-  select_page(context, 1);
+  if((Value![0])!=[])
+ 
+{    
+ 
   //استرجاع البيانات السابقة للعميل من اجل تعديلها
-}
-else
-//رساله تعرض رسالة الخطا
+client=[(Value[0])];
+     //ينتقل لصفحة التعديل
+      select_page(context, 1); 
+ } //رساله تعرض رسالة الخطا
+     else
+
    {
-     ScaffoldMessenger.of(context).showSnackBar(
+  ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-         content: Text(massage_error),
+         content: Text("كلمة المرور خاطئة"),
          behavior: SnackBarBehavior.floating,
        )
      );
    }
+   
+});
+    
+ 
+   
+
  
 
    Navigator.of(context,rootNavigator: true).pop('passwordshow');         

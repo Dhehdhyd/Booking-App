@@ -34,8 +34,9 @@ request.headers.addAll(headers);
 
 http.StreamedResponse response = await request.send();
 
+if (response.statusCode == 200) {
  return response.statusCode;
-
+}
 
     }
     
@@ -50,9 +51,9 @@ http.StreamedResponse response = await request.send();
   String midentityno=iD_number;
   String mcidentity_image=image.toString();
   String mclient_identity_image="data:"+"$mcnameimage"+"/"+"$mctypeimage"+";base64,"+"$mcidentity_image";
-   int mbirthdate=birthyear;
+   String mbirthdate=birthyear;
   String mcpassword=password;
-  int mcid=id;
+  String mcid=id;
   try{
 
    var headers = {
@@ -71,9 +72,9 @@ request.headers.addAll(headers);
 
 http.StreamedResponse response = await request.send();
 
-if (response.statusCode == 201) {
+
  return response.statusCode;
-}
+
     }
     
       catch(Exc){
@@ -81,7 +82,7 @@ if (response.statusCode == 201) {
   }
   }  
    //--------------------------------------------------------   ارسال بيانات الحجز  للمساعدة في عملية تاكيدالحجز----------------------------------//
-  Future  SendBooking_data(shprname,shprimage,shprphon_no,tthis_trip_id,ttrip_date,dateday,typepay) async{
+  Future  SendBooking_data(shprname,shprimage,shprphon_no,tthis_trip_id,ttrip_date,typepay) async{
     
   int trip_id=tthis_trip_id;
   String client_name=shprname;
@@ -89,7 +90,6 @@ if (response.statusCode == 201) {
   String image=shprimage.toString();
   String client_identity_image="data:"+"$nameimage"+"/"+"$typeimage"+";base64,"+"$image";
    String trip_date=ttrip_date;
-  String booking_date=dateday;
     String payment_type=typepay;
   try{
    var headers = {
@@ -102,7 +102,6 @@ request.body = json.encode({
   "client_phoneno": client_phoneno,
   "client_identity_image": client_identity_image,
   "trip_date": trip_date,
-  "booking_date": booking_date,//من وديان ارجع احذفة
   "payment_type":payment_type
 });
 request.headers.addAll(headers);

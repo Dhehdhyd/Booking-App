@@ -6,15 +6,21 @@ import '../screens/create_an_account_page.dart';
 import '../screens/settings.dart';
 import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
-import '../class_tools/counter_date_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
 import 'Functions/fetch.dart';
 
 ThemeMode tm=ThemeMode.light;
 bool darkMode=false;
-var card=AppBar();
+ int day=16;
+  int mounth=09;
+  int year=2022;
+  List data_inc_dec1=[];
+  List<String> data_inc_dec=[''];
+String mounths="";
+  String days="";
+  String years="";
 
+Fetch f=Fetch();
 
 
 void main()async{
@@ -97,7 +103,7 @@ class MyApp extends StatelessWidget {
   String? selectedItem1='عدن';
 
 
-
+//////////////////////////////////////////////////// الاداة حق فلاتر حقل التاريخ////////////////////////////////
   String selectedDate=selectedDate1.toString();
     List<String> s=selectedDate.split(' ');
     
@@ -109,22 +115,210 @@ class MyApp extends StatelessWidget {
               
               
   int filter_trips=0;
+//حقل التاريخ اليوم/////////////////////////////////////////////////////
+  DateTime d=DateTime.now();
 
+String dd=d.toString();
+    List<String> ss=dd.split(' ');
+    
+      List<String> ss2=ss[0].split('-');
 
+  String dateday=ss2[2]+'-'+ss2[1]+'-'+ss2[0];
+////////////////////////////////////////////////////////////////////
 class MyHomePage extends StatefulWidget {
 
-  
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
 
-  
+
+class _MyHomePageState extends State<MyHomePage> {
+///////////////////////////////////////////////////////////////////دوال الحقل الزيادة والنقصان حق التاريخ/////////////////////////
+ 
+//تحديث التاريخ بعد الزيادة او النقصان
+ updatedata(dayss,mounthss,yearss){
+      setState(() {
+ Dateday=yearss+mounthss+dayss;
+ 
+      });
+}
+ _MyHomePageState(){ 
+   //التاريخ حق اليوم ثم يجزئه
+ data_inc_dec1= DateTime.now().toString().split(' ');
+   data_inc_dec="${data_inc_dec1[0]}".split('-');
+   days=data_inc_dec[2];
+
+   day= int.parse(days);
+          mounths=data_inc_dec[1];
+
+   mounth= int.parse(mounths);
+    years=data_inc_dec[0];
+
+   year= int.parse(years);
+ }
+
+ 
+  inc(){
+
+    if(mounth==4||mounth==6||mounth==9||mounth==11)
+    {
+      if(day<30)
+      {
+        setState(() {
+                  day++;
+                });
+
+      }
+      else if(day==30)
+      {day=1;
+        if(mounth<12)
+        {
+          setState(() {
+                      mounth++;
+                    });
+        }
+        else if(mounth==12)
+        {mounth=1;
+          setState(() {
+                      year++;
+                    });
+        }
+      }
+    }
+   else if(mounth==1||mounth==3||mounth==5||mounth==7||mounth==8||mounth==10||mounth==12)
+    {
+      if(day<31)
+      {
+        setState(() {
+                  day++;
+                });
+
+      }
+      else if(day==31)
+      {day=1;
+        if(mounth<12)
+        {
+          setState(() {
+                      mounth++;
+                    });
+        }
+        else if(mounth==12)
+        {mounth=1;
+          setState(() {
+                      year++;
+                    });
+        }
+      }
+    }
+      else if(mounth==2)
+    {
+      if(day<28)
+      {
+        setState(() {
+                  day++;
+                });
+
+      }
+      else if(day==28)
+      {day=1;
+        if(mounth<12)
+        {
+          setState(() {
+                      mounth++;
+                    });
+        }
+        else if(mounth==12)
+        {mounth=1;
+          setState(() {
+                      year++;
+                    });
+        }
+      }
+    }
+  }
+dec(){
+    if(mounth==4||mounth==2||mounth==6||mounth==9||mounth==11)
+    {
+      if(day>1)
+      {
+        setState(() {
+                  day--;
+                });
+
+      }
+      else if(day==1)
+      {day=31;
+        if(mounth>1)
+        {
+          setState(() {
+                      mounth--;
+                    });
+        }
+        else if(mounth==1)
+        {mounth=12;
+          setState(() {
+                      year--;
+                    });
+        }
+      }
+    }
+   else if(mounth==1||mounth==5||mounth==7||mounth==8||mounth==10||mounth==12)
+    {
+      if(day>1)
+      {
+        setState(() {
+                  day--;
+                });
+
+      }
+      else if(day==1)
+      {day=30;
+        if(mounth>1)
+        {
+          setState(() {
+                      mounth--;
+                    });
+        }
+        else if(mounth==1)
+        {mounth=12;
+          setState(() {
+                      year--;
+                    });
+        }
+      }
+    }
+      else if(mounth==3)
+    {
+      if(day>1)
+      {
+        setState(() {
+                  day--;
+                });
+
+      }
+      else if(day==1)
+      {day=28;
+        if(mounth>1)
+        {
+          setState(() {
+                      mounth--;
+                    });
+        }
+        else if(mounth==11)
+        {mounth=12;
+          setState(() {
+                      year--;
+                    });
+        }
+      }
+    }
+  }
           
  
 
-
+/////////////////////////////////////////////////////////////////end/////////////////////////////////////
   List<String>list_city=[
 'تعز','عدن', 'صنعاء', 'اب', 'جدة', 'الرياض',
 'رداع','البيضاء', 'الحديدة', 'العبر', 'مارب', 'الطائف',
@@ -141,12 +335,12 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
  //تحديث البيانات عند النقر على الخيارات
  update(selectedDate,selectedItem,selectedItem1,selectedDate1){
-      setState(() {
+      
   select_date=selectedDate;
   select_date1=selectedDate1;
 from_city=selectedItem;
 to_city=selectedItem1;
-      });
+    
 }
   //عرض التاريخ
   void date_picker()
@@ -160,34 +354,21 @@ to_city=selectedItem1;
     ).then((date){
       if(date==null){return;}
       setState(() {
+                   
 selectedDate1=date;
               selectedDate=date.toString();
               s=selectedDate.split(' ');
-              datetrip=s[0];
+              datetrip=s[0];});
               s2=s[0].split('-');
              datetrip1=s2[2]+'-'+s2[1]+'-'+s2[0];
               update(datetrip,selectedItem,selectedItem1,datetrip1);
-           final timer=Timer(const Duration(seconds: 20), (){
-             Navigator.of(context).push(MaterialPageRoute(
-
-      builder: (_){
-
- return MyHomePage();
-
-}  ),
-
-    );
-                                  });
 
 
-            });});
+
+
+            });
             }
-
-    @override
-      void initState() {
-        card=AppBar();
-        super.initState();
-      }     
+     
   @override
   
   Widget build(BuildContext context) {
@@ -244,23 +425,10 @@ Container(
           isExpanded: true,
           value:selectedItem,
           onChanged: (newValue){
-            setState(() {
+           
                       selectedItem = newValue;
-                      update(datetrip,selectedItem,selectedItem1,datetrip1);
-                                  
-                                  final timer=Timer(const Duration(seconds: 20), (){
-             Navigator.of(context).push(MaterialPageRoute(
-
-      builder: (_){
-
- return MyHomePage();
-
-}  ),
-
-    );
-                                  });
-
-                    });
+                     update(datetrip,selectedItem,selectedItem1,datetrip1);
+         
           },
           items: list_city.map((item)=> DropdownMenuItem(
   value:item,
@@ -301,22 +469,10 @@ Container(
           isExpanded: true,
           value:selectedItem1,
           onChanged: (newValue){
-            setState(() {
+   
                       selectedItem1 = newValue;
                       update(datetrip,selectedItem,selectedItem1,datetrip1);
-       final timer=Timer(const Duration(seconds: 20), (){
-             Navigator.of(context).push(MaterialPageRoute(
-
-      builder: (_){
-
- return MyHomePage();
-
-}  ),
-
-    );
-                                  });
-
-                    });
+       
           },
           items: list_city.map((item)=> DropdownMenuItem(
   value:item,
@@ -339,9 +495,10 @@ SizedBox(width: 10),
  
         ),),
         onTap:(){
-         setState(() {
+        // setState(() {
                  date_picker(); 
-                });} ,
+                //});
+                } ,
     ),
   ],
 )
@@ -363,30 +520,15 @@ textStyle:TextStyle(color:Colors.white,),
     ),
     
     onPressed:() {
-      setState(() {
+                    
+                     
         //يتم عرض الرحلات التي تم البحث عنها حيث يتغير قيمة متغير الفلتره ثم يتغير قيمة متغير الرحلات
+setState(() {
           filter_trips=2;
-              Navigator.of(context).push(MaterialPageRoute(
 
-      builder: (_){
+});
 
- return MyHomePage();
-
-}  ),
-
-    );
-ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text(trip_date+select_date1+Dateday+select_date+from_city.toString()),
-         behavior: SnackBarBehavior.floating,
-       )
-     ); 
-
-         
-
-         
-        
-        });
+  
     }
     ,
     child: Text('بحث ',style: TextStyle(fontSize: 15,color:lightcolor)),
@@ -398,11 +540,105 @@ ScaffoldMessenger.of(context).showSnackBar(
        crossAxisAlignment: CrossAxisAlignment.stretch, 
     ),
 ),
-// الزيادة والنقصان في التاريخ
-  Counter_date(),
+/////////////////////////////////////// الزيادة والنقصان في التاريخ//////////////////////////////////////////////
+Container(
+      height: 50,
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+           ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(110.0)
+    ),
+    ),
+     
+    
+    onPressed:(){
+if( data_inc_dec[2].compareTo(days)==0&&data_inc_dec[1].compareTo(mounths)==0&&data_inc_dec[0].compareTo(years)==0)
+{
+  ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("لا يتم عرض الرحلات بعد تاريخ اليوم"),
+         behavior: SnackBarBehavior.floating,
+       )
+     );  
+}
+             else{
+               dec();
+                if(mounth==1||mounth==2||mounth==3||mounth==4||mounth==5||mounth==6||mounth==7||mounth==8||mounth==9)
+{mounths="0"+mounth.toString();}
+else
+{mounths=mounth.toString();}
+  if(day==1||day==2||day==3||day==4||day==5||day==6||day==7||day==8||day==9)
+{days="0"+day.toString();}
+else
+{days=day.toString();}
+years=year.toString();
+updatedata(days,mounths,years);
+ setState(() {
+   filter_trips=1;
+});
+
+             } 
+    
+
+       
+   
+    },
+    child: Text('<<',style: TextStyle(fontSize: 12,color:Colors.white)),
+    
+    
+    ),
+         
+    Text(days+" - "+mounths+" - "+years
+    ,style: TextStyle(fontSize: 15,color: thridtextcolor,fontFamily: 'Lobster')),
+          ElevatedButton(
+     style: ElevatedButton.styleFrom(
+      primary: secondappcolor,
+ 
+textStyle:TextStyle(color:Colors.white,),
+       shape:  RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(110.0)
+    ),
+    ),
+    
+    
+    onPressed:(){
+          inc();
+           if(mounth==1||mounth==2||mounth==3||mounth==4||mounth==5||mounth==6||mounth==7||mounth==8||mounth==9)
+{mounths="0"+mounth.toString();}
+else
+{mounths=mounth.toString();}
+  if(day==1||day==2||day==3||day==4||day==5||day==6||day==7||day==8||day==9)
+{days="0"+day.toString();}
+else
+{days=day.toString();}
+years=year.toString();
+setState(() {
+   filter_trips=1;
+});
+   
+updatedata(days,mounths,years);
+
+      
+      
+    },
+    child: Text('>>',style: TextStyle(fontSize: 12,color:Colors.white)),
+    
+    
+    ),
+        ],
+      ),
+      
+    ),
+//////////////////////////////////////////////////////////////////END//////////////////////////////////////////  
 SizedBox(height: 30,),
 // متغير الرحلات
-
 AppCard(),
 
 

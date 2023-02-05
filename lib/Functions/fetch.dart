@@ -3,13 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:date_format/date_format.dart';
 import '../class_tools/app_drawer.dart';
-import '../class_tools/counter_date_main.dart';
 import '../main.dart';
 
 
 
 String trip_date="";
-String massage_error="";
+
      List trips=[];
      String select_date=datetrip;
 String select_date1=datetrip1;
@@ -38,8 +37,8 @@ class Fetch
 
  }
   catch(Exc){
- massage_error=Exc.toString();
-    
+ 
+     print(Exc);
   }
   
 }
@@ -48,22 +47,15 @@ class Fetch
    
   try
   {
-    var request = http.Request('GET', Uri.parse('http://34.133.61.239:8080/users/$passwordforupdate'));
-    http.StreamedResponse response = await request.send();
+  
+    http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/users/$passwordforupdate'));
     if(response.statusCode==200)
     {
-       massage_error="تم";
-
-       return   json.decode(request.body);
+       
+   return json.decode(response.body) ;
+  
+      
     }
-    
-else
-{
-  //لو اريد الطبع رسالة الخط ابحث عن اداة حاليا هذا لي فقط
-  massage_error="${response.statusCode}";
-     
-
-}
 
   }
   catch(Exc){
@@ -133,8 +125,10 @@ List<dynamic> filtertrips2=[];
 Future<List<dynamic>?> checktrip(int filter)async{
 
 List<dynamic>? filtertrips=await fetchTrips();
-
-
+filtertrips2=[];
+trips_date_now=[]; 
+trips_inc_and_dec_date=[];
+trips_search_button=[];  
 if(filter==1)
 {
 //تاريخ الرحلة

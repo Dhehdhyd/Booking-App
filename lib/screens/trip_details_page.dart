@@ -5,7 +5,6 @@ import '../class_tools/app_card_trip.dart';
 import '../main.dart';
 import '../screens/create_an_account_page.dart';
 import '../screens/settings.dart';
-import '../class_tools/counter_date_main.dart';
 import 'create_an_account_traveler.dart';
 class Trip_details_page extends StatefulWidget {
   @override
@@ -47,7 +46,7 @@ title:Container(
 alignment: Alignment.center,
   child: Column(
     children: [
-      Text("تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+      Text(" الرجاء المسارعه بدفع الى مقر المكتب تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
      Container(
     
     height: 50,
@@ -76,7 +75,7 @@ textStyle:TextStyle(color:Colors.white,),
   setState(() {
      
         //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
- s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, dateday, typepay) .then((Value){
+ s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, typepay) .then((Value){
    ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
          content: Text(Value.toString()),
@@ -128,7 +127,7 @@ title:Container(
 alignment: Alignment.center,
   child: Column(
     children: [
-      Text("تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+      Text("تم استلام طلبك بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك بعد تاكد مكتبنا من استلام اشعار الدفع",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
      Container(
     
     height: 50,
@@ -156,7 +155,7 @@ textStyle:TextStyle(color:Colors.white,),
             onPressed: (){
   setState(() {
           //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
- s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, dateday, typepay) .then((Value){
+ s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, typepay) .then((Value){
    ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
          content: Text(Value.toString()),

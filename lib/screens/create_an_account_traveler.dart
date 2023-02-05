@@ -555,8 +555,13 @@ shprphon_no=phone_no.text;
    
 // رقم رحلة معينه
     f.fetchbooking(tthis_trip_id).then((Value){
+             setState(() {
 
-booking_trip.add(Value![0]);
+booking_trip=[(Value![0])];
+   
+}
+
+);  
    
 
 }

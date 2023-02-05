@@ -19,29 +19,27 @@ class Modifly_my_account_data extends StatefulWidget {
   @override
   _Modifly_my_account_data createState() => _Modifly_my_account_data();
 }
- int birthyearsend=client[0]['birthdate'];
  
-String? birthyear=birthyearsend.toString();
 class _Modifly_my_account_data extends State<Modifly_my_account_data> {
 
-   String imagee=base64Decode(String.fromCharCodes( client[0]['identity_image'].cast<int>())).toString();
+ 
+  String? birthyear='2000';
+
+String imagebase=String.fromCharCodes(client[0]['identity_image']['data'].cast<int>());
     final picker=ImagePicker();
     bool passwordicon=true;
      Insert s=Insert();
     String mcsendpassword="";
         String mcsendiD_number="";
-         int mcsendbirthyear=2000;
+
 File image=File('');    
     var name=TextEditingController();
 
     var password=TextEditingController();
     var phone_no=TextEditingController();
     var iD_number=TextEditingController();
-    bool showimagebool=true;
-    List<String>list_gender=[
-  'أنثى', 'ذكر',
-  ];
-  String? selectedItem='ذكر';
+    bool showimagebool=false;
+
     List<String>list_Date=[
   '1965', '1966','1967', '1968','1969', '1970','1971', '1972', '1973', '1974','1975', '1976','1977', '1978','1979', '1980',
    '1965', '1981','1982', '1983','1984', '1985','1986', '1987', '1988', '1989','1990', '1991','1992', '1993','1994', '1995',
@@ -108,7 +106,19 @@ child:
   }
   else
   {
- return SizedBox(height: 25,);
+ return Column(
+     children: [
+       SizedBox(height: 25,),
+       Container(
+          height: 150,
+width: 250,
+child: 
+
+ Image.memory(base64Decode(imagebase.split(',').last),alignment: Alignment.center,fit: BoxFit.fill,),
+        ),
+       SizedBox(height: 25,),
+     ],
+   );
   }
   }
 
@@ -212,8 +222,7 @@ nameimageandtypy(image);
             } 
   @override
   Widget build(BuildContext context) {
-   //اجعل امتغير الصوره يحوي الصوره السابقة
-   image=File('$imagee');        
+       
 
     return 
     Scaffold(
@@ -284,20 +293,20 @@ controller:name ,
                ),
               SizedBox(height: 25,),
  // الجنس والتاريخ قائمة خيارات             
-Container(
+ Container(
   
  
- child: Row(
+  child: Row(
     children: [
-    
+   
      SizedBox(width: 15,),
       Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
 
-  SizedBox(width: 25,),
+  SizedBox(width: 15,),
  Container( 
           height: 70,
     width: 223,
- 
+
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
@@ -310,12 +319,11 @@ Container(
                   onChanged: (newValue){
                     setState(() {
                               birthyear = newValue;
-                              mcsendbirthyear=int.parse(birthyear.toString()) ;
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
           value:item,
-          child: Text(item,style: TextStyle(color: thridtextcolor),),
+        child: Text(item,style: TextStyle(color: thridtextcolor),),
 ) 
                   ).toList(),
                 ),
@@ -614,8 +622,15 @@ shprimage=mimage_convert;
    mcsendpassword=password.text;
          mcsendiD_number=iD_number.text;
          
-          int user_id=client[0]['user_id'];
-s.ModiflyDataclient(shprname,mcsendpassword,shprphon_no,mcsendiD_number,mcsendbirthyear,shprimage,user_id);
+          String user_id=client[0]['user_id'];
+s.ModiflyDataclient(shprname,mcsendpassword,shprphon_no,mcsendiD_number,birthyear,shprimage,user_id).then((Value){
+   ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(Value.toString()),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
+      });
 
   });
       // غلق نافذة الرسالة 

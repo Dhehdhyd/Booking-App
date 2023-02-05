@@ -30,7 +30,6 @@ class AppCard extends StatefulWidget {
 }
 
 
-List tripss=[];
 
 class _AppCardState extends State<AppCard>{ 
   Insert s=Insert();
@@ -127,40 +126,46 @@ child: Column(
 
       ),
 
-      onPressed: (){
+      onPressed: ()async{
+                           f.fetchbooking(tthis_trip_id).then((Value){
+               setState(() {
 
-// هل قد انشاء حساب من قبل ام لاأذا انشاء ينتقل الى اتمام الحجز او الى صفحة الانشاء
+booking_trip=[(Value![0])];
+   
+}
 
-   //احدد رقم الصفحة
-
-   setState(() {
-     
-// رقم رحلة معينه
-    f.fetchbooking(tthis_trip_id).then((Value)async{
-
-   SharedPreferences prefs=await SharedPreferences.getInstance();
+);      
+   select_page(context, 1);     
+                              });
+SharedPreferences prefs=await SharedPreferences.getInstance();
   //بعض من بيانات العميل يتم حفظها مثل الاسم والصوره ورقم الهاتف من اجل ارسالها عند الحاجة
           create_account=prefs.getBool("create_account")as bool;
           shprname=prefs.getString("shprname").toString();
           shprphon_no=prefs.getString("shprphon_no").toString();
           shprimage=prefs.getString("shprimage").toString();
-booking_trip.add(Value![0]);
+// هل قد انشاء حساب من قبل ام لاأذا انشاء ينتقل الى اتمام الحجز او الى صفحة الانشاء
 
-   select_page(context, 1);     
-
-
-   
-
-}
-
-);
-
+   //احدد رقم الصفحة
   ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-         content: Text("شكرا لك لختيرك الرحلة المقدمة من مكتب"+" "+booking_trip[0]['office_name']),
+         content: Text( tthis_trip_id.toString()),
          behavior: SnackBarBehavior.floating,
        )
      ); 
+           // رقم رحلة معينه
+ 
+
+
+  ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("شكرا لك لختيرك الرحلة المقدمة من مكتب"+" "+booking_trip[0]['office_name']+tthis_trip_id.toString()+booking_trip[0]['arrival_city']),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
+        
+
+
+
          //جلب بيانات الحجز لداخل متغير Booking من اجل عرضها في صفحة تاكيد الحجز
 
 
@@ -169,7 +174,7 @@ booking_trip.add(Value![0]);
 
 
 
-      }); 
+      
 
 
    
@@ -225,7 +230,7 @@ booking_trip.add(Value![0]);
 
       onPressed: (){
 
- setState(() {
+ 
 
 select_page(context, 3);
 
@@ -233,7 +238,7 @@ select_page(context, 3);
 
     
 
-  });
+ 
 
       },
 
@@ -253,22 +258,24 @@ select_page(context, 3);
 
 
 
-    setState(() {
+  
 
         showDialog(builder: (context) => ad, context:context);
 
           
 
-        });  
+     
 
   }
 
-Widget appbar(){
-    return 
 
 
 
-      Container(
+  Widget build(BuildContext context) {
+
+List<dynamic> tripss=[];
+
+   return  Container(
 
         width: 360,
 
@@ -742,7 +749,7 @@ textStyle:TextStyle(color:Colors.white,),
     
 
     onPressed:(){
-setState(() {
+
   
 
       //يختبر هل الشخص يملك حساب او لا 
@@ -809,13 +816,13 @@ textStyle:TextStyle(color:Colors.white,),
 
           onPressed: (){
 
-   setState(() {
+  
 
        select_page(context, 2);
 
    Navigator.of(context,rootNavigator: true).pop('booking');   
 
-      });
+     
 
         
 
@@ -859,13 +866,13 @@ textStyle:TextStyle(color:Colors.white,),
 
       onPressed: (){
 
-  setState(() {
+
 
    Navigator.of(context,rootNavigator: true).pop('booking');         
 
       
 
-    });
+   
 
            
 
@@ -934,14 +941,17 @@ textStyle:TextStyle(color:Colors.white,),
    else
 
      { myDialog();
-     office_name=tripss[index]['office_name'];
+     setState(() {
+            office_name=tripss[index]['office_name'];
     tthis_trip_id=tripss[index]['trip_id'];
+          });
+     
   
 
      }
 
     }  
-    });
+    
     },
 
     child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 15,color:Colors.white,)),
@@ -978,13 +988,23 @@ SizedBox(height: 5,),],
            {
  //لو لم يعد الرحلات يظهر الحلقة الدواره
 
-                        return CircularProgressIndicator();
-   ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text("اتصل بالانترنت وحاول مرة اخرى"),
-         behavior: SnackBarBehavior.floating,
-       )
-     );
+                        return Column(
+                          children: [
+                             Container(
+                           child: Text("انت غير متصل بالانترنت او انك تبحث  عن رحلة غير متوفرة لدينا",
+                           style: TextStyle(color: secondtextcolor,fontSize: 10,fontWeight: FontWeight.bold),),
+                         ),
+
+          Container(
+width: 200,
+height:200,
+            child: Image.asset("assets/images/net.png",alignment: Alignment.center,fit: BoxFit.fill,)),
+
+                            CircularProgressIndicator(),
+                         ],
+                        );
+                  
+ 
                       }          
 
                     }
@@ -995,11 +1015,7 @@ SizedBox(height: 5,),],
 
      
 
-      );}
-
-  Widget build(BuildContext context) {
-
-return appbar();
+      );
 
   }
 
