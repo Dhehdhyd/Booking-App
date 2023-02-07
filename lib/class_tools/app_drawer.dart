@@ -18,9 +18,9 @@ String sendpasswordforupdate="";
 class _AppDrawerState extends State<AppDrawer> {
 Fetch f=Fetch();
  var passwordforupdate=TextEditingController();
-  //const AppDrawer({Key key}) : super(key: key);
+ 
   // الانتقال الى الفيديو اليوتيوب
-  final Uri _url = Uri.parse('https://youtube.com/');
+  final Uri _url = Uri.parse('https://youtube.be/XjeRoSFGg2s');
   launchurl(String url)async{
     if(await canLaunch(url)){
       await launch(url);
@@ -41,8 +41,7 @@ Fetch f=Fetch();
       
         
  return index_page==1?Modifly_my_account_data():index_page==2?Settingpage():index_page==3?About_the_application():index_page==4?Help_and_support():Mycreate_account();
-//arguments: {
-//مفتاح وقيمة'id':indexpage==1?10:20وهكذا كل القيم التي تحتاج لتمريرها
+
 
 }  ),
     );
