@@ -339,7 +339,7 @@ return          Card(
                  height: 40,
 
                  alignment: Alignment.topLeft,
-                 child: Image.memory(base64Decode(String.fromCharCodes( tripss[index]['logo_image']['data'].cast<int>())),alignment: Alignment.center,fit: BoxFit.fill,)
+                 child: Image.memory(base64Decode((String.fromCharCodes( tripss[index]['logo_image']['data'].cast<int>())).split(',').last),alignment: Alignment.center,fit: BoxFit.fill,)
 
                  ),
 

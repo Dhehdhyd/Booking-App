@@ -8,17 +8,16 @@ import '../screens/help_and_support.dart';
 import '../screens/modifly_my_account_data.dart';
 import '../screens/settings.dart';
 //القائمة المنسدلة
-   var passwordforupdate=TextEditingController();
-String sendpasswordforupdate =passwordforupdate.text;
+  
 List<dynamic>client=[];
 class AppDrawer extends StatefulWidget {
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
-
+String sendpasswordforupdate="";
 class _AppDrawerState extends State<AppDrawer> {
 Fetch f=Fetch();
-
+ var passwordforupdate=TextEditingController();
   //const AppDrawer({Key key}) : super(key: key);
   // الانتقال الى الفيديو اليوتيوب
   final Uri _url = Uri.parse('https://youtube.com/');
@@ -53,7 +52,8 @@ Fetch f=Fetch();
      modifly(){
        
         if(create_account==false)
-     { final AlertDialog booking=AlertDialog(
+     { 
+       final AlertDialog booking=AlertDialog(
 title:Container(
 alignment: Alignment.center,
   child: Column(
@@ -193,41 +193,43 @@ controller:passwordforupdate,
 
       child: Center(child: Text("تحقق",style: TextStyle(color: Colors.white),)),
       onPressed: (){
-
-   f.fetchclient(sendpasswordforupdate).then((Value){
-setState(() {
-  if((Value![0])!=[])
+        setState(() {
+                sendpasswordforupdate=passwordforupdate.text;  
+                });
  
-{    
- 
-  //استرجاع البيانات السابقة للعميل من اجل تعديلها
-client=[(Value[0])];
-     //ينتقل لصفحة التعديل
-      select_page(context, 1); 
- } //رساله تعرض رسالة الخطا
-     else
 
-   {
-  ScaffoldMessenger.of(context).showSnackBar(
+              f.fetchclient(sendpasswordforupdate).then((Value){
+               setState(() {
+
+
+
+
+   
+if([(Value![0])].isNotEmpty )  
+  {
+     client=[(Value[0])];
+     select_page(context, 1);     
+   Navigator.of(context,rootNavigator: true).pop('passwordshow');       
+   
+   
+  }
+  else
+  {
+    ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-         content: Text("كلمة المرور خاطئة"),
+         content: Text("كلمة المرور خاطئة حاول مجددا"),
          behavior: SnackBarBehavior.floating,
        )
-     );
-   }
-   
-});
-    
- 
-   
+     );    
+  } 
+  }
 
- 
-
-   Navigator.of(context,rootNavigator: true).pop('passwordshow');         
-      
+);  
     });
            
 
+
+ 
       },
       
     ),
@@ -270,8 +272,8 @@ SizedBox(height: 20),
         ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color:secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
   trailing: Icon(Icons.manage_accounts,color: fristappcolor,),
   onTap: ()=>{
-       
-  modifly(),
+    setState(() {   
+  modifly();}),
   },),
          ListTile(title: Text('الإعدادات',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',)),
   trailing: Icon(Icons.settings,color: fristappcolor,),

@@ -6,6 +6,7 @@ import '../class_tools/app_drawer.dart';
 import '../main.dart';
 
 
+ String messageerre="";
 
 String trip_date="";
 
@@ -51,15 +52,15 @@ class Fetch
     http.Response response=await http.get(Uri.parse('http://34.133.61.239:8080/users/$passwordforupdate'));
     if(response.statusCode==200)
     {
-       
+       if(response.body.isNotEmpty)
    return json.decode(response.body) ;
   
-      
+   
     }
 
   }
   catch(Exc){
-    print(Exc);
+   messageerre= Exc.toString();
   }
   
 

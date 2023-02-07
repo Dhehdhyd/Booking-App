@@ -23,9 +23,10 @@ class Modifly_my_account_data extends StatefulWidget {
 class _Modifly_my_account_data extends State<Modifly_my_account_data> {
 
  
-  String? birthyear='2000';
 
-String imagebase=String.fromCharCodes(client[0]['identity_image']['data'].cast<int>());
+ String? birthyear=client[0]['birthdate'];
+
+//Uint8List u=Uri.parse(String.fromCharCodes(client[0]['identity_image']['data'].cast<int>())).data!.contentAsBytes();
     final picker=ImagePicker();
     bool passwordicon=true;
      Insert s=Insert();
@@ -53,15 +54,8 @@ File image=File('');
 bool oksaveimage=false;
   
   Future convertimage(File image,String path)async{
-//ضغط الصورة
-   var result = await FlutterImageCompress.compressAndGetFile(
-        image.absolute.path, path,
-        quality: 40,
 
-      );
-
-     
-    List<int> imageBytes=await result!.readAsBytes();
+    List<int> imageBytes=await image.readAsBytes();
        setState(() {
         
     String base64string=base64.encode(imageBytes.cast<int>());
@@ -113,8 +107,8 @@ child:
           height: 150,
 width: 250,
 child: 
-
- Image.memory(base64Decode(imagebase.split(',').last),alignment: Alignment.center,fit: BoxFit.fill,),
+//Text(""),
+ Image.memory(base64Decode((String.fromCharCodes(client[0]['identity_image']['data'].cast<int>()).split(',').last) ),alignment: Alignment.center,fit: BoxFit.fill,),
         ),
        SizedBox(height: 25,),
      ],
@@ -124,7 +118,8 @@ child:
 
   //دالة اختيار صوره
  Future getImage(ImageSource scr)async{
-final PickedFile=await picker.getImage(source: scr);
+final PickedFile=await picker.getImage(source: scr,
+imageQuality: 10);
 setState(() {
   if(PickedFile!=null)
   {
@@ -472,7 +467,9 @@ SizedBox(width: 10,),
    
       onPressed: (){
    
-getImage(ImageSource.gallery);
+getImage(ImageSource.gallery
+
+);
  
    Navigator.of(context,rootNavigator: true).pop('dialog');         
         

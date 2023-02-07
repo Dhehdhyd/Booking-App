@@ -52,7 +52,7 @@ class _Mycreate_accountState extends State<Mycreate_account> {
     var iD_number=TextEditingController();
           String sendpassword="";
         String sendiD_number="";
-         int sendbirthyear=2000;
+    
         
     bool showimagebool=false;
    
@@ -63,10 +63,10 @@ class _Mycreate_accountState extends State<Mycreate_account> {
    '1965', '1996','1997', '1998','1999', '2000','2001', '2002', '2003', '2004','2005', '2006','2007', '2008','2009'
   ];
   String? birthyear='2000';
-  String cimage_convert="";//الصوره المحولة
+  
  //تحويل الصوره الى سلسلة لتخزينها في السرفر 
 bool oksaveimage=false;
-  
+  String cimage_convert="";//الصوره المحولة
   Future convertimage(File image,String path)async{
 //ضغط الصورة
    var result = await FlutterImageCompress.compressAndGetFile(
@@ -324,7 +324,7 @@ Container(
                   onChanged: (newValue){
                     setState(() {
                               birthyear = newValue;
-                              sendbirthyear=int.parse(birthyear.toString()) ;
+                             
                             });
                   },
                   items: list_Date.map((item)=> DropdownMenuItem(
@@ -663,10 +663,10 @@ shprimage=cimage_convert;
 
             savevalues();
             sendiD_number=iD_number.text;
-            sendpassword=iD_number.text;
+            sendpassword=password.text;
       //-----------------------------------------------------------------------//
             //ارسال البيانات الى السرفر
-            s.SendDataclient(shprname,sendpassword,shprphon_no,sendiD_number,sendbirthyear,shprimage).then((Value)
+            s.SendDataclient(shprname,sendpassword,shprphon_no,sendiD_number,birthyear,shprimage).then((Value)
             {
               ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
@@ -681,7 +681,7 @@ shprimage=cimage_convert;
    Navigator.of(context, rootNavigator: true).pop('ok');         
 
 //الانتقال الى الصفحة الرئسية
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (_){
       
         
