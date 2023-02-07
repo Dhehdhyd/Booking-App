@@ -27,7 +27,7 @@ class Fetch
   try{
   
     var request =await http.get( Uri.parse('http://34.133.61.239:8080/trips'));
-   // http.StreamedResponse response = await request.send();
+ 
     if(request.statusCode==200)
     {
 
@@ -156,7 +156,7 @@ else if(filter==0)
 
  //تاريخ اليوم بدون مايضفط على اي زر اول مايشتغل التطبيق
  for(int i=0;i<filtertrips!.length;i++)
- { if(filtertrips[i]['trip_day']=='السبت')//change(Dateday))
+ { if(filtertrips[i]['trip_day']==change(Dateday))
   {
     trips_date_now.add(filtertrips[i]);
   }
@@ -176,7 +176,7 @@ else if(filter==2)
  for(int i=0;i<filtertrips!.length;i++)
 
  {if(filtertrips[i]['trip_day']==change(select_date)&&filtertrips[i]['arrival_city']==to_city.toString()&&filtertrips[i]['departure_city']==from_city.toString())
-    //if(filtertrips[i]['trip_day']=='السبت'&&filtertrips[i]['arrival_city']=='تعز'&&filtertrips[i]['departure_city']=='اب')
+    
   {
     
     trips_search_button.add(filtertrips[i]);

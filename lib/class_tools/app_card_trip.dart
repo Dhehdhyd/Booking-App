@@ -146,13 +146,7 @@ SharedPreferences prefs=await SharedPreferences.getInstance();
 // هل قد انشاء حساب من قبل ام لاأذا انشاء ينتقل الى اتمام الحجز او الى صفحة الانشاء
 
    //احدد رقم الصفحة
-  ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text( tthis_trip_id.toString()),
-         behavior: SnackBarBehavior.floating,
-       )
-     ); 
-           // رقم رحلة معينه
+  // رقم رحلة معينه
  
 
 
@@ -371,7 +365,7 @@ return          Card(
 
                    Row(
 
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            
 
 
 
@@ -451,7 +445,7 @@ return          Card(
 
                    Row(
 
-             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+             
 
 
 
@@ -514,7 +508,7 @@ return          Card(
 
                    Row(
 
-             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+         
 
 
 
@@ -592,7 +586,7 @@ return          Card(
 
                    Row(
 
-             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            
 
 
 
@@ -656,7 +650,7 @@ return          Card(
 
                    Row(
 
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+             
 
 
 

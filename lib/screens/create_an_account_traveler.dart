@@ -38,15 +38,9 @@ class _Create_accountState extends State<Create_account> {
 bool oksaveimage=false;
   
   Future convertimage(File image,String path)async{
-//ضغط الصورة
-   var result = await FlutterImageCompress.compressAndGetFile(
-        image.absolute.path, path,
-        quality: 40,
-
-      );
 
      
-    List<int> imageBytes=await result!.readAsBytes();
+    List<int> imageBytes=await image.readAsBytes();
        setState(() {
         
     String base64string=base64.encode(imageBytes.cast<int>());
@@ -97,7 +91,8 @@ child:
 
   //دالة اختيار صوره
  Future getImage(ImageSource scr)async{
-final PickedFile=await picker.getImage(source: scr);
+final PickedFile=await picker.getImage(source: scr,
+  imageQuality: 30);
 setState(() {
   if(PickedFile!=null)
   {

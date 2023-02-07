@@ -27,7 +27,7 @@ void main()async{
   //عندما ينشاء حساب تتسجل بيانات العميل اي انه قد انشاء حساب فيتم ارجاع قيمة متغير الانشاء لكي لا اسمح له بانشاء حساب جديد
 WidgetsFlutterBinding.ensureInitialized();
 //هذا الشرط لي لانه جهازي قد حفظ البيانات افعل هذا الشرط بس
-         // if(create_account==true)
+          if(create_account==true)
 {
     SharedPreferences prefs=await SharedPreferences.getInstance();
   //بعض من بيانات العميل يتم حفظها مثل الاسم والصوره ورقم الهاتف من اجل ارسالها عند الحاجة

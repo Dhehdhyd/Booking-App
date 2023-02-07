@@ -75,14 +75,8 @@ textStyle:TextStyle(color:Colors.white,),
   setState(() {
      
         //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
- s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, typepay) .then((Value){
-   ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text(Value.toString()),
-         behavior: SnackBarBehavior.floating,
-       )
-     ); 
-      });
+ s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, typepay) ;
+ 
 
  
   });
@@ -155,14 +149,7 @@ textStyle:TextStyle(color:Colors.white,),
             onPressed: (){
   setState(() {
           //ارسل بيانات لتاكيد الحجز مثل اسم مقدم الطلب  وصورتة ورقم هاتفة وتاريخ الرحلةورقم الرحلة وتاريخ الحجز الذي هو تاريخ الرحلة  وكذا نوع الدفع 
- s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, typepay) .then((Value){
-   ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text(Value.toString()),
-         behavior: SnackBarBehavior.floating,
-       )
-     ); 
-      });
+ s.SendBooking_data(shprname, shprimage, shprphon_no, tthis_trip_id, trip_date, typepay) ;
 
   });
       // غلق نافذة الرسالة 

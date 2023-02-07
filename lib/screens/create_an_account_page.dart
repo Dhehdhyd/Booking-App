@@ -68,15 +68,9 @@ class _Mycreate_accountState extends State<Mycreate_account> {
 bool oksaveimage=false;
   String cimage_convert="";//الصوره المحولة
   Future convertimage(File image,String path)async{
-//ضغط الصورة
-   var result = await FlutterImageCompress.compressAndGetFile(
-        image.absolute.path, path,
-        quality: 40,
 
-      );
-
-     
-    List<int> imageBytes=await result!.readAsBytes();
+   
+    List<int> imageBytes=await image.readAsBytes();
        setState(() {
         
     String base64string=base64.encode(imageBytes.cast<int>());
@@ -127,7 +121,8 @@ child:
 
   //دالة اختيار صوره
  Future getImage(ImageSource scr)async{
-final PickedFile=await picker.getImage(source: scr);
+final PickedFile=await picker.getImage(source: scr,
+  imageQuality: 30);
 setState(() {
   if(PickedFile!=null)
   {
@@ -666,15 +661,7 @@ shprimage=cimage_convert;
             sendpassword=password.text;
       //-----------------------------------------------------------------------//
             //ارسال البيانات الى السرفر
-            s.SendDataclient(shprname,sendpassword,shprphon_no,sendiD_number,birthyear,shprimage).then((Value)
-            {
-              ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-         content: Text(Value.toString()),
-         behavior: SnackBarBehavior.floating,
-       )
-     ); 
-            });
+            s.SendDataclient(shprname,sendpassword,shprphon_no,sendiD_number,birthyear,shprimage);
 
   });
       // غلق نافذة الرسالة 

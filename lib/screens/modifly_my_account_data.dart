@@ -26,7 +26,7 @@ class _Modifly_my_account_data extends State<Modifly_my_account_data> {
 
  String? birthyear=client[0]['birthdate'];
 
-//Uint8List u=Uri.parse(String.fromCharCodes(client[0]['identity_image']['data'].cast<int>())).data!.contentAsBytes();
+
     final picker=ImagePicker();
     bool passwordicon=true;
      Insert s=Insert();
