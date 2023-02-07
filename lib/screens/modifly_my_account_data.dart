@@ -119,7 +119,8 @@ child:
   //دالة اختيار صوره
  Future getImage(ImageSource scr)async{
 final PickedFile=await picker.getImage(source: scr,
-imageQuality: 10);
+imageQuality: 30
+);
 setState(() {
   if(PickedFile!=null)
   {
