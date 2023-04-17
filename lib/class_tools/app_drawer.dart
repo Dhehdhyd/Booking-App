@@ -20,7 +20,7 @@ Fetch f=Fetch();
  var passwordforupdate=TextEditingController();
  
   // الانتقال الى الفيديو اليوتيوب
-  final Uri _url = Uri.parse('https://youtube.be/XjeRoSFGg2s');
+  final Uri _url = Uri.parse('https://youtu.be/XjeRoSFGg2s');
   launchurl(String url)async{
     if(await canLaunch(url)){
       await launch(url);
