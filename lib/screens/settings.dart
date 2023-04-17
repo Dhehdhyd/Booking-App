@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
  // اللوان الخاصة بتطبيق
   Color darkcolor=Colors.black;
   Color lightcolor=Colors.white;
@@ -26,9 +27,9 @@ class _SettingpageState extends State<Settingpage> {
        appBar: AppBar(
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 250),
+             padding: EdgeInsets.only(left:75),
 
-             child: Text(" الإعدادت ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7)),
+             child: Text(" الإعدادت ",style:TextStyle(fontSize: 12.sp,fontFamily: 'Lobster',height: 0.7.h)),
            ),], 
           flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -49,16 +50,16 @@ gradient: LinearGradient(colors: [
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left:200.0),
-            child: Text("تغير الوان التطبيق",style:TextStyle(fontSize: 18,height: 1.7)),
+            padding:  EdgeInsets.only(left:100.0),
+            child: Text("تغير الوان التطبيق",style:TextStyle(fontSize: 10.sp,height: 0.7.h)),
             
           ),
-      SizedBox(height: 5,) ,
+      SizedBox(height: 2.5.h,) ,
     Divider(color: Colors.black,),
-      SizedBox(height: 10,) ,
+      SizedBox(height: 5.h,) ,
  Padding(
-            padding: const EdgeInsets.only(left:200.0),
-            child: Text(" الوان خلفية التطبيق",style:TextStyle(fontSize: 18)),
+            padding: EdgeInsets.only(left:100.0),
+            child: Text(" الوان خلفية التطبيق",style:TextStyle(fontSize: 10.sp)),
             
           ),
           Center(
@@ -68,7 +69,7 @@ gradient: LinearGradient(colors: [
               
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(40),
+                  padding: const EdgeInsets.all(20),
                   child: Text("ابيض"),
                 ),
                 Switch(
@@ -85,22 +86,22 @@ gradient: LinearGradient(colors: [
                   inactiveThumbColor: lightcolor,
                 ),
                Padding(
-                  padding: const EdgeInsets.all(40),
+                  padding: const EdgeInsets.all(20),
                   child: Text("أسود"),
                 ), 
               ],
             ),
           ),
-      SizedBox(height: 20,) ,
+      SizedBox(height: 10.h,) ,
     Divider(color: darkcolor,),
  
-      SizedBox(height: 5,) ,
+      SizedBox(height: 2.5.h,) ,
       Padding(
-            padding: const EdgeInsets.only(left:160.0),
-            child: Text("تغير لوني التطبيق الإساسيين ",style:TextStyle(fontSize: 18)),
+            padding:  EdgeInsets.only(left:80.0),
+            child: Text("تغير لوني التطبيق الإساسيين ",style:TextStyle(fontSize: 10.sp)),
             
           ),
-      SizedBox(height: 30,) ,
+      SizedBox(height: 15.h,) ,
  
             Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -108,7 +109,7 @@ gradient: LinearGradient(colors: [
               children: [
 
                 Container(
-      width: 150,
+      width: 75.w,
                  
     
     child: ElevatedButton(
@@ -120,7 +121,7 @@ gradient: LinearGradient(colors: [
     ),
     ),
       child: 
-    Text(" اللون الإول",style:TextStyle(fontSize: 15,color: lightcolor)),
+    Text(" اللون الإول",style:TextStyle(fontSize: 10.sp,color: lightcolor)),
       
      
       onPressed: (){
@@ -134,7 +135,7 @@ gradient: LinearGradient(colors: [
           ),
         
           Container(
-      width: 150,
+      width: 75.w,
                  
     
     child:  ElevatedButton(
@@ -147,7 +148,7 @@ gradient: LinearGradient(colors: [
     ),
     ),
       child: 
-    Text(" اللون الثاني",style:TextStyle(fontSize: 15,color:lightcolor)),
+    Text(" اللون الثاني",style:TextStyle(fontSize: 10.sp,color:lightcolor)),
       
  
       onPressed: (){
@@ -161,7 +162,7 @@ gradient: LinearGradient(colors: [
           ),
             ],
             ),
-        SizedBox(height: 20,) ,
+        SizedBox(height: 10.h,) ,
     Divider(color: darkcolor,), ],
       ),
       

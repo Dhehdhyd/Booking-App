@@ -8,7 +8,7 @@ import '../class_tools/app_drawer.dart';
 import '../class_tools/app_card_trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Functions/fetch.dart';
-
+import 'package:sizer/sizer.dart';
 ThemeMode tm=ThemeMode.light;
 bool darkMode=false;
  int day=16;
@@ -50,8 +50,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return 
-    MaterialApp(
+ return Sizer(
+      builder: (context, orientation, deviceType) {
+        return MaterialApp(
       title: 'TravBus',
       //اتجاة الكتابة واللغة العربية
        localizationsDelegates: [
@@ -90,9 +91,10 @@ class MyApp extends StatelessWidget {
         '/': (context) =>MyHomePage() ,
         
                                       
-
+      }
                                        
-          }
+         );
+      },
     );
   }
 }
@@ -381,9 +383,9 @@ selectedDate1=date;
           
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 210.0),
+             padding: EdgeInsets.only(left: 210.0),
 
-             child: Text('الصفحة الرئيسية',style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color:lightcolor)),
+             child: Text('الصفحة الرئيسية',style:TextStyle(fontSize: 16.sp,fontFamily: 'Lobster',height: 1.7,color:lightcolor)),
            ),
 
           ],backgroundColor: secondappcolor,
@@ -397,22 +399,22 @@ child: SingleChildScrollView(
 child: Column(
   mainAxisAlignment: MainAxisAlignment.start,
 children: [
-SizedBox(height: 20),
+SizedBox(height: 2.h),
 Container(
   child: Row(
     children: [
-        SizedBox(width: 10),
+        SizedBox(width: 4.w),
    Icon(Icons.location_city,color: secondappcolor),
-   SizedBox(width: 10), 
-        Text('من مدينة',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
+   SizedBox(width: 4.w), 
+        Text('من مدينة',style:TextStyle(color: secondtextcolor,fontSize: 13.sp,fontFamily: 'Lobster',
         ),),
    
     ],
   ),
 ),
-SizedBox(height: 10),
+SizedBox(height: 2.h),
 Container(
-  height: 70,
+  height: 10.h,
   child: DropdownButtonFormField<String>(
   decoration: InputDecoration(
     enabledBorder: OutlineInputBorder(
@@ -437,25 +439,24 @@ Container(
           ).toList(),
         ),
     ),
-         
-       SizedBox(height: 10),
+ 
   Container(
   child: Row(
     children: [
-        SizedBox(width: 10),
+        SizedBox(width: 4.w),
    Icon(Icons.location_on,color: secondappcolor,),
-   SizedBox(width: 10), 
-        Text('الى مدينة',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
+   SizedBox(width: 4.w), 
+        Text('الى مدينة',style:TextStyle(color: secondtextcolor,fontSize: 13.sp,fontFamily: 'Lobster',
         ),
         ),
    
     ],
   ),
 ),
-SizedBox(height: 10),
+SizedBox(height: 2.h),
 //قائمة الخيارات
 Container(
-  height: 70,
+  height: 10.h,
   
   child: DropdownButtonFormField<String>(
   decoration: InputDecoration(
@@ -481,17 +482,17 @@ Container(
           ).toList(),
         ),
     ),
-SizedBox(height: 30),
+
 //التاريخ
 Container(child:Row(
   children: [
-    SizedBox(width: 6,),
+    SizedBox(width: 4.w,),
    Icon(Icons.date_range,color: secondappcolor,), 
-SizedBox(width: 10),
+SizedBox(width: 4.w),
  //String Day=formatDate(DateTime.parse(date),[D]);
 
     InkWell(
-        child: Text("${datetrip}",style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',
+        child: Text("${datetrip}",style:TextStyle(color: secondtextcolor,fontSize: 13.sp,fontFamily: 'Lobster',
  
         ),),
         onTap:(){
@@ -506,7 +507,7 @@ SizedBox(width: 10),
  
 ),
 
-SizedBox(height: 20),
+SizedBox(height: 2.h),
 //الزر بحث
 Container(child: Column(
   children: [
@@ -531,7 +532,7 @@ setState(() {
   
     }
     ,
-    child: Text('بحث ',style: TextStyle(fontSize: 15,color:lightcolor)),
+    child: Text('بحث ',style: TextStyle(fontSize: 10.sp,color:lightcolor)),
     
     
     ),
@@ -542,7 +543,7 @@ setState(() {
 ),
 /////////////////////////////////////// الزيادة والنقصان في التاريخ//////////////////////////////////////////////
 Container(
-      height: 50,
+      height: 10.h,
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -590,13 +591,13 @@ updatedata(days,mounths,years);
        
    
     },
-    child: Text('<<',style: TextStyle(fontSize: 12,color:Colors.white)),
+    child: Text('<<',style: TextStyle(fontSize: 12.sp,color:Colors.white)),
     
     
     ),
          
     Text(days+" - "+mounths+" - "+years
-    ,style: TextStyle(fontSize: 15,color: thridtextcolor,fontFamily: 'Lobster')),
+    ,style: TextStyle(fontSize: 10.sp,color: thridtextcolor,fontFamily: 'Lobster')),
           ElevatedButton(
      style: ElevatedButton.styleFrom(
       primary: secondappcolor,
@@ -628,7 +629,7 @@ updatedata(days,mounths,years);
       
       
     },
-    child: Text('>>',style: TextStyle(fontSize: 12,color:Colors.white)),
+    child: Text('>>',style: TextStyle(fontSize: 12.sp,color:Colors.white)),
     
     
     ),
@@ -637,7 +638,7 @@ updatedata(days,mounths,years);
       
     ),
 //////////////////////////////////////////////////////////////////END//////////////////////////////////////////  
-SizedBox(height: 30,),
+
 // متغير الرحلات
 AppCard(),
 

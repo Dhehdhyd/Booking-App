@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../screens/settings.dart';
 
@@ -15,42 +16,37 @@ class _Help_and_supportState extends State<Help_and_support> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+             appBar: AppBar(
+          
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 210),
+             padding: EdgeInsets.only(left: 210.0),
 
-             child: Text(" المساعدة و الدعم ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
-           ),], 
-          flexibleSpace: Container(
-          decoration: BoxDecoration(
-gradient: LinearGradient(colors: [
-secondappcolor,
-secondappcolor,
-  
+             child: Text(' المساعدة والدعم',style:TextStyle(fontSize: 16.sp,fontFamily: 'Lobster',height: 1.7,color:lightcolor)),
+           ),
 
-
-],),
-          ),
-          ),
-
+          ],backgroundColor: secondappcolor,
+    
         ),
       body:
      Container(
      child: Row(
        children: [
         Container(
-          margin: EdgeInsets.only(left: 5),
-          child: Column (
+          margin: EdgeInsets.only(left: 10),
+          
+          child: 
+
+          Column (
             
              children: [
     
                Container(
   
-                 margin: EdgeInsets.only(top: 20),
+                 margin: EdgeInsets.only(top: 10),
                  child: Icon(Icons.call,color:fristappcolor,size: 50,),
                ),
-SizedBox(height: 30,),
+SizedBox(height: 7.h,),
 Container(
   child: InkWell(
     
@@ -60,9 +56,8 @@ Container(
   
               
   
-  SizedBox(width: 8,),
   
-              Text(" مكتب البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+              Text(" مكتب البركة",style: TextStyle(color:secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
   
             ],
   
@@ -76,7 +71,7 @@ Container(
   
       ),
 ),
-    SizedBox(height: 10,),
+    SizedBox(height: 2.h,),
 Container(
   child: InkWell(
     
@@ -86,9 +81,9 @@ Container(
   
               
   
-  SizedBox(width: 8,),
+
   
-              Text("مكتب ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+              Text("مكتب ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
   
             ],
   
@@ -103,6 +98,7 @@ Container(
       ),
 ),
           
+    SizedBox(height: 2.h,),
          
          Container(
   child: InkWell(
@@ -113,9 +109,9 @@ Container(
   
               
   
-  SizedBox(width: 8,),
+
   
-              Text(" الدعم الفني ",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+              Text(" الدعم الفني ",style: TextStyle(color:secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
   
             ],
   
@@ -131,15 +127,16 @@ Container(
 ),    ],
            ),
         ),
-SizedBox(width: 130,),
+    SizedBox(width: 40.w,),
+
         Column(
           children: [
             Container(
-               margin: EdgeInsets.only(top: 20),   
+               margin: EdgeInsets.only(top: 10),   
                    child: Icon(Icons.whatsapp_rounded,color: fristappcolor,size: 50,),
               ),
         
-        SizedBox(height: 30,),
+        SizedBox(height: 7.h,),
 Container(
   child:   InkWell(
 
@@ -149,9 +146,9 @@ Container(
   
             
   
-  SizedBox(width: 14,),
+
   
-            Text(" مكتب البركة",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+            Text(" مكتب البركة",style: TextStyle(color:secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
   
           ],
   
@@ -165,7 +162,8 @@ Container(
   
       ),
 ),
-    SizedBox(height: 10,),Container(
+    SizedBox(height: 2.h,),
+    Container(
   child:   InkWell(
 
      child: Row(
@@ -174,9 +172,9 @@ Container(
   
           
   
-  SizedBox(width: 14,),
+
   
-            Text(" مكتب ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+            Text(" مكتب ابوسرهد",style: TextStyle(color:secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
   
           ],
   
@@ -189,7 +187,9 @@ Container(
         },
   
       ),
-), 
+),
+    SizedBox(height: 2.h,),
+
 Container(
   child:   InkWell(
 
@@ -199,9 +199,9 @@ Container(
   
             
   
-  SizedBox(width: 14,),
+
   
-            Text("  الدعم الفني",style: TextStyle(color:secondtextcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+            Text("  الدعم الفني",style: TextStyle(color:secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
   
           ],
   

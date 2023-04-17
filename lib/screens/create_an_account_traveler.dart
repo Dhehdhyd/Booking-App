@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';//اتجاة الكتابة
 import 'package:intl/intl.dart';//تنسيق التاريخ
+import 'package:sizer/sizer.dart';
 import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
 import '../class_tools/app_card_trip.dart';
@@ -71,21 +72,21 @@ bool oksaveimage=false;
 if(showimagebool==true)
    {return Column(
      children: [
-       SizedBox(height: 25,),
+       SizedBox(height: 13.h,),
        Container(
-          height: 150,
-width: 250,
+          height: 35.h,
+width: 110.w,
 child:
  Image.file(image,fit: BoxFit.fill,),
         ),
-       SizedBox(height: 25,),
+       SizedBox(height: 13.h,),
      ],
    );
 
   }
   else
   {
- return SizedBox(height: 25,);
+ return SizedBox(height: 13.h,);
   }
   }
 
@@ -99,24 +100,24 @@ setState(() {
     image=File(PickedFile.path);
      final AlertDialog adimage=AlertDialog(
 content: Container(
-height: 250,
-width: 300,
+height: 65.h,
+width: 90.w,
 
 child:
  Column(
   children: [
     Container(
-      height: 150,
-width: 250,
+      height: 45.h,
+width: 75.w,
 child:
  image==File('')?Text("لم تختر صورة"):Image.file(image,fit: BoxFit.fill,),
     ),
-    SizedBox(height: 20,),
+    SizedBox(height: 5.h,),
 
     Row(
       children: [
         Container(
-          width: 100,
+          width: 25.w,
         
         child:  ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -145,10 +146,10 @@ nameimageandtypy(image);
         ),
         ),
      
-    SizedBox(width: 70,),
+    SizedBox(width: 15.w,),
        Container(
          
-      width: 100,
+      width: 25.w,
    
     child: ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -193,46 +194,38 @@ nameimageandtypy(image);
    
   return 
     Scaffold(
-       appBar: AppBar(
+             appBar: AppBar(
+          
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 250),
+             padding: EdgeInsets.only(left: 210.0),
 
-             child: Text(" بيانات مسافر",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: Colors.white)),
-           ),], 
-          flexibleSpace: Container(
-          decoration: BoxDecoration(
-gradient: LinearGradient(colors: [
-  secondappcolor,
-  secondappcolor,
-  
+             child: Text("بيانات مسافر",style:TextStyle(fontSize: 16.sp,fontFamily: 'Lobster',height: 1.7,color:lightcolor)),
+           ),
 
-
-],),
-          ),
-          ),
-
+          ],backgroundColor: secondappcolor,
+    
         ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(25.0),
         child: Card(
           
      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide(color: secondappcolor,width: 2.5),
+        side: BorderSide(color: secondappcolor,width: 0.5.w),
     ),
         color: lightcolor,
           child: SingleChildScrollView(
                     child: Column(
               children: [
-                
+                SizedBox(height: 5.h,),
                 //العنوان
                Center(
-                 child: Text("بيانات مسافر",style:TextStyle(color: secondtextcolor,fontSize: 25,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                 child: Text("بيانات مسافر",style:TextStyle(color: secondtextcolor,fontSize: 13.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
         ),
         ),
                ),
-               SizedBox(height: 25,),
+                SizedBox(height: 5.h,),             
                 // حقل الاسم
                Container(
                  child: TextField(
@@ -241,13 +234,13 @@ gradient: LinearGradient(colors: [
     
          labelText:"الاسم بالكامل",
     
-         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color:fristtextcolor,fontSize: 12.sp,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.person,color:secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor )
+            borderSide: BorderSide(width: 0.5.w,color:fristappcolor )
     ),
     
               ), 
@@ -257,7 +250,8 @@ keyboardType: TextInputType.text,
 controller:tname ,
      ),
                ),
-              SizedBox(height: 25,),
+              SizedBox(height: 5.h,),
+              
  // الجنس والتاريخ قائمة خيارات  
  Container(
   
@@ -265,19 +259,21 @@ controller:tname ,
   child: Row(
     children: [
    
-     SizedBox(width: 15,),
-      Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:18,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+    SizedBox(width: 8.w,),
+    
+      Text('تاريخ الميلاد',style:TextStyle(color: fristtextcolor,fontSize:10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold)),
+    SizedBox(height: 5.h,),
+    SizedBox(width: 8.w,),
 
-  SizedBox(width: 15,),
  Container( 
-          height: 70,
-    width: 223,
+          height: 13.h,
+    width: 50.w,
 
           child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(width: 2,color:fristappcolor)
+                borderSide: BorderSide(width: 0.5.w,color:fristappcolor)
             )
           ),
                   isExpanded: true,
@@ -298,7 +294,7 @@ controller:tname ,
     ],
   ),
     ),
-    SizedBox(height: 25,),
+
      //رقم الهاتف
                Container(
                  child: TextField(
@@ -307,13 +303,13 @@ controller:tname ,
     
          labelText:"رقم الهاتف",
     
-         labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color: fristtextcolor,fontSize: 12.sp,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.phone_android,color: secondappcolor),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor )
+            borderSide: BorderSide(width: 0.5.w,color:fristappcolor )
     ),
     
               ), 
@@ -323,8 +319,9 @@ keyboardType: TextInputType.number,
 controller:phone_no,
      ),
                ),
-               SizedBox(height: 25,),
+              
             
+    SizedBox(height: 5.h,),
               
      //رقم الهوية
                Container(
@@ -334,13 +331,13 @@ controller:phone_no,
     
          labelText:"رقم الهوية",
     
-         labelStyle: TextStyle(color: fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color: fristtextcolor,fontSize: 12.sp,fontFamily: 'Lobster'),
     
          prefixIcon: Icon(Icons.card_membership,color: secondappcolor,),
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor )
+            borderSide: BorderSide(width: 0.5.w,color:fristappcolor )
     ),
     
               ), 
@@ -351,8 +348,8 @@ controller:iD_number,
      ),
                ),
               
-               SizedBox(height: 25,),
-              
+           
+              SizedBox(height: 5.h,),
      
                //زر عرض صورة
             Container(child: Row(
@@ -377,12 +374,12 @@ controller:iD_number,
       final AlertDialog ad=AlertDialog(
 title:Text("اختر الصور من ") ,
 content: Container(
-height: 150,
+height: 25.h,
 child: Column(
   children: [
     Divider(color: Colors.black,),
     Container(
-      width: 300,
+      width: 150.w,
     
     child:  ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -396,7 +393,7 @@ child: Column(
       child: Row(
         children: [
           Icon(Icons.image,color: secondappcolor),
-SizedBox(width: 10,),
+SizedBox(width: 5.w,),
           Text("المعرض",style: TextStyle(color: Colors.white),),
         ],
       ),
@@ -411,9 +408,9 @@ getImage(ImageSource.gallery);
       },
     ),
     ),
-    SizedBox(height: 10,),
+
        Container(
-      width: 300,
+      width: 150.w,
     
     child: ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -427,7 +424,7 @@ getImage(ImageSource.gallery);
       child: Row(
         children: [
           Icon(Icons.add_a_photo,color: secondappcolor),
-          SizedBox(width: 10,),
+          SizedBox(width: 5.w,),
           Text("الكاميرا",style: TextStyle(color: Colors.white),),
         ],
       ),
@@ -451,8 +448,8 @@ getImage(ImageSource.camera);
     } ,
     child: Row(
       children: [
-        Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 13,color: Colors.white)),
-        SizedBox(width: 150,),
+        Text('تحميل صورة اثبات هوية ',style: TextStyle(fontSize: 9.sp,color: Colors.white,fontWeight: FontWeight.bold)),
+      
      Icon(Icons.add_a_photo,color: lightcolor,), ],
     ),
     
@@ -508,26 +505,32 @@ getImage(ImageSource.camera);
     else
     {
    
+    ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("إضغط تم لاكمال العملية"),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
         final AlertDialog ok=AlertDialog(
 title:Container(
 alignment: Alignment.center,
   child: Column(
     children: [
-      Text("تم الموافقة بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+      Text("تم الموافقة بنجاح",style: TextStyle(color: secondtextcolor,fontSize: 15.sp,fontWeight: FontWeight.bold),),
      Container(
     
-    height: 50,
+    height: 10.h,
     
     child:Icon(Icons.add_task,color:fristappcolor,size: 50,)
     
     
     
     ),
-    SizedBox(height: 8,),
+
     Center(
       child: Container(
-            width: 100,
-          height: 35,
+            width: 15.w,
+          height: 5.h,
           child: ElevatedButton(
        style: ElevatedButton.styleFrom(
         primary: secondappcolor,
@@ -608,7 +611,7 @@ booking_trip=[(Value![0])];
     }
             
     },
-    child: Text(' موافق ',style: TextStyle(fontSize: 15,color: Colors.white)),
+    child: Text(' موافق ',style: TextStyle(fontSize: 10.sp,color: Colors.white,fontWeight: FontWeight.bold)),
     
     
     ),
@@ -617,7 +620,7 @@ booking_trip=[(Value![0])];
        crossAxisAlignment: CrossAxisAlignment.stretch, 
     ),
 ), 
-SizedBox(height: 25,), ],
+SizedBox(height: 6.h,), ],
                     ),
           ),
         ),

@@ -1,6 +1,6 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
 import '../Functions/insert.dart';
 import '../Functions/fetch.dart';
 import '../main.dart';
@@ -78,7 +78,7 @@ title:Text("حجز الرحلة  ") ,
 
 content: Container(
 
-height: 150,
+height: 25.h,
 
 child: Column(
 
@@ -88,7 +88,7 @@ child: Column(
 
     Container(
 
-      width: 300,
+      width: 100.w,
 
     child: 
 
@@ -114,7 +114,7 @@ child: Column(
 
           Icon(Icons.person),
 
-           SizedBox(width: 10,),
+           SizedBox(width: 2.5.w,),
 
           Text("حجز لي",style: TextStyle(color: Colors.white),),
 
@@ -184,11 +184,11 @@ SharedPreferences prefs=await SharedPreferences.getInstance();
 
     ),
 
-    SizedBox(height: 10,),
+    SizedBox(height: 2.5.h,),
 
        Container(
 
-      width: 300,
+      width: 100.w,
 
     child:   ElevatedButton(
 
@@ -210,7 +210,7 @@ SharedPreferences prefs=await SharedPreferences.getInstance();
 
            Icon(Icons.man),
 
-           SizedBox(width: 10,),
+           SizedBox(width: 2.5.w,),
 
           Text("حجز لمسافر",style: TextStyle(color: Colors.white)),
 
@@ -271,9 +271,9 @@ List<dynamic> tripss=[];
 
    return  Container(
 
-        width: 360,
+        width: 90.w,
 
-        height: 310,
+        height:70.h,
 
         child:
          FutureBuilder(
@@ -302,7 +302,7 @@ return          Card(
 
         borderRadius: BorderRadius.circular(25.0),
 
-        side: BorderSide(color: fristappcolor,width: 2.5),
+        side: BorderSide(color: fristappcolor,width: 0.5.w),
 
     ),
 
@@ -312,58 +312,65 @@ return          Card(
 
                       child: Column(
 
+             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
-            Row(
+            Container(
+              child: Row(
 
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      
 
-              children: [
+                children: [
 
-                SizedBox(height: 2,),
+SizedBox(width: 20.w),
 
-                //صورة شعار الشركة
+
+                  //صورة شعار الشركة
  
-                Container(
+                  Container(
 
-                  margin: EdgeInsets.only(top: 5),
+                    margin: EdgeInsets.only(top: 5),
 
-                 width: 40,
+                   width: 14.w,
 
-                 height: 40,
+                   height: 8.h,
 
-                 alignment: Alignment.topLeft,
-                 child: Image.memory(base64Decode((String.fromCharCodes( tripss[index]['logo_image']['data'].cast<int>())).split(',').last),alignment: Alignment.center,fit: BoxFit.fill,)
+                   alignment: Alignment.topLeft,
+                   child: Image.memory(base64Decode((String.fromCharCodes( tripss[index]['logo_image']['data'].cast<int>())).split(',').last),alignment: Alignment.center,fit: BoxFit.fill,)
 
-                 ),
+                   ),
 
-            
+              
 
-                SizedBox(height: 1,),
 
-                  
+SizedBox(width: 30.w),
 
-                  //اسم المكتب
+                    
 
-                 Center(
+                    //اسم المكتب
 
-                   child: Text(tripss[index]['office_name'],style:TextStyle(color:secondtextcolor,fontSize: 15,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   Container(
+                 
+
+                     child: Text(tripss[index]['office_name'],style:TextStyle(color:secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',height:0.01.h,fontWeight: FontWeight.bold,
 
           ),
 
           ),
 
-                 ),
+                   ),
 
-                    ],
+                      ],
 
+              ),
             ),
 
                
 
-                 SizedBox(height: 6,),
 
-                   Row(
+
+                   Container(
+                     child: Row(
 
             
 
@@ -373,13 +380,13 @@ return          Card(
 
                //موعد الحضور
 
-                     Container(
+                       Container(
 
-                 margin: EdgeInsets.only(right: 35),
+                margin: EdgeInsets.fromLTRB(20, 0.5, 20, 0.5),
 
 
 
-                   child: Text("موعد الحضور",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                     child: Text("موعد الحضور",style:TextStyle(color: secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -393,11 +400,11 @@ return          Card(
 
                  Container(
 
-                 margin: EdgeInsets.only(right: 80),
+                 margin: EdgeInsets.only(right: 40),
 
 
 
-                   child: Text(tripss[index]['attendance_time'],style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                     child: Text(tripss[index]['attendance_time'],style:TextStyle(color: thridtextcolor,fontSize: 8.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -407,13 +414,13 @@ return          Card(
 
                  //من مدينة
 
-                       Container(
+                         Container(
 
-                 margin: EdgeInsets.only(right: 50),
+                 margin: EdgeInsets.only(right: 60),
 
 
 
-                   child: Text("من :  ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                     child: Text("من :  ",style:TextStyle(color:secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -421,15 +428,15 @@ return          Card(
 
                  ),
 
-                       //من مدينة
+                         //من مدينة
 
-                       Container(
+                         Container(
 
                  margin: EdgeInsets.only(right: 8),
 
 
 
-                   child: Text(tripss[index]['departure_city'],style:TextStyle(color:thridtextcolor,fontSize: 12,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                     child: Text(tripss[index]['departure_city'],style:TextStyle(color:thridtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -438,12 +445,8 @@ return          Card(
                  ), ],
 
             ),
-
-               
-
-                 SizedBox(height: 6,),
-
-                   Row(
+                   ),
+       Row(
 
              
 
@@ -455,11 +458,11 @@ return          Card(
 
                      Container(
 
-                 margin: EdgeInsets.only(right: 35),
+                 margin: EdgeInsets.only(right:20),
 
 
 
-                   child: Text("مدة الانتظار ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("مدة الانتظار ",style:TextStyle(color:secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -473,11 +476,11 @@ return          Card(
 
                  Container(
 
-                 margin: EdgeInsets.only(right: 70),
+                 margin: EdgeInsets.only(right: 65),
 
 
 
-                   child: Text(tripss[index]['waiting_time'],style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index]['waiting_time'],style:TextStyle(color: thridtextcolor,fontSize: 8.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -487,11 +490,11 @@ return          Card(
 
                Container(
 
-                 margin: EdgeInsets.only(right: 10),
+                 margin: EdgeInsets.fromLTRB(8, 0.5, 8, 0.5),
 
 
 
-                   child: Text("دقيقة",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("دقيقة",style:TextStyle(color: secondtextcolor,fontSize: 9.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -504,7 +507,7 @@ return          Card(
 
             ),
 
-               SizedBox(height: 6,),
+
 
                    Row(
 
@@ -518,11 +521,12 @@ return          Card(
 
                      Container(
 
-                 margin: EdgeInsets.only(right: 35),
+                margin: EdgeInsets.fromLTRB(20, 0.5, 20, 0.5),
+              
 
 
 
-                   child: Text("موعد  الانطلاق",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("موعد  الانطلاق",style:TextStyle(color:secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -536,11 +540,11 @@ return          Card(
 
                  Container(
 
-                 margin: EdgeInsets.only(right: 75),
+                 margin: EdgeInsets.only(right: 40),
 
 
 
-                   child: Text(tripss[index]['departure_time'],style:TextStyle(color:thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index]['departure_time'],style:TextStyle(color:thridtextcolor,fontSize: 8.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -552,11 +556,11 @@ return          Card(
 
                        Container(
 
-                 margin: EdgeInsets.only(right: 50),
+                 margin: EdgeInsets.only(right: 60),
 
 
 
-                   child: Text("الى : ",style:TextStyle(color:secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("الى : ",style:TextStyle(color:secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -572,7 +576,7 @@ return          Card(
 
 
 
-                   child: Text(tripss[index]['arrival_city'],style:TextStyle(color: thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index]['arrival_city'],style:TextStyle(color: thridtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -581,8 +585,6 @@ return          Card(
                  ), ],
 
             ),   
-
-                 SizedBox(height: 6,),
 
                    Row(
 
@@ -596,11 +598,12 @@ return          Card(
 
                      Container(
 
-                 margin: EdgeInsets.only(right: 60),
+                margin: EdgeInsets.fromLTRB(30, 0.5, 30, 0.5),
+                 
 
 
 
-                   child: Text("نوع الباص ",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("نوع الباص ",style:TextStyle(color: secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -614,11 +617,11 @@ return          Card(
 
                  Container(
 
-                 margin: EdgeInsets.only(right: 70),
+                 margin: EdgeInsets.only(right: 40),
 
 
 
-                   child: Text(tripss[index]['bus_type'],style:TextStyle(color:thridtextcolor,fontSize: 11,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index]['bus_type'],style:TextStyle(color:thridtextcolor,fontSize: 8.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -632,11 +635,11 @@ return          Card(
 
                     Container(
 
-                 margin: EdgeInsets.only(right: 55),
+                 margin: EdgeInsets.only(right: 65),
 
 
 
-                   child: Text(tripss[index]['status'],style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index]['status'],style:TextStyle(color: thridtextcolor,fontSize: 8.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -646,8 +649,7 @@ return          Card(
 
             ),
 
-                 SizedBox(height: 6,),
-
+  
                    Row(
 
              
@@ -660,11 +662,11 @@ return          Card(
 
                      Container(
 
-                 margin: EdgeInsets.only(right: 60),
+                 margin: EdgeInsets.only(right: 30),
 
 
 
-                   child: Text("سعر الرحلة",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("سعر الرحلة",style:TextStyle(color: secondtextcolor,fontSize: 10.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -678,11 +680,11 @@ return          Card(
 
                  Container(
 
-                 margin: EdgeInsets.only(right: 75),
+                 margin: EdgeInsets.only(right: 60),
 
 
 
-                   child: Text(tripss[index]['ticket_price'],style:TextStyle(color: thridtextcolor,fontSize: 10,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text(tripss[index]['ticket_price'],style:TextStyle(color: thridtextcolor,fontSize: 8.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -694,11 +696,11 @@ return          Card(
 
                  Container(
 
-                 margin: EdgeInsets.only(right: 10),
+                 margin: EdgeInsets.only(right: 5),
 
 
 
-                   child: Text("ر.ي",style:TextStyle(color: secondtextcolor,fontSize: 13,fontFamily: 'Lobster',height:2,fontWeight: FontWeight.bold,
+                   child: Text("ر.ي",style:TextStyle(color: secondtextcolor,fontSize: 9.sp,fontFamily: 'Lobster',fontWeight: FontWeight.bold,
 
           ),
 
@@ -711,6 +713,9 @@ return          Card(
             ), 
 
         //زر الحجز
+               
+
+
 
               Container(
 
@@ -766,15 +771,15 @@ alignment: Alignment.center,
 
             Icon(Icons.warning_sharp,color: fristappcolor,size: 40,),
 
-          SizedBox(width: 8,),
+          SizedBox(width: 4.w,),
 
-          Text("ارجاء إنشاء حساب لك في التطبيق  ",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+          Text("ارجاء إنشاء حساب لك في التطبيق  ",style: TextStyle(color:secondappcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
 
         ],
 
       ),
 
-     SizedBox(height: 20,),
+     SizedBox(height: 5.h,),
 
 
 
@@ -784,7 +789,7 @@ alignment: Alignment.center,
 
         Container(
 
-          width: 100,
+          width: 30.w,
 
         
 
@@ -830,13 +835,13 @@ textStyle:TextStyle(color:Colors.white,),
 
      
 
-    SizedBox(width: 70,),
+    SizedBox(width: 2.w,),
 
        Container(
 
          
 
-      width: 100,
+      width: 30.w,
 
    
 
@@ -948,7 +953,7 @@ textStyle:TextStyle(color:Colors.white,),
     
     },
 
-    child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 15,color:Colors.white,)),
+    child: Text('إحجز رحلتك الآن',style: TextStyle(fontSize: 10.sp,color:Colors.white,)),
 
     
 
@@ -966,7 +971,7 @@ textStyle:TextStyle(color:Colors.white,),
 
 ), 
 
-SizedBox(height: 5,),],    
+],    
 
     ),
 
@@ -986,12 +991,12 @@ SizedBox(height: 5,),],
                           children: [
                              Container(
                            child: Text("انت غير متصل بالانترنت او انك تبحث  عن رحلة غير متوفرة لدينا",
-                           style: TextStyle(color: secondtextcolor,fontSize: 10,fontWeight: FontWeight.bold),),
+                           style: TextStyle(color: secondtextcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
                          ),
 
           Container(
-width: 200,
-height:200,
+width: 50.w,
+height:50.h,
             child: Image.asset("assets/images/net.png",alignment: Alignment.center,fit: BoxFit.fill,)),
 
                             CircularProgressIndicator(),

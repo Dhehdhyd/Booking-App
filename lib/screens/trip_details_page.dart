@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import '../Functions/fetch.dart';
 import '../Functions/insert.dart';
 import '../class_tools/app_card_trip.dart';
@@ -29,8 +30,8 @@ alignment: Alignment.center,
   child: Row(
     children: [
         Icon(Icons.warning_sharp,color: fristappcolor,size: 40,),
-      SizedBox(width: 8,),
-      Text("الرجاء تحديد طريقة الدفع",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+      SizedBox(width: 4.w,),
+      Text("الرجاء تحديد طريقة الدفع",style: TextStyle(color:secondappcolor,fontSize: 13.sp,fontWeight: FontWeight.bold),),
     ],
   ),) ,
 
@@ -41,26 +42,32 @@ alignment: Alignment.center,
   }
 else if(numberselect==1)
 {
+   ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("إضغط تم لاكمال العملية"),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
    final AlertDialog ok2=AlertDialog(
 title:Container(
 alignment: Alignment.center,
   child: Column(
     children: [
-      Text(" الرجاء المسارعه بدفع الى مقر المكتب تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+      Text(" الرجاء المسارعه بدفع الى مقر المكتب تم استلام الطلب بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك",style: TextStyle(color: secondtextcolor,fontSize: 12.sp,fontWeight: FontWeight.bold),),
      Container(
     
-    height: 50,
+    height: 5.h,
     
     child:Icon(Icons.alarm,color:fristappcolor,size: 50,)
     
     
     
     ),
-    SizedBox(height: 8,),
+    SizedBox(height: 4.h,),
     Center(
       child: Container(
-            width: 100,
-          height: 35,
+            width: 25.w,
+          height: 9.h,
           child: ElevatedButton(
        style: ElevatedButton.styleFrom(
         primary: secondappcolor,
@@ -116,26 +123,32 @@ textStyle:TextStyle(color:Colors.white,),
 
 else if(numberselect==2)
 {
+   ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text("إضغط تم لاكمال العملية"),
+         behavior: SnackBarBehavior.floating,
+       )
+     ); 
    final AlertDialog ok3=AlertDialog(
 title:Container(
 alignment: Alignment.center,
   child: Column(
     children: [
-      Text("تم استلام طلبك بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك بعد تاكد مكتبنا من استلام اشعار الدفع",style: TextStyle(color: secondtextcolor,fontSize: 20,fontWeight: FontWeight.bold),),
+      Text("تم استلام طلبك بنجاح سوف تصلك رسالة SMS برقم الحجز الخاص بك بعد تاكد مكتبنا من استلام اشعار الدفع",style: TextStyle(color: secondtextcolor,fontSize: 12.sp,fontWeight: FontWeight.bold),),
      Container(
     
-    height: 50,
+    height: 8.h,
     
     child:Icon(Icons.alarm,color:fristappcolor,size: 50,)
     
     
     
     ),
-    SizedBox(height: 8,),
+    SizedBox(height: 4.h,),
     Center(
       child: Container(
-            width: 100,
-          height: 35,
+            width: 25.w,
+          height: 9.h,
           child: ElevatedButton(
        style: ElevatedButton.styleFrom(
         primary: secondappcolor,
@@ -192,25 +205,17 @@ textStyle:TextStyle(color:Colors.white,),
   Widget build(BuildContext context) {
     return
     Scaffold(
-       appBar: AppBar(
+               appBar: AppBar(
+          
          actions: 
           [ Padding(
-             padding: const EdgeInsets.only(left: 240),
+             padding: EdgeInsets.only(left: 210.0),
 
-             child: Text("تأكيد الحجز ",style:TextStyle(fontSize: 22,fontFamily: 'Lobster',height: 1.7,color: lightcolor)),
-           ),], 
-          flexibleSpace: Container(
-          decoration: BoxDecoration(
-gradient: LinearGradient(colors: [
-secondappcolor,
-secondappcolor,
-  
+             child: Text(' تاكيد الحجز',style:TextStyle(fontSize: 16.sp,fontFamily: 'Lobster',height: 1.7,color:lightcolor)),
+           ),
 
-
-],),
-          ),
-          ),
-
+          ],backgroundColor: secondappcolor,
+    
         ),
       body: SingleChildScrollView(
               child: Column(
@@ -218,102 +223,102 @@ secondappcolor,
             
 //بيانات الرحلة
              Container(
-               margin: EdgeInsets.only(top: 40),
-               width: 390,
-        height: 425,
+               margin: EdgeInsets.only(top: 20),
+               width: 190.w,
+        height: 65.h,
                child: Card(
                  
            shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide(color: secondappcolor,width: 2.5),
+        side: BorderSide(color: secondappcolor,width: 0.5.w),
     ),
         color: lightcolor,
 child: Column(
   children: [
-        Center(child: Text("بيانات الرحلة",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
+        Center(child: Text("بيانات الرحلة",style: TextStyle(fontSize: 15.sp,color: secondtextcolor,fontWeight: FontWeight.bold),),),
  Row(
    children: [
      
      Container(
                  margin: EdgeInsets.only(right: 35),
 
-       child: Text('اسم المكتب',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('اسم المكتب',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          Container(
-                 margin: EdgeInsets.only(right: 75),
+                 margin: EdgeInsets.only(right: 65),
 
-       child: Text(booking_trip[0]['office_name'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['office_name'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
  ),
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
        
      Row(
        children: [
          Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text(' تاريخ الرحلة',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+           child: Text(' تاريخ الرحلة',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
            ),
        
          Container(
                  margin: EdgeInsets.only(right: 65),
 
-       child: Text(trip_date,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(trip_date,style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
      ),
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
        
      Row(
        children: [
          Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text('من مدينة ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+           child: Text('من مدينة ',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
            ),
         
          Container(
                  margin: EdgeInsets.only(right: 100),
 
-       child: Text(booking_trip[0]['departure_city'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['departure_city'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
      ),
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
        
      Row(
        children: [
          Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text('الى مدينة',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+           child: Text('الى مدينة',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
            ),
        
          Container(
                  margin: EdgeInsets.only(right: 100),
 
-       child: Text(booking_trip[0]['arrival_city'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['arrival_city'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
      ), 
      
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
 
          Row(
            children: [
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text('موعد الحضور',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('موعد الحضور',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         
@@ -321,18 +326,18 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text(booking_trip[0]['attendance_time'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['attendance_time'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ), 
           ],
          ),
-       SizedBox(height: 10,), 
+       SizedBox(height: 1.h,), 
          Row(
            children: [
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text('مدة الانتظار ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('مدة الانتظار ',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
           
@@ -340,19 +345,19 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text(booking_trip[0]['waiting_time'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['waiting_time'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ), 
         ],
          ),
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
 
          Row(
            children: [
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text('موعد الانطلاق ',style: TextStyle(fontSize: 15,color:secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('موعد الانطلاق ',style: TextStyle(fontSize: 12.sp,color:secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          
@@ -360,19 +365,19 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 70),
 
-       child: Text(booking_trip[0]['departure_time'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['departure_time'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          ],
          ), 
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
 
          Row(
            children: [
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text('محطة انطلاق الباص ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('محطة انطلاق الباص ',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
           
@@ -380,19 +385,19 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(booking_trip[0]['departure_station'],style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['departure_station'],style: TextStyle(fontSize: 12.sp,color:thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
         ],
          ),
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
 
          Row(
            children: [
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text(' محطة وصول الباص',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text(' محطة وصول الباص',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          
@@ -400,18 +405,18 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(booking_trip[0]['arrival_station'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['arrival_station'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          ],
          ), 
-       SizedBox(height: 10,) ,
+       SizedBox(height: 1.h,) ,
          Row(
            children: [
              Container(
                      margin: EdgeInsets.only(right: 35),
 
-       child: Text(' سعر التذكرة',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text(' سعر التذكرة',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          
@@ -419,7 +424,7 @@ child: Column(
      Container(
                  margin: EdgeInsets.only(right: 80),
 
-       child: Text(booking_trip[0]['ticket_price'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['ticket_price'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),    
    ],
@@ -428,74 +433,78 @@ child: Column(
 ),
 ),
              ),
-             SizedBox(height: 10,),
+             SizedBox(height: 5.h,),
              //بيانات المسافر
              Container(
-               width: 390,
-        height: 120,
+               width: 350.w,
+        height: 35.h,
                child: Card(
                  
          shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide(color: secondappcolor,width: 2.5),
+        side: BorderSide(color: secondappcolor,width: 0.5.w),
     ),
         color: lightcolor,
 child: Column(
   children: [
-        Center(child: Text("بيانات المسافر",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
+        Center(child: Text("بيانات المسافر",style: TextStyle(fontSize: 17.sp,color: secondtextcolor,fontWeight: FontWeight.bold),),),
  Row(
    children: [
      
      Container(
                  margin: EdgeInsets.only(right: 35),
 
-       child: Text('اسم المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('اسم المسافر',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          Container(
                  margin: EdgeInsets.only(right: 85),
 
-       child: Text('رقم هاتف المسافر',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text('رقم هاتف المسافر',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
  ),
-     SizedBox(height: 10,),
+     SizedBox(height: 5.h,),
       Row(
         children: [
-          Container(
-                     margin: EdgeInsets.only(right: 2),
+          Expanded(
+                      child: Container(
+                       margin: EdgeInsets.only(right: 2),
 
-           child: Text(shprname,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
-           )
-           ),
+             child: Text(shprname,style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
+             )
+             ),
+          ),
      
-         Container(
-                 margin: EdgeInsets.only(right: 50),
+         Expanded(
+                    child: Container(
+                   margin: EdgeInsets.only(right: 50),
 
-       child: Text(shprphon_no,style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(shprphon_no,style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
-       ),  
+       ),
+         ),  
      ],
       ),
   ],
 ),
 ),
              ),
-              SizedBox(height: 10,),
+              SizedBox(height: 5.h,),
               Container(
-               width: 390,
-        height: 400,
+               width: 350.w,
+        height: 70.h,
                child: Card(
                  
           shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide(color: secondappcolor,width: 2.5),
+        side: BorderSide(color: secondappcolor,width: 0.5.w),
     ),
         color: lightcolor,
 child: Column(
   children: [
-        Center(child: Text("سياسة الحجز في الشركة",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
+        Center(child: Text("سياسة الحجز في الشركة",style: TextStyle(fontSize: 17.sp,color: secondtextcolor,fontWeight: FontWeight.bold),),),
  
      
      
@@ -505,7 +514,7 @@ child: Column(
                        margin: EdgeInsets.only(right: 35),
 
              child: Text(booking_trip[0]['booking_policy'],
-             style: TextStyle(fontFamily: 'Lobster',fontSize: 17,fontWeight: FontWeight.bold,height: 2,color: thridtextcolor)
+             style: TextStyle(fontFamily: 'Lobster',fontSize: 12.sp,fontWeight: FontWeight.bold,height: 2,color: thridtextcolor)
              )
              ),
          ),
@@ -515,46 +524,46 @@ child: Column(
 ),
 ),
              ),
-              SizedBox(height: 10,),
+              SizedBox(height: 5.h,),
 //بيانات الدفع
             Container(
-               width: 390,
-        height: 350,
+               width: 350.w,
+        height: 55.h,
                child: Card(
                  
           shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
-        side: BorderSide(color: secondappcolor,width: 2.5),
+        side: BorderSide(color: secondappcolor,width: 0.5.w),
     ),
         color: lightcolor,
 child: Column(
   children: [
-        Center(child: Text(" بيانات الدفع ",style: TextStyle(fontSize: 20,color: secondtextcolor,fontWeight: FontWeight.bold),),),
+        Center(child: Text(" بيانات الدفع ",style: TextStyle(fontSize: 17.sp,color: secondtextcolor,fontWeight: FontWeight.bold),),),
   Row(
    children: [
      
      Container(
                  margin: EdgeInsets.only(right: 35),
 
-       child: Text(' مقر المكتب',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+       child: Text(' مقر المكتب',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
        )
        ),
          Container(
                  margin: EdgeInsets.only(right: 30),
 
-       child: Text(booking_trip[0]['location'],style: TextStyle(fontSize: 15,color:thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['location'],style: TextStyle(fontSize: 12.sp,color:thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),
         ],
  ),
-     SizedBox(height: 10,),
+     SizedBox(height: 1.h,),
      
       Row(
         children: [
           Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text('الحساب البنكي ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+           child: Text('الحساب البنكي ',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
            ),
      
@@ -562,19 +571,19 @@ child: Column(
                  margin: EdgeInsets.only(right: 10),
            padding: const EdgeInsets.all(15.0),
 
-       child: Text(booking_trip[0]['bank_account'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['bank_account'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
       ),
-      SizedBox(height: 5,),
+      SizedBox(height: 1.h,),
      
       Row(
         children: [
           Container(
                      margin: EdgeInsets.only(right: 35),
 
-           child: Text('اسم البنك ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+           child: Text('اسم البنك ',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
            ),
      
@@ -582,19 +591,19 @@ child: Column(
                  margin: EdgeInsets.only(right: 35),
            padding: const EdgeInsets.all(15.0),
 
-       child: Text(booking_trip[0]['bank_name'],style: TextStyle(fontSize: 15,color: thridtextcolor,fontWeight: FontWeight.bold)
+       child: Text(booking_trip[0]['bank_name'],style: TextStyle(fontSize: 12.sp,color: thridtextcolor,fontWeight: FontWeight.bold)
        )
        ),  
      ],
       ),
-     SizedBox(height: 20,),
+     SizedBox(height: 2.h,),
           Container(
                      margin: EdgeInsets.only(right: 30),
 
-           child: Text(' طريقة الدفع ',style: TextStyle(fontSize: 15,color: secondtextcolor,fontWeight: FontWeight.bold)
+           child: Text(' طريقة الدفع ',style: TextStyle(fontSize: 12.sp,color: secondtextcolor,fontWeight: FontWeight.bold)
            )
            ),
-     SizedBox(height: 20,),
+     SizedBox(height: 3.h,),
      Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -612,7 +621,7 @@ child: Column(
                             });
             },
           ),
-          Text('الدفع نقدا',style: TextStyle(fontSize: 15,color: thridtextcolor),),
+          Text('الدفع نقدا',style: TextStyle(fontSize: 12.sp,color: thridtextcolor),),
                 Radio(
               
             value: 2,
@@ -625,7 +634,7 @@ child: Column(
                             });
             },
           ),
-          Text('التحويل البنكي',style: TextStyle(fontSize: 15,color:thridtextcolor),),
+          Text('التحويل البنكي',style: TextStyle(fontSize: 12.sp,color:thridtextcolor),),
         ],
       ),
       
@@ -661,7 +670,7 @@ child: Column(
       });
      
     },
-    child: Text('تأكيد الحجز',style: TextStyle(fontSize: 15,color: lightcolor)),
+    child: Text('تأكيد الحجز',style: TextStyle(fontSize: 13.sp,color: lightcolor)),
     
     
     ),

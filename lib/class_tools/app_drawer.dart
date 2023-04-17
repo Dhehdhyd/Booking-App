@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Functions/fetch.dart';
 import '../screens/about_the_application.dart';
@@ -60,16 +61,16 @@ alignment: Alignment.center,
       Row(
         children: [
             Icon(Icons.warning_sharp,color: fristappcolor,size: 40,),
-          SizedBox(width: 8,),
-          Text("ارجاء إنشاء حساب لك في التطبيق  ",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+          SizedBox(width: 4.w,),
+          Text("ارجاء إنشاء حساب لك في التطبيق  ",style: TextStyle(color:secondappcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
         ],
       ),
-     SizedBox(height: 20,),
+     SizedBox(height: 5.h,),
 
     Row(
       children: [
         Container(
-          width: 100,
+          width: 30.w,
         
         child: ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -92,10 +93,10 @@ textStyle:TextStyle(color:Colors.white,),
         ),
         ),
      
-    SizedBox(width: 70,),
+    SizedBox(width: 2.w,),
        Container(
          
-      width: 100,
+      width: 30.w,
    
     child: ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -143,11 +144,11 @@ alignment: Alignment.center,
       Row(
         children: [
             Icon(Icons.warning_sharp,color: fristappcolor,size: 40,),
-          SizedBox(width: 8,),
-          Text("ادخل كلمة المرور الخاصة بك",style: TextStyle(color:secondappcolor,fontSize: 15,fontWeight: FontWeight.bold),),
+          SizedBox(width: 4.w,),
+          Text("ادخل كلمة المرور الخاصة بك",style: TextStyle(color:secondappcolor,fontSize: 10.sp,fontWeight: FontWeight.bold),),
         ],
       ),
-     SizedBox(height: 20,),
+     SizedBox(height: 2.h,),
 
     Column(
       children: [
@@ -159,13 +160,13 @@ alignment: Alignment.center,
     
          labelText:"كلمة المرور",
     
-         labelStyle: TextStyle(color:fristtextcolor,fontSize: 18,fontFamily: 'Lobster'),
+         labelStyle: TextStyle(color:fristtextcolor,fontSize: 10.sp,fontFamily: 'Lobster'),
    
                   
     
     enabledBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(width: 2,color:fristappcolor )
+            borderSide: BorderSide(width: 1.w,color:fristappcolor )
     ),
     
               ), 
@@ -176,10 +177,10 @@ controller:passwordforupdate,
      ),
                ),
      
-    SizedBox(height: 30,),
+    SizedBox(height: 3.h,),
        Container(
          
-      width: 100,
+      width: 50.w,
    
     child: ElevatedButton(
      style: ElevatedButton.styleFrom(
@@ -256,25 +257,25 @@ Container(
         alignment: Alignment.topLeft,
         child: Drawer(
 child: ListView(children: [
-  Container( height: 40,      
+  Container( height: 6.h,      
   child: Center(
-    child: Text('TravBus',style:TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Lobster'))),
+    child: Text('TravBus',style:TextStyle(color: Colors.white,fontSize: 14.sp,fontFamily: 'Lobster'))),
   color: fristappcolor,
  ),
-SizedBox(height: 20),
-  ListTile(title: Text('شرح كيفيةاستخدام التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+SizedBox(height: 3.h),
+  ListTile(title: Text('شرح كيفيةاستخدام التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 12.sp,fontFamily: 'Lobster')),
   trailing: Icon(Icons.video_call,color: fristappcolor,),
   onTap: ()=>{
     
     launchurl('$_url'),
   },),
-        ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color:secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+        ListTile(title: Text('تعديل بيانات حسابي',style:TextStyle(color:secondtextcolor,fontSize: 12.sp,fontFamily: 'Lobster')),
   trailing: Icon(Icons.manage_accounts,color: fristappcolor,),
   onTap: ()=>{
     setState(() {   
   modifly();}),
   },),
-         ListTile(title: Text('الإعدادات',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster',)),
+         ListTile(title: Text('الإعدادات',style:TextStyle(color: secondtextcolor,fontSize: 12.sp,fontFamily: 'Lobster',)),
   trailing: Icon(Icons.settings,color: fristappcolor,),
   onTap: ()=>{
     setState(() {
@@ -289,20 +290,20 @@ SizedBox(height: 20),
    
 }),
   },),
-         ListTile(title: Text('مشاركة التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+      /*   ListTile(title: Text('مشاركة التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
  trailing: Icon(Icons.share,color: fristappcolor,),
   onTap: ()=>{
     Share.share('رابط التطبيق في جوجل play com.example.tickets_booking_app'),
 
-  },),
-         ListTile(title: Text('حول التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+  },),*/
+         ListTile(title: Text('حول التطبيق',style:TextStyle(color: secondtextcolor,fontSize: 12.sp,fontFamily: 'Lobster')),
   trailing: Icon(Icons.question_answer,color: fristappcolor,),
   onTap: ()=>{
  setState(() {
   select_page(context, 3);
 }),
   },),
-         ListTile(title: Text('المساعدة والدعم',style:TextStyle(color: secondtextcolor,fontSize: 18,fontFamily: 'Lobster')),
+         ListTile(title: Text('المساعدة والدعم',style:TextStyle(color: secondtextcolor,fontSize: 12.sp,fontFamily: 'Lobster')),
   trailing: Icon(Icons.help_sharp,color: fristappcolor,),
   onTap: ()=>{
    setState(() {
